@@ -1,0 +1,55 @@
+$primary-dark-color: #153243;
+$primary-font-color: #C3E8BD;
+$highlight-bg-color: #C3E8BD;
+$border: 2px solid #4F5165;
+
+body {
+  .loginctrl {
+    @include grid-row();
+    font-size: 22px;
+    padding: 20px;
+    display: flex;
+    .login_a {
+      @include grid-column(6);
+      margin: auto;
+    .login {
+      @include grid-column(12);
+      font-size: 22px;
+      border: 2px solid #F4F9E9;
+      padding: 20px;
+      text-align: center;
+      display: block;
+      border-radius: 10px;
+    }
+    .choice {
+      border: none;
+      a {
+        text-decoration: none;
+        color: $primary-font-color;
+        padding: 10px;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-weight: bold;
+      }
+    }
+    input {
+      @include grid-column(12);
+      padding: 20px;
+      margin: auto;
+      margin-top: 10px;
+      text-align: center;
+      font-family: 'PT Sans', sans-serif;
+      background-color: #EEF0EB;
+    }
+    button {
+      @include grid-column(12);
+      padding: 20px;
+      margin: 10px auto;
+      border: $border;
+      color: $primary-font-color;
+      text-align: center;
+      background-color: $primary-dark-color;
+      font-family: 'Source Sans Pro', sans-serif;
+    }
+  }
+  }
+}

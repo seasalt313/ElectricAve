@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>tripr</title>
+    <!-- add css file -->
+    <link rel="stylesheet" href="main.css">
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans|Source+Sans+Pro" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+
+  </head>
+  <body ng-app= 'tripApp'>
+    <section class="header_section">
+      <div class="header">
+        <h1>tripr</h1>
+      </div>
+    </section>
+
+    <!-- <section class="loginctrl" ng-controller="loginController">
+      <div class="login_a">
+      <div class="login tag">
+        <a href="#">login</a>/<a href="#">new user</a>
+      </div>
+
+      <div class="login">
+        <input type="email" ng-model="user_email" placeholder="email">
+        <input type="password" ng-model="user_password" placeholder="password">
+        <button type="button" ng-click="login(user_email, user_password)">Log In</button>
+      </div>
+      </div>
+    </section> -->
+
+    <section class="loginctrl" ng-controller="loginController">
+      <div class="login_a">
+      <div class="login choice">
+        <a href="#">login</a>/<a href="#">new user</a>
+      </div>
+        <div class="login">
+        <input type="text" ng-model="username" placeholder="enter your name">
+        <input type="email" ng-model="user_email" placeholder="email">
+        <input type="password" ng-model="user_password" placeholder="password">
+        <input type="text" ng-model="user_car" placeholder="Tesla or Chevy Leaf?">
+        <button type="button" ng-click="makeAccount(username, user_email, user_password, user_car)">Log In</button>
+      </div>
+    </section>
+
+    <!-- <section ng-controller="createTripController">
+      <div class="creating_trip">
+        <div class="contain_trip">
+          <button type="button" id="history"> Previous Trips</button>
+        <div class="tripform">
+            <h1 class="name_trip">New Trip</h1>
+            <input type="text" ng-model="trip_name" placeholder="Name of Trip">
+        </div>
+          <div class="tripform">
+            <input type="text" ng-model="from" placeholder="From Where?">
+            <input type="text" ng-model="to" placeholder="To Where?">
+          <button id="newbtn" ng-click="postTrip(trip_name, from, to)">GO</button>
+        </div>
+
+    </div>
+    </div>
+    </section> -->
+
+    <!-- <section ng-controller="showTripController">
+      <div class="trip_history">
+        <h1>Trip History</h1>
+        <ul>
+          <li ng-repeat="trip in trips">
+            <h3 ng-click="showMap(trip)"> {{ trip.name }}</h3>
+          </li>
+        </ul>
+      </div>
+    </section> -->
+
+     <!-- <section id="success">
+      <h1>Success!</h1>
+    <i class="icon-thumbs-up"></i>
+    </section>  -->
+
+
+    <script src="https://use.fontawesome.com/7fb1b7bdac.js"></script>
+
+    <!-- add js file -->
+    <script src="app.js" type="text/javascript">
+    </script>
+  </body>
+</html>
