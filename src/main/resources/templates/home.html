@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--If user is not present-->
+{{^user}}
+<h1>
+    Login!
+</h1>
+<form action="/login" method="post">
+    <input type="email" placeholder="Email" name="emailName" required/>
+    <input type="password" placeholder="Password" name="password" required/>
+    <button type="submit">Login</button>
+</form>
+<h2>
+    Create account!
+</h2>
+<form action="/new-user" method="post">
+    <input type="text" placeholder="Name" name="name"/>
+    <input type="email" placeholder="Email" name="emailName" required/>
+    <input type="password" placeholder="Password" name="password" required/>
+    <input type="text" placeholder="Car Name" name="car" required/>
+    <button type="submit">Login</button>
+</form>
+{{/user}}
+<!--If user is present-->
+{{#user}}
+Welcome, {{name}}!
+<form action="/logout" method="post">
+    <button type="submit">Logout</button>
+</form>
+{{/user}}
+<br><br>
+</body>
+</html>
