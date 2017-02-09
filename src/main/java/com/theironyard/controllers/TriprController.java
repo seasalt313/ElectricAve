@@ -7,10 +7,7 @@ import com.theironyard.services.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
@@ -55,7 +52,7 @@ public class TriprController {
 
     @CrossOrigin
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public String login(HttpSession session, String email, String password) throws Exception {
+    public String login(@RequestBody HttpSession session, String email, String password) throws Exception {
         User user = users.findByEmail(email);
         if (user == null) {
             return "redirect:/new-user";
@@ -76,7 +73,7 @@ public class TriprController {
 
     @CrossOrigin
     @RequestMapping(path = "/new-user", method = RequestMethod.POST)
-    public User newUser(String name,  String email, String pass, String car, HttpSession session) throws Exception {
+    public User newUser(@RequestBody String name, String email, String pass, String car, HttpSession session) throws Exception {
         User user = users.findByEmail(email);
 
         if(user == null) {
