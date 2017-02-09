@@ -52,23 +52,22 @@ public class TriprController {
 
     @CrossOrigin
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public String login(@RequestBody HttpSession session, String email, String password) throws Exception {
+    public User login(@RequestBody HttpSession session, String email, String password) throws Exception {
         User user = users.findByEmail(email);
         if (user == null) {
-            return "redirect:/new-user";
+            throw new Exception("User does not exist");
         }
         else if (!PasswordStorage.verifyPassword(password, user.getPassword())) {
             throw new Exception("Incorrect password");
         }
         session.setAttribute("email", email);
-        return "redirect:/login";
+        return user;
     }
 
     @CrossOrigin
     @RequestMapping(path = "/logout", method = RequestMethod.POST)
-    public String logout(HttpSession session) {
+    public void logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/login";
     }
 
     @CrossOrigin
