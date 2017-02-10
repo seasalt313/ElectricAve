@@ -2,7 +2,6 @@ body {
 
   .header_section {
     @include grid-row();
-    margin: 30px;
     border: 2px solid #C3E8BD;
     background-color: #4F5165;
     border-radius: 10px;

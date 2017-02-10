@@ -1,0 +1,17 @@
+<section ng-controller="createTripController">
+
+  <div class="creating_trip">
+    <div class="contain_trip">
+      <button type="button" id="history">View Account and Previous Trips</button>
+      <div class="tripform">
+        <h1 class="name_trip">New Trip</h1>
+        <input type="text" ng-model="trip_name" placeholder="Name of Trip">
+      </div>
+      <div class="tripform">
+        <input type="text" ng-model="from" placeholder="From Where?">
+        <input type="text" ng-model="to" placeholder="To Where?">
+      <button id="newbtn" ng-click="postTrip(trip_name, from, to)">GO</button>
+      </div>
+    </div>
+  </div>
+</section>

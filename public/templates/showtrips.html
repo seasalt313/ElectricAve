@@ -1,0 +1,10 @@
+<section ng-controller="showTripController">
+  <div class="trip_history">
+    <h1>Trip History</h1>
+    <ul>
+      <li ng-repeat="trip in trips">
+        <h3 ng-click="showMap(trip)"> {{ trip.name }}</h3>
+      </li>
+    </ul>
+  </div>
+</section>

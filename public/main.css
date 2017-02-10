@@ -1256,7 +1256,6 @@ body .header_section {
   max-width: 75rem;
   margin-right: auto;
   margin-left: auto;
-  margin: 30px;
   border: 2px solid #C3E8BD;
   background-color: #4F5165;
   border-radius: 10px; }
@@ -1385,19 +1384,19 @@ body .loginctrl {
   body .loginctrl::after {
     clear: both; }
   body .loginctrl .login_a {
-    width: 50%;
-    float: left;
-    padding-right: 0.625rem;
-    padding-left: 0.625rem;
-    margin: auto; }
-    @media print, screen and (min-width: 40em) {
-      body .loginctrl .login_a {
-        padding-right: 0.9375rem;
-        padding-left: 0.9375rem; } }
-    body .loginctrl .login_a:last-child:not(:first-child) {
-      float: right; }
+    max-width: 75rem;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 22px;
+    padding: 20px;
+    display: flex; }
+    body .loginctrl .login_a::before, body .loginctrl .login_a::after {
+      display: table;
+      content: ' '; }
+    body .loginctrl .login_a::after {
+      clear: both; }
     body .loginctrl .login_a .login {
-      width: 100%;
+      width: 25%;
       float: left;
       padding-right: 0.625rem;
       padding-left: 0.625rem;
@@ -1414,65 +1413,103 @@ body .loginctrl {
       body .loginctrl .login_a .login:last-child:not(:first-child) {
         float: right; }
     body .loginctrl .login_a .choice {
-      border: none; }
-      body .loginctrl .login_a .choice a {
-        text-decoration: none;
-        color: #C3E8BD;
-        padding: 10px;
-        font-family: 'Source Sans Pro', sans-serif;
-        font-weight: bold; }
-    body .loginctrl .login_a input {
+      border: none;
       width: 100%;
       float: left;
       padding-right: 0.625rem;
-      padding-left: 0.625rem;
-      padding: 20px;
-      margin: auto;
-      margin-top: 10px;
-      text-align: center;
-      font-family: 'PT Sans', sans-serif;
-      background-color: #EEF0EB; }
+      padding-left: 0.625rem; }
       @media print, screen and (min-width: 40em) {
-        body .loginctrl .login_a input {
+        body .loginctrl .login_a .choice {
           padding-right: 0.9375rem;
           padding-left: 0.9375rem; } }
-      body .loginctrl .login_a input:last-child:not(:first-child) {
+      body .loginctrl .login_a .choice:last-child:not(:first-child) {
         float: right; }
-    body .loginctrl .login_a button {
-      width: 100%;
-      float: left;
-      padding-right: 0.625rem;
-      padding-left: 0.625rem;
-      padding: 20px;
-      margin: 10px auto;
-      border: 2px solid #4F5165;
-      color: #C3E8BD;
-      text-align: center;
-      background-color: #153243;
-      font-family: 'Source Sans Pro', sans-serif; }
-      @media print, screen and (min-width: 40em) {
-        body .loginctrl .login_a button {
-          padding-right: 0.9375rem;
-          padding-left: 0.9375rem; } }
-      body .loginctrl .login_a button:last-child:not(:first-child) {
-        float: right; }
+      body .loginctrl .login_a .choice ul {
+        width: 100%;
+        float: left;
+        padding-right: 0.625rem;
+        padding-left: 0.625rem; }
+        @media print, screen and (min-width: 40em) {
+          body .loginctrl .login_a .choice ul {
+            padding-right: 0.9375rem;
+            padding-left: 0.9375rem; } }
+        body .loginctrl .login_a .choice ul:last-child:not(:first-child) {
+          float: right; }
+        body .loginctrl .login_a .choice ul li {
+          list-style: none;
+          font-size: 27px; }
+        body .loginctrl .login_a .choice ul a {
+          list-style: none;
+          text-decoration: none;
+          color: #C3E8BD;
+          padding: 10px;
+          font-family: 'Source Sans Pro', sans-serif;
+          font-weight: bold;
+          font-size: 27px; }
+
+body .loginform {
+  width: 50%;
+  float: left;
+  padding-right: 0.625rem;
+  padding-left: 0.625rem; }
+  @media print, screen and (min-width: 40em) {
+    body .loginform {
+      padding-right: 0.9375rem;
+      padding-left: 0.9375rem; } }
+  body .loginform:last-child:not(:first-child) {
+    float: right; }
+  body .loginform input {
+    width: 100%;
+    float: left;
+    padding-right: 0.625rem;
+    padding-left: 0.625rem;
+    padding: 20px;
+    margin: 10px auto auto;
+    text-align: center;
+    font-family: 'PT Sans', sans-serif;
+    background-color: #EEF0EB; }
+    @media print, screen and (min-width: 40em) {
+      body .loginform input {
+        padding-right: 0.9375rem;
+        padding-left: 0.9375rem; } }
+    body .loginform input:last-child:not(:first-child) {
+      float: right; }
+  body .loginform button {
+    width: 100%;
+    float: left;
+    padding-right: 0.625rem;
+    padding-left: 0.625rem;
+    padding: 20px;
+    margin: 10px auto;
+    border: 2px solid #4F5165;
+    color: #C3E8BD;
+    text-align: center;
+    background-color: #153243;
+    font-family: 'Source Sans Pro', sans-serif; }
+    @media print, screen and (min-width: 40em) {
+      body .loginform button {
+        padding-right: 0.9375rem;
+        padding-left: 0.9375rem; } }
+    body .loginform button:last-child:not(:first-child) {
+      float: right; }
 
 html {
   background-color: #4F5165; }
 
 body {
-  background-color: #8EB897;
+  background-color: #C3E8BD;
   border: 2px solid #F4F9E9;
+  height: 800px;
   padding: 20px;
   margin: 20px;
-  background-image: url("https://images.pexels.com/photos/30134/pexels-photo.jpg?w=1260&h=750&auto=compress&cs=tinysrgb");
+  background-image: url("http://www.wbwells.com/wp-content/uploads/2011/06/Desert_road_UAE.jpg");
   background-size: cover;
   font-family: 'Source Sans Pro', sans-serif;
   border-radius: 10px; }
   body #history {
     padding: 20px;
     margin: 20px;
-    border: 2px solid 2px solid #4F5165;
+    border: 2px solid #4F5165;
     text-align: right;
     font-family: 'Source Sans Pro', sans-serif;
     color: #F4F9E9;

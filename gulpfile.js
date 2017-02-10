@@ -13,6 +13,9 @@ gulp.task('default', ['html',
 //Step 3: create subtasks
 gulp.task('html', function (){ //when someone types 'gulp html' run this function
   // Copy index.html into the public/directory.
+  gulp.src('templates/*.html')
+.pipe(gulp.dest('public/templates'))
+
   return gulp.src('index.html')
   .pipe(gulp.dest('public/'));
 })
