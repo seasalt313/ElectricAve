@@ -41,37 +41,37 @@ public class TriprController {
         }
     }
 
-    @CrossOrigin
-    @RequestMapping(path = "/", method = RequestMethod.GET) // This is for testing purposes for the HTML
-    public String home(HttpSession session, Model model) {
-        init();
-        String email = (String) session.getAttribute("email");
-        User user = users.findByEmail(email);
-        if (user != null) {
-            model.addAttribute("user", user);
-        }
-        return "home";
-    }
+//    @CrossOrigin
+//    @RequestMapping(path = "/", method = RequestMethod.GET) // This is for testing purposes for the HTML
+//    public String home(HttpSession session, Model model) {
+//        init();
+//        String email = (String) session.getAttribute("email");
+//        User user = users.findByEmail(email);
+//        if (user != null) {
+//            model.addAttribute("user", user);
+//        }
+//        return "home";
+//    }
 
     @CrossOrigin
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public String login(HttpSession session, String email, String pass) throws Exception {
         User user = users.findByEmail(email);
         if (user == null) {
-            return "redirect:/";
+            return "redirect:/new-user";
         }
         else if (!PasswordStorage.verifyPassword(pass, user.getPassword())) {
             throw new Exception("Incorrect password");
         }
         session.setAttribute("email", email);
-        return "redirect:/";
+        return "redirect:/create";
     }
 
     @CrossOrigin
     @RequestMapping(path = "/logout", method = RequestMethod.POST)
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/";
+        return "redirect:/login";
     }
 
     @CrossOrigin
@@ -86,7 +86,7 @@ public class TriprController {
             throw new Exception("User already exists");
         }
         session.setAttribute("email", email);
-        return "redirect:/";
+        return "redirect:/create";
     }
 
 }
