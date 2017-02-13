@@ -2,7 +2,7 @@
 const app = angular.module('tripApp', ['ui.router']);
 
 
-//CONTROLLERS
+// CONTROLLERS
 const controllers = [
   require('./controllers/login'),
   require('./controllers/createtrip'),
@@ -41,6 +41,7 @@ const components = [
   require('./components/createtrip'),
   require('./components/showtrips'),
   require('./components/newuser'),
+  require('./components/map'),
 ];
 
   for (let i = 0; i < components.length; i++) {
@@ -48,7 +49,18 @@ const components = [
     app.component(components[i].name, components[i].config);
   };
 
-},{"./components/accountlogin":2,"./components/createtrip":3,"./components/newuser":4,"./components/showtrips":5,"./controllers/createtrip":6,"./controllers/login":7,"./controllers/showtrip":8,"./routes":9,"./services/account":10,"./services/trip":11}],2:[function(require,module,exports){
+
+//   //leaflet
+//   var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+//
+//   L.tileLayer('https://api.mapbox.com/styles/v1/seasalt/ciz05osm200022srz742acakx/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2Vhc2FsdCIsImEiOiJjaXkzanV0c2UwMDEzMzNsamV1bmg0ZWVqIn0.mcvszUMDaLO4C8Ea9ytkOg', {
+//     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+//     maxZoom: 18,
+//     id: 'mapbox.mapbox-traffic-v1',
+//     accessToken: 'pk.eyJ1Ijoic2Vhc2FsdCIsImEiOiJjaXkzanV0c2UwMDEzMzNsamV1bmg0ZWVqIn0.mcvszUMDaLO4C8Ea9ytkOg'
+// }).addTo(mymap);
+
+},{"./components/accountlogin":2,"./components/createtrip":3,"./components/map":4,"./components/newuser":5,"./components/showtrips":6,"./controllers/createtrip":7,"./controllers/login":8,"./controllers/showtrip":9,"./routes":10,"./services/account":11,"./services/trip":12}],2:[function(require,module,exports){
 module.exports = {
   name: 'accountLogin',
   config: {
@@ -66,6 +78,15 @@ module.exports = {
 };
 
 },{}],4:[function(require,module,exports){
+
+module.exports = {
+  name: 'mapComponent',
+  config: {
+    templateUrl: 'templates/map.html',
+  },
+};
+
+},{}],5:[function(require,module,exports){
 module.exports = {
   name: 'newUser',
   config: {
@@ -73,7 +94,7 @@ module.exports = {
   },
 };
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 module.exports = {
   name: 'showTrips',
   config: {
@@ -81,19 +102,22 @@ module.exports = {
   },
 };
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 module.exports = {
   name: "createTripController",
   func: function($scope, tripService){
     console.log("create trip controller working");
     $scope.postTrip = function(name, from, to){
-      tripService.postTrip(name, from, to)
+      tripService.postTrip(name, from, to) //this should return the map coordinates? and send them to a differet page that will display the map ** luke
     }
     $scope.getTripNames = tripService.getTrips();
+
+    $scope.map = tripService.showLeaflet();
+
   }
 }
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 module.exports = {
   name: "loginController",
   func: function($scope, accountService){
@@ -107,19 +131,23 @@ module.exports = {
   }
 }
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 module.exports = {
   name: "showTripController",
-  func: function($scope, tripService, $state){
+  func: function($scope, tripService, accountService, $state){
     console.log("trip controller working");
-    $scope.showMap = function(trip){
-      tripService.showMap(trip);
-    },
-    $scope.trips = tripService.getTrips();
-  },
+
+      $scope.showMap = function(trip){
+        tripService.showMap(trip);
+      }
+
+      $scope.trips = tripService.getTrips();
+
+      $scope.getAccount = accountService.getAccount();
+  }
 }
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 module.exports = [
 
     {
@@ -146,9 +174,15 @@ module.exports = [
         component: 'showTrips',
     },
 
+    {
+        name: 'map',
+        url: '/show-map',
+        component: 'mapComponent',
+    },
+
 ];
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 module.exports = {
   name: "accountService",
   func: function($http){
@@ -188,13 +222,24 @@ module.exports = {
         return accountInfo; ///???
         //2) if response === true, new-trip view should appear to user.
       },
+      getAccount: function(){
+        //1) GET request here
+        let account = $http.get('https://dry-headland-17316.herokuapp.com/account/' + userId).then(function(response){
+          const incoming = response.data;
+          console.log("should be receiving account info below: ");
+          console.log(incoming);
+          angular.copy(response.data, accountInfo)
+        })
+        //2) return trip names, and send to controller to display on page.
+        return accountInfo;
+      }
 
     }//closing return object
 
   }//closing func
 }//closing module export
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 module.exports = {
   name: "tripService",
   func: function($http){
@@ -236,6 +281,31 @@ module.exports = {
       showMap: function(trip){
         //POST trip names
         //response = maps
+      },
+      showLeaflet : function(){
+        var map,
+            dir;
+
+            map = L.map('map', {
+            layers: MQ.mapLayer(),
+            center: [ 38.895345, -77.030101 ],
+            zoom: 15
+            });
+
+            dir = MQ.routing.directions();
+
+            dir.route({
+            locations: [
+            '1600 pennsylvania ave, washington dc',
+            '935 pennsylvania ave, washington dc'
+            ]
+            });
+
+            map.addLayer(MQ.routing.routeLayer({
+            directions: dir,
+            fitBounds: true
+            }));
+
       },
 
     }//closing return

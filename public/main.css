@@ -1499,7 +1499,7 @@ html {
 body {
   background-color: #C3E8BD;
   border: 2px solid #F4F9E9;
-  height: 800px;
+  height: auto;
   padding: 20px;
   margin: 20px;
   background-image: url("http://www.wbwells.com/wp-content/uploads/2011/06/Desert_road_UAE.jpg");
@@ -1514,3 +1514,15 @@ body {
     font-family: 'Source Sans Pro', sans-serif;
     color: #F4F9E9;
     background-color: #153243; }
+  body .map_area {
+    text-align: center; }
+    body .map_area button {
+      border: 2px solid #C3E8BD;
+      color: #C3E8BD;
+      font-size: 22px;
+      padding: 20px;
+      background-color: grey;
+      border-radius: 8px; }
+  body #map {
+    margin: 100px;
+    height: 400px; }

@@ -24,4 +24,10 @@ module.exports = [
         component: 'showTrips',
     },
 
+    {
+        name: 'map',
+        url: '/show-map',
+        component: 'mapComponent',
+    },
+
 ];
