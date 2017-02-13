@@ -57,11 +57,8 @@ public class TriprController {
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public String login(HttpSession session, String email, String pass) throws Exception {
         User user = users.findByEmail(email);
-        if (user == null) {
+        if ((user == null) || (!PasswordStorage.verifyPassword(pass, user.getPassword()))){
             return "redirect:/new-user";
-        }
-        else if (!PasswordStorage.verifyPassword(pass, user.getPassword())) {
-            throw new Exception("Incorrect password");
         }
         session.setAttribute("email", email);
         return "redirect:/create";
@@ -83,7 +80,7 @@ public class TriprController {
             user = new User(name, email, PasswordStorage.createHash(pass), car);
             users.save(user);
         } else {
-            throw new Exception("User already exists");
+            return "redirect:/new-user";
         }
         session.setAttribute("email", email);
         return "redirect:/create";
