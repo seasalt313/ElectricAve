@@ -11,8 +11,8 @@
     Login!
 </h1>
 <form action="/login" method="post">
-    <input type="email" placeholder="Email" name="email" required/>
-    <input type="password" placeholder="Password" name="pass" required/>
+    <input type="email" placeholder="Email" name="emailName" required/>
+    <input type="password" placeholder="Password" name="password" required/>
     <button type="submit">Login</button>
 </form>
 <h2>
@@ -20,8 +20,8 @@
 </h2>
 <form action="/new-user" method="post">
     <input type="text" placeholder="Name" name="name"/>
-    <input type="email" placeholder="Email" name="email" required/>
-    <input type="password" placeholder="Password" name="pass" required/>
+    <input type="email" placeholder="Email" name="emailName" required/>
+    <input type="password" placeholder="Password" name="password" required/>
     <input type="text" placeholder="Car Name" name="car" required/>
     <button type="submit">Login</button>
 </form>
@@ -29,8 +29,6 @@
 <!--If user is present-->
 {{#user}}
 Welcome, {{name}}!
-Your email, {{email}}
-The car, {{car}}
 <form action="/logout" method="post">
     <button type="submit">Logout</button>
 </form>
