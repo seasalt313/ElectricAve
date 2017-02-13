@@ -10,14 +10,19 @@ gulp.task('default', ['html',
 'css',
 'js']);
 
+const BUILD_URL = 'build/resources/main/static';
+const SRC_URL = 'src/main/resources/static';
+
 //Step 3: create subtasks
 gulp.task('html', function (){ //when someone types 'gulp html' run this function
   // Copy index.html into the public/directory.
   gulp.src('templates/*.html')
-.pipe(gulp.dest('public/templates'))
+    .pipe(gulp.dest(BUILD_URL + '/templates'))
+    .pipe(gulp.dest(SRC_URL + '/templates'));
 
   return gulp.src('index.html')
-  .pipe(gulp.dest('public/'));
+  .pipe(gulp.dest(BUILD_URL))
+  .pipe(gulp.dest(SRC_URL));
 })
 
 gulp.task('css', function(){
@@ -25,14 +30,16 @@ gulp.task('css', function(){
   //Copy to public/
   return gulp.src('scss/main.scss')
     .pipe(sass()) //requires gulp-sass
-    .pipe(gulp.dest('public/'));
-})
+    .pipe(gulp.dest(BUILD_URL))
+    .pipe(gulp.dest(SRC_URL));
+  })
 
 gulp.task('js', function(){
   //Copy js file into public/
   return gulp.src('js/app.js')
   .pipe(browser.browserify())
-  .pipe(gulp.dest('public/'));
+  .pipe(gulp.dest(BUILD_URL))
+  .pipe(gulp.dest(SRC_URL));
 })
 
 gulp.task('watch', ['default'], function(){
