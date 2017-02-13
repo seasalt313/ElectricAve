@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>tripr</title>
+    <!-- add css file -->
+    <link rel="stylesheet" href="main.css">
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans|Source+Sans+Pro" rel="stylesheet">
+    <!-- leaflet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
+
+
+  </head>
+
+  <body ng-app= 'tripApp'>
+     <!-- $state.go -->
+    <section class="header_section">
+      <div class="header">
+        <h1>tripr</h1>
+      </div>
+    </section>
+
+
+    <ui-view></ui-view>
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
+    <!-- <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script> -->
+    <script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-map.js?key=yyOIPG8BapuTKAQxWdWtVGaYhqILVXy3"></script>
+    <script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-routing.js?key=yyOIPG8BapuTKAQxWdWtVGaYhqILVXy3"></script>
+
+
+    <!-- add angular -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js">
+    </script>
+
+    <!-- add font awesome -->
+    <script src="https://use.fontawesome.com/7fb1b7bdac.js">
+    </script>
+
+    <!-- add ui-router -->
+    <script src="https://npmcdn.com/angular-ui-router@1.0.0-beta.3/release/angular-ui-router.min.js">
+    </script>
+
+
+    <!-- add js file -->
+    <script src="app.js" type="text/javascript">
+    </script>
+  </body>
+</html>

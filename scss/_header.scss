@@ -1,0 +1,15 @@
+body {
+
+  .header_section {
+    @include grid-row();
+    border: 2px solid #C3E8BD;
+    background-color: #4F5165;
+    border-radius: 10px;
+
+    .header {
+    font-size: 40px;
+    text-align: center;
+    color: #C3E8BD;
+    }
+  }
+}

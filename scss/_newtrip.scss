@@ -1,0 +1,57 @@
+
+$primary-dark-color: #153243;
+$primary-font-color: #F4F9E9;
+$highlight-bg-color: #C3E8BD;
+$border: 2px solid #4F5165;
+
+body {
+  .creating_trip {
+    @include grid-row();
+    display: flex;
+    color: $primary-font-color;
+    font-family: 'PT Sans', sans-serif;
+    text-align: center;
+
+    .contain_trip {
+      @include grid-column(6);
+      margin: auto;
+
+      .name_trip {
+        @include grid-column(12);
+        margin: 10px;
+        input {
+          @include grid-column(12);
+          padding: 20px;
+          font-size: 22px;
+          font-family: 'PT Sans', sans-serif;
+          background-color: #F4F9E9;
+        }
+      }
+      .tripform {
+        @include grid-column(12);
+        margin: auto;
+        background-color: $primary-dark-color;
+        border: $border;
+        input {
+          @include grid-column(12);
+          margin-bottom: 10px;
+          padding: 20px;
+          font-size: 22px;
+          font-family: 'PT Sans', sans-serif;
+          background-color: #F4F9E9;
+          border-radius: 9px;
+        }
+      }
+      #newbtn {
+        @include grid-column(12);
+        padding: 20px;
+        margin: 10px auto;
+        border: $border;
+        text-align: center;
+        font-family: 'Source Sans Pro', sans-serif;
+        color: $primary-font-color;
+        background-color: $primary-dark-color;
+      }
+    }
+  }
+}
