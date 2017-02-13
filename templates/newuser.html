@@ -10,10 +10,10 @@
  </div>
 
  <form class="loginform" action="/new-user" method="post">
-   <input type="text" ng-model="username" placeholder="enter your name">
-   <input type="email" ng-model="user_email" placeholder="email">
-   <input type="password" ng-model="user_password" placeholder="password">
-   <input type="text" ng-model="user_car" placeholder="Tesla or Chevy Leaf?">
+   <input type="text" name="name" ng-model="username" placeholder="enter your name">
+   <input type="email" name="email" ng-model="user_email" placeholder="email">
+   <input type="password" name="pass" ng-model="user_password" placeholder="password">
+   <input type="text" "car" ng-model="user_car" placeholder="Tesla or Chevy Leaf?">
    <button type="button" ng-click="makeAccount(username, user_email, user_password, user_car)"><a ui-sref="new-trip">Create Account</a></button>
  </form>
 
