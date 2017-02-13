@@ -7,16 +7,13 @@ import com.theironyard.services.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@Controller
+@RestController
 public class TriprController {
     @Autowired
     UserRepository users; //Repo for users
@@ -55,35 +52,39 @@ public class TriprController {
 
     @CrossOrigin
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public String login(HttpSession session, String email, String pass) throws Exception {
+    public User login(@RequestBody HttpSession session, String email, String pass) throws Exception {
         User user = users.findByEmail(email);
         if ((user == null) || (!PasswordStorage.verifyPassword(pass, user.getPassword()))){
-            return "redirect:/new-user";
+//            return "redirect:/new-user";
+            return user;
         }
         session.setAttribute("email", email);
-        return "redirect:/create";
+//        return "redirect:/create";
+        return user;
     }
 
     @CrossOrigin
     @RequestMapping(path = "/logout", method = RequestMethod.POST)
-    public String logout(HttpSession session) {
+    public void logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/login";
+//        return "redirect:/login";
     }
 
     @CrossOrigin
     @RequestMapping(path = "/new-user", method = RequestMethod.POST)
-    public String newUser(String name,  String email, String pass, String car, HttpSession session) throws Exception {
+    public User newUser(@RequestBody String name, String email, String pass, String car, HttpSession session) throws Exception {
         User user = users.findByEmail(email);
 
         if(user == null) {
             user = new User(name, email, PasswordStorage.createHash(pass), car);
             users.save(user);
         } else {
-            return "redirect:/new-user";
+//            return "redirect:/new-user";
+            return user;
         }
         session.setAttribute("email", email);
-        return "redirect:/create";
+        return user;
+//        return "redirect:/create";
     }
 
 }
