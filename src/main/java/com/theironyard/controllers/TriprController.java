@@ -52,15 +52,15 @@ public class TriprController {
 
     @CrossOrigin
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public User login(@RequestBody HttpSession session, String email, String pass) throws Exception {
+    public Integer login(@RequestBody HttpSession session, String email, String pass) throws Exception {
         User user = users.findByEmail(email);
         if ((user == null) || (!PasswordStorage.verifyPassword(pass, user.getPassword()))){
 //            return "redirect:/new-user";
-            return user;
+            return user.getId();
         }
         session.setAttribute("email", email);
 //        return "redirect:/create";
-        return user;
+        return user.getId();
     }
 
     @CrossOrigin
@@ -72,7 +72,7 @@ public class TriprController {
 
     @CrossOrigin
     @RequestMapping(path = "/new-user", method = RequestMethod.POST)
-    public User newUser(@RequestBody String name, String email, String pass, String car, HttpSession session) throws Exception {
+    public Integer newUser(@RequestBody String name, String email, String pass, String car, HttpSession session) throws Exception {
         User user = users.findByEmail(email);
 
         if(user == null) {
@@ -80,10 +80,10 @@ public class TriprController {
             users.save(user);
         } else {
 //            return "redirect:/new-user";
-            return user;
+            return user.getId();
         }
         session.setAttribute("email", email);
-        return user;
+        return user.getId();
 //        return "redirect:/create";
     }
 

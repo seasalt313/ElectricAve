@@ -34,6 +34,14 @@ public class Trip {
         this.endLocation = endLocation;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getTripName() {
         return tripName;
     }
