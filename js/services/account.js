@@ -17,7 +17,7 @@ module.exports = {
           console.log("response below");
           console.log(response.data);
           accountInfo = response.data;
-          userId = response.data.id;
+          // userId = response.data.id;
         })
         console.log("account creation successful");
         return accountInfo;
