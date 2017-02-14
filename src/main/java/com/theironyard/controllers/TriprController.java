@@ -13,7 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@RestController
+@Controller
 public class TriprController {
     @Autowired
     UserRepository users; //Repo for users
@@ -45,9 +45,9 @@ public class TriprController {
 //        String email = (String) session.getAttribute("email");
 //        User user = users.findByEmail(email);
         if (session.getAttribute("email") != null) {
-            return "redirect:create.html";
+            return "redirect:/create.html";
         }
-        return "redirect:new-user.html";
+        return "redirect:/new-user.html";
     }
 
     @CrossOrigin
