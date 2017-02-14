@@ -21,8 +21,8 @@ module.exports = {
 
           dir.route({
           locations: [
-          '1600 pennsylvania ave, washington dc',
-          '935 pennsylvania ave, washington dc'
+          '200 south church st, charlotte, nc',
+          '1304 south college st, charlotte nc'
           ]
           });
 
@@ -31,7 +31,11 @@ module.exports = {
           fitBounds: true
           }));
 
-          tripService.showLocation();
+          // tripService.showLocation();
+          console.log("showing location");
+          map.locate({setView: true, maxZoom: 16});
+
+
 
     }
 
