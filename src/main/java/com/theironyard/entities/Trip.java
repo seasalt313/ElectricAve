@@ -1,6 +1,12 @@
 package com.theironyard.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.theironyard.data.CurrentLocation;
+import org.springframework.web.client.RestTemplate;
+
 import javax.persistence.*;
+import java.util.HashMap;
+import java.util.Map;
 
 @Entity
 @Table(name = "trips")
@@ -13,33 +19,48 @@ public class Trip {
     String tripName;
 
     @Column(nullable = false)
-    String startLocation;
+    String startAddress;
 
     @Column(nullable = false)
-    String endLocation;
+    String endAddress;
+
+    @Column(nullable = false)
+    Double latitude;
+
+    @Column(nullable = false)
+    Double longitude;
+
 
     @ManyToOne
     User user;
 
-    public Trip(String tripName, String startLocation, String endLocation, User user) {
+    @JsonIgnore
+    public void setLatLongValues() {
+        Map<String, String> urlParms = new HashMap<>();
+        urlParms.put("accessKey", System.getenv("GOOGLE_API_KEY"));
+        urlParms.put("start-address", getStartAddress());
+        urlParms.put("end-address", getEndAddress());
+        CurrentLocation startLocation = new RestTemplate().getForObject("https://maps.googleapis.com/maps/api/geocode/json?address={start-address}&key={accessKey}", CurrentLocation.class, urlParms);
+        CurrentLocation endLocation = new RestTemplate().getForObject("https://maps.googleapis.com/maps/api/geocode/json?address={end-address}&key={accessKey}", CurrentLocation.class, urlParms);
+
+        if (startLocation.getResults().size() >= 1) {
+            this.latitude = startLocation.getResults().get(0).getGeometry().getLocation().getLat();
+            this.longitude = startLocation.getResults().get(0).getGeometry().getLocation().getLng();
+        }
+
+        if (endLocation.getResults().size() >= 1) {
+            this.latitude = endLocation.getResults().get(0).getGeometry().getLocation().getLat();
+            this.longitude = endLocation.getResults().get(0).getGeometry().getLocation().getLng();
+        }
+    }
+
+    public Trip() {
+    }
+
+    public Trip(String tripName, String startAddress, String endAddress) {
         this.tripName = tripName;
-        this.startLocation = startLocation;
-        this.endLocation = endLocation;
-        this.user = user;
-    }
-
-    public Trip(String tripName, String startLocation, String endLocation) {
-        this.tripName = tripName;
-        this.startLocation = startLocation;
-        this.endLocation = endLocation;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.startAddress = startAddress;
+        this.endAddress = endAddress;
     }
 
     public String getTripName() {
@@ -50,27 +71,43 @@ public class Trip {
         this.tripName = tripName;
     }
 
-    public String getStartLocation() {
-        return startLocation;
+    public String getStartAddress() {
+        return startAddress;
     }
 
-    public void setStartLocation(String startLocation) {
-        this.startLocation = startLocation;
+    public void setStartAddress(String startAddress) {
+        this.startAddress = startAddress;
     }
 
-    public String getEndLocation() {
-        return endLocation;
+    public String getEndAddress() {
+        return endAddress;
     }
 
-    public void setEndLocation(String endLocation) {
-        this.endLocation = endLocation;
+    public void setEndAddress(String endAddress) {
+        this.endAddress = endAddress;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public User getUser() {
         return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }

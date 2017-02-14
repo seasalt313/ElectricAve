@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +21,10 @@ public class TriprController {
 
     @Autowired
     TripRepository trips; //Repo for trips
+
+    @Autowired
+    RestTemplate template;
+
 
 //    @PostConstruct // Testing Purposes with a bit of humor
 //    public void init() {
@@ -82,4 +87,6 @@ public class TriprController {
         }
         return "redirect:/";
     }
+
+
 }
