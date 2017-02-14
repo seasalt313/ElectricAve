@@ -31,6 +31,8 @@ module.exports = {
           fitBounds: true
           }));
 
+          tripService.showLocation();
+
     }
 
   }
