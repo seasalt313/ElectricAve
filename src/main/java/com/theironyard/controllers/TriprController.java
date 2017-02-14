@@ -21,51 +21,51 @@ public class TriprController {
     @Autowired
     TripRepository trips; //Repo for trips
 
-    @PostConstruct // Testing Purposes with a bit of humor
-    public void init() {
-        if (users.count() == 0) { // If repo is not populated at all do this
-            User user = new User(); // Creates user
-            user.setName("Zach"); // sets user name to Zach
-            user.setEmail("zach@gmail.com");
-            user.setCar("Tesla");
-            try {
-                user.setPassword(PasswordStorage.createHash("hunter2")); // Creates a password
-            } catch (PasswordStorage.CannotPerformOperationException e) {
-                e.printStackTrace();
-            }
+//    @PostConstruct // Testing Purposes with a bit of humor
+//    public void init() {
+//        if (users.count() == 0) { // If repo is not populated at all do this
+//            User user = new User(); // Creates user
+//            user.setName("Zach"); // sets user name to Zach
+//            user.setEmail("zach@gmail.com");
+//            user.setCar("Tesla");
+//            try {
+//                user.setPassword(PasswordStorage.createHash("hunter2")); // Creates a password
+//            } catch (PasswordStorage.CannotPerformOperationException e) {
+//                e.printStackTrace();
+//            }
+//
+//            users.save(user); // saves this user into the Repo
+//        }
+//    }
 
-            users.save(user); // saves this user into the Repo
-        }
-    }
-
-//    @CrossOrigin
-//    @RequestMapping(path = "/", method = RequestMethod.GET) // This is for testing purposes for the HTML
-//    public String home(HttpSession session, Model model) {
-//        init();
+    @CrossOrigin
+    @RequestMapping(path = "/", method = RequestMethod.GET) // This is for testing purposes for the HTML
+    public String home(HttpSession session) {
+        //init();
 //        String email = (String) session.getAttribute("email");
 //        User user = users.findByEmail(email);
-//        if (user != null) {
-//            model.addAttribute("user", user);
-//        }
-//        return "home";
-//    }
+        if (session.getAttribute("email") != null) {
+            return "redirect:create.html";
+        }
+        return "redirect:new-user.html";
+    }
 
     @CrossOrigin
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public String login(@RequestBody HttpSession session, String email, String pass) throws Exception {
         User user = users.findByEmail(email);
         if ((user == null) || (!PasswordStorage.verifyPassword(pass, user.getPassword()))){
-            return "redirect:new-user.html";
+            return "redirect:/";
         }
         session.setAttribute("email", email);
-        return "redirect:create.html";
+        return "redirect:/";
     }
 
     @CrossOrigin
     @RequestMapping(path = "/logout", method = RequestMethod.POST)
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:login.html";
+        return "redirect:/";
     }
 
     @CrossOrigin
@@ -76,12 +76,10 @@ public class TriprController {
         if(user == null) {
             user = new User(name, email, PasswordStorage.createHash(pass), car);
             users.save(user);
-        } else {
-            return "redirect:new-user.html";
+            session.setAttribute("email", email);
+            return "redirect:/";
 
         }
-        session.setAttribute("email", email);
-        return "redirect:create.html";
+        return "redirect:/";
     }
-
 }
