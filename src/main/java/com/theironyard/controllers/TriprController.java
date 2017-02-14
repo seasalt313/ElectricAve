@@ -52,39 +52,36 @@ public class TriprController {
 
     @CrossOrigin
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public Integer login(@RequestBody HttpSession session, String email, String pass) throws Exception {
+    public String login(@RequestBody HttpSession session, String email, String pass) throws Exception {
         User user = users.findByEmail(email);
         if ((user == null) || (!PasswordStorage.verifyPassword(pass, user.getPassword()))){
-//            return "redirect:/new-user";
-            return user.getId();
+            return "redirect:new-user.html";
         }
         session.setAttribute("email", email);
-//        return "redirect:/create";
-        return user.getId();
+        return "redirect:create.html";
     }
 
     @CrossOrigin
     @RequestMapping(path = "/logout", method = RequestMethod.POST)
-    public void logout(HttpSession session) {
+    public String logout(HttpSession session) {
         session.invalidate();
-//        return "redirect:/login";
+        return "redirect:login.html";
     }
 
     @CrossOrigin
     @RequestMapping(path = "/new-user", method = RequestMethod.POST)
-    public Integer newUser(@RequestBody String name, String email, String pass, String car, HttpSession session) throws Exception {
+    public String newUser(@RequestBody String name, String email, String pass, String car, HttpSession session) throws Exception {
         User user = users.findByEmail(email);
 
         if(user == null) {
             user = new User(name, email, PasswordStorage.createHash(pass), car);
             users.save(user);
         } else {
-//            return "redirect:/new-user";
-            return user.getId();
+            return "redirect:new-user.html";
+
         }
         session.setAttribute("email", email);
-        return user.getId();
-//        return "redirect:/create";
+        return "redirect:create.html";
     }
 
 }
