@@ -45,9 +45,9 @@ public class TriprController {
 //        String email = (String) session.getAttribute("email");
 //        User user = users.findByEmail(email);
         if (session.getAttribute("email") != null) {
-            return "redirect:/create.html";
+            return "redirect:/create";
         }
-        return "redirect:/new-user.html";
+        return "redirect:/new-user";
     }
 
     @CrossOrigin
