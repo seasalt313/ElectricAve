@@ -12,13 +12,13 @@ public class User {
     int id;
 
     @Column(nullable = false)
-    String name;
+    String userName;
 
     @Column(nullable = false, unique = true)
-    String email;
+    String emailAddress;
 
     @Column(nullable = false)
-    String pass;
+    String password;
 
     @Column(nullable = false)
     String car;
@@ -29,64 +29,48 @@ public class User {
     public User() {
     }
 
-    public User(String name, String email, String pass, String car, List<Trip> trips) {
-        this.name = name;
-        this.email = email;
-        this.pass = pass;
+    public User(String userName, String emailAddress, String password, String car, List<Trip> trips) {
+        this.userName = userName;
+        this.emailAddress = emailAddress;
+        this.password = password;
         this.car = car;
         this.trips = trips;
     }
 
-    public User(String name, String email, String pass, String car) {
-        this.name = name;
-        this.email = email;
-        this.pass = pass;
+    public User(String userName, String emailAddress, String password, String car) {
+        this.userName = userName;
+        this.emailAddress = emailAddress;
+        this.password = password;
         this.car = car;
     }
 
-    public User(String email, String pass) {
-        this.email = email;
-        this.pass = pass;
+    public User(String emailAddress, String password) {
+        this.emailAddress = emailAddress;
+        this.password = password;
     }
 
-    public int getId() {
-        return id;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public List<Trip> getTrips() {
-        return trips;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
-    public void setTrips(List<Trip> trips) {
-        this.trips = trips;
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
-    public String getName() {
-        return name;
+    public String getPassword() {
+        return password;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPass() {
-        return pass;
-    }
-
-    public void setPass(String pass) {
-        this.pass = pass;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getCar() {
@@ -95,5 +79,13 @@ public class User {
 
     public void setCar(String car) {
         this.car = car;
+    }
+
+    public List<Trip> getTrips() {
+        return trips;
+    }
+
+    public void setTrips(List<Trip> trips) {
+        this.trips = trips;
     }
 }
