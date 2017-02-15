@@ -5,13 +5,9 @@ import com.theironyard.services.PasswordStorage;
 import com.theironyard.services.TripRepository;
 import com.theironyard.services.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @RestController
@@ -34,7 +30,7 @@ public class TriprController {
 //            user.setEmail("zach@gmail.com");
 //            user.setCar("Tesla");
 //            try {
-//                user.setPassword(PasswordStorage.createHash("hunter2")); // Creates a password
+//                user.setPass(PasswordStorage.createHash("hunter2")); // Creates a password
 //            } catch (PasswordStorage.CannotPerformOperationException e) {
 //                e.printStackTrace();
 //            }
@@ -57,13 +53,13 @@ public class TriprController {
 
     @CrossOrigin
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public boolean login(@RequestBody HttpSession session, String email, String pass) throws Exception {
+    public User login(@RequestParam(value = "email") String email, @RequestParam(value = "pass") String pass) throws Exception {
         User user = users.findByEmail(email);
-        if ((user == null) || (!PasswordStorage.verifyPassword(pass, user.getPassword()))){
-            return false;
+        if ((user == null) || (!PasswordStorage.verifyPassword(pass, user.getPass()))){
+            throw new Exception();
         }
-        session.setAttribute("email", email);
-        return true;
+//        session.setAttribute("email", email);
+        return user;
     }
 
     @CrossOrigin
@@ -75,13 +71,13 @@ public class TriprController {
 
     @CrossOrigin
     @RequestMapping(path = "/new-user", method = RequestMethod.POST)
-    public boolean newUser(@RequestBody String name, String email, String pass, String car, HttpSession session) throws Exception {
-        User user = users.findByEmail(email);
+    public boolean newUser(@RequestBody User current) throws Exception {
+        User user = users.findByEmail(current.getEmail());
 
         if(user == null) {
-            user = new User(name, email, PasswordStorage.createHash(pass), car);
+            user = new User(current.getName(), current.getEmail(), PasswordStorage.createHash(current.getPass()), current.getCar());
             users.save(user);
-            session.setAttribute("email", email);
+            //session.setAttribute("email", email);
             return true;
 
         }

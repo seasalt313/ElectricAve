@@ -45,10 +45,10 @@ public class PasswordStorage
     public static final int SALT_INDEX = 3;
     public static final int PBKDF2_INDEX = 4;
 
-    public static String createHash(String password)
+    public static String createHash(String pass)
             throws CannotPerformOperationException
     {
-        return createHash(password.toCharArray());
+        return createHash(pass.toCharArray());
     }
 
     public static String createHash(char[] password)

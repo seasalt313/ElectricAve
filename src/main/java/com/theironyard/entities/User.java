@@ -18,7 +18,7 @@ public class User {
     String email;
 
     @Column(nullable = false)
-    String password;
+    String pass;
 
     @Column(nullable = false)
     String car;
@@ -29,24 +29,24 @@ public class User {
     public User() {
     }
 
-    public User(String name, String email, String password, String car, List<Trip> trips) {
+    public User(String name, String email, String pass, String car, List<Trip> trips) {
         this.name = name;
         this.email = email;
-        this.password = password;
+        this.pass = pass;
         this.car = car;
         this.trips = trips;
     }
 
-    public User(String name, String email, String password, String car) {
+    public User(String name, String email, String pass, String car) {
         this.name = name;
         this.email = email;
-        this.password = password;
+        this.pass = pass;
         this.car = car;
     }
 
-    public User(String email, String password) {
+    public User(String email, String pass) {
         this.email = email;
-        this.password = password;
+        this.pass = pass;
     }
 
     public int getId() {
@@ -81,12 +81,12 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPass() {
+        return pass;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 
     public String getCar() {
