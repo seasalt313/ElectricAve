@@ -112,7 +112,33 @@ module.exports = {
     }
     $scope.getTripNames = tripService.getTrips();
 
-    $scope.map = tripService.showLeaflet();
+    $scope.map = function(){
+      var map,
+          dir;
+
+          map = L.map('map', {
+          layers: MQ.mapLayer(),
+          center: [ 38.895345, -77.030101 ],
+          zoom: 15
+          });
+
+          dir = MQ.routing.directions();
+
+          dir.route({
+          locations: [
+          '1600 pennsylvania ave, washington dc',
+          '935 pennsylvania ave, washington dc'
+          ]
+          });
+
+          map.addLayer(MQ.routing.routeLayer({
+          directions: dir,
+          fitBounds: true
+          }));
+
+          tripService.showLocation();
+
+    }
 
   }
 }
@@ -202,7 +228,7 @@ module.exports = {
           console.log("response below");
           console.log(response.data);
           accountInfo = response.data;
-          userId = response.data.id;
+          // userId = response.data.id;
         })
         console.log("account creation successful");
         return accountInfo;
@@ -268,7 +294,7 @@ module.exports = {
       },
       getTrips: function(){
         //1) GET request here
-        let tripHistory = $http.get('https://dry-headland-17316.herokuapp.com/trip-list' + userId).then(function(response){
+        let tripHistory = $http.get('https://dry-headland-17316.herokuapp.com/trip-list/' + userId).then(function(response){
           const incoming = response.data;
           console.log("should be receiving a list of trips below: ");
           console.log(incoming);
@@ -278,34 +304,15 @@ module.exports = {
         console.log(tripList);
         return tripList;
       },
+      // get data for a particular trip
       showMap: function(trip){
         //POST trip names
         //response = maps
       },
-      showLeaflet : function(){
-        var map,
-            dir;
-
-            map = L.map('map', {
-            layers: MQ.mapLayer(),
-            center: [ 38.895345, -77.030101 ],
-            zoom: 15
-            });
-
-            dir = MQ.routing.directions();
-
-            dir.route({
-            locations: [
-            '1600 pennsylvania ave, washington dc',
-            '935 pennsylvania ave, washington dc'
-            ]
-            });
-
-            map.addLayer(MQ.routing.routeLayer({
-            directions: dir,
-            fitBounds: true
-            }));
-
+      showLocation: function(){
+        navigator.geolocation.getCurrentPosition(function(position) {
+          do_something(position.coords.latitude, position.coords.longitude);
+        });
       },
 
     }//closing return

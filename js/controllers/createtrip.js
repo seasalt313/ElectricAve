@@ -7,7 +7,37 @@ module.exports = {
     }
     $scope.getTripNames = tripService.getTrips();
 
-    $scope.map = tripService.showLeaflet();
+    $scope.map = function(){
+      var map,
+          dir;
+
+          map = L.map('map', {
+          layers: MQ.mapLayer(),
+          center: [ 38.895345, -77.030101 ],
+          zoom: 15
+          });
+
+          dir = MQ.routing.directions();
+
+          dir.route({
+          locations: [
+          '200 south church st, charlotte, nc',
+          '1304 south college st, charlotte nc'
+          ]
+          });
+
+          map.addLayer(MQ.routing.routeLayer({
+          directions: dir,
+          fitBounds: true
+          }));
+
+          // tripService.showLocation();
+          console.log("showing location");
+          map.locate({setView: true, maxZoom: 16});
+
+
+
+    }
 
   }
 }
