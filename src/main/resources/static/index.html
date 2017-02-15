@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
 
     <title>tripr</title>
     <!-- add css file -->
@@ -10,6 +12,10 @@
     <link href="https://fonts.googleapis.com/css?family=PT+Sans|Source+Sans+Pro" rel="stylesheet">
     <!-- leaflet -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" >
+    <!-- mapbox -->
+    <link href='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.js'></script>
 
 
   </head>
@@ -25,11 +31,12 @@
 
     <ui-view></ui-view>
 
+    <script src='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.4.0/mapbox.directions.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.4.0/mapbox.directions.css' type='text/css' />
 
 
-
+    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
-    <!-- <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script> -->
     <script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-map.js?key=yyOIPG8BapuTKAQxWdWtVGaYhqILVXy3"></script>
     <script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-routing.js?key=yyOIPG8BapuTKAQxWdWtVGaYhqILVXy3"></script>
 

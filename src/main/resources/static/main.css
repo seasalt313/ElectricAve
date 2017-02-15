@@ -1524,5 +1524,7 @@ body {
       background-color: grey;
       border-radius: 8px; }
   body #map {
-    margin: 100px;
-    height: 400px; }
+    position: absolute;
+    width: 75%;
+    margin: auto;
+    height: 50%; }
