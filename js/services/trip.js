@@ -39,6 +39,7 @@ module.exports = {
       // get data for a particular trip
       showMap: function(trip){
         return $http.get('https://polar-tor-56907.herokuapp.com');
+        console.log(response.data);
         //
       },
       showLocation: function(){
