@@ -7,9 +7,23 @@ body {
     border-radius: 10px;
 
     .header {
-    font-size: 40px;
-    text-align: center;
-    color: #C3E8BD;
+    @include grid-column(12);
+
+    h1 {
+      @include grid-column(10);
+      font-size: 40px;
+      text-align: center;
+      color: #C3E8BD;
+    }
+
+    .logout {
+      @include grid-column(2);
+      border: 2px solid #C3E8BD;
+      margin: 5px;
+      padding: 20px;
+      font-size: 18px;
+    }
+
     }
   }
 }
