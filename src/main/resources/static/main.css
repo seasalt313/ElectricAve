@@ -1516,6 +1516,10 @@ body {
     background-color: #153243; }
   body .map_area {
     text-align: center; }
+    body .map_area #map {
+      width: 500px;
+      height: 500px;
+      margin: 100px auto; }
     body .map_area button {
       border: 2px solid #C3E8BD;
       color: #C3E8BD;
@@ -1523,8 +1527,3 @@ body {
       padding: 20px;
       background-color: grey;
       border-radius: 8px; }
-  body #map {
-    position: absolute;
-    width: 75%;
-    margin: auto;
-    height: 50%; }

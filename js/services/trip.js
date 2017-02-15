@@ -38,8 +38,8 @@ module.exports = {
       },
       // get data for a particular trip
       showMap: function(trip){
-        //POST trip names
-        //response = maps
+        return $http.get('https://polar-tor-56907.herokuapp.com');
+        //
       },
       showLocation: function(){
         navigator.geolocation.getCurrentPosition(function(position) {

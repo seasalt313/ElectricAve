@@ -6,11 +6,11 @@ module.exports = [
         component: 'accountLogin',
     },
 
-    {
-        name: 'new-user',
-        url: '',
-        component: 'newUser',
-    },
+    // {
+    //     name: 'new-user',
+    //     url: '',
+    //     component: 'newUser',
+    // },
 
     {
         name: 'newtrip',
