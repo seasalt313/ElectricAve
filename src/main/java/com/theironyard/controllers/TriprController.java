@@ -14,7 +14,7 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@Controller
+@RestController
 public class TriprController {
     @Autowired
     UserRepository users; //Repo for users
@@ -57,13 +57,13 @@ public class TriprController {
 
     @CrossOrigin
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public String login(@RequestBody HttpSession session, String email, String pass) throws Exception {
+    public boolean login(@RequestBody HttpSession session, String email, String pass) throws Exception {
         User user = users.findByEmail(email);
         if ((user == null) || (!PasswordStorage.verifyPassword(pass, user.getPassword()))){
-            return "newuser.html";
+            return false;
         }
         session.setAttribute("email", email);
-        return "create.html";
+        return true;
     }
 
     @CrossOrigin
@@ -75,17 +75,17 @@ public class TriprController {
 
     @CrossOrigin
     @RequestMapping(path = "/new-user", method = RequestMethod.POST)
-    public String newUser(@RequestBody String name, String email, String pass, String car, HttpSession session) throws Exception {
+    public boolean newUser(@RequestBody String name, String email, String pass, String car, HttpSession session) throws Exception {
         User user = users.findByEmail(email);
 
         if(user == null) {
             user = new User(name, email, PasswordStorage.createHash(pass), car);
             users.save(user);
             session.setAttribute("email", email);
-            return "login.html";
+            return true;
 
         }
-        return "newuser.html";
+        return false;
     }
 
 
