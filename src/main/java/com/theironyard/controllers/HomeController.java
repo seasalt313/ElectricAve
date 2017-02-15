@@ -8,7 +8,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
-    public String home() {
-        return "../static/templates/login";
+    public String home(String pants) {
+//        if (pants != null && pants.equals("true")) {
+            return "../static/templates/index";
+//        } else {
+//            return "../static/templates/login";
+//        }
+
     }
 }
