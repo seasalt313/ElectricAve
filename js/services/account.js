@@ -27,8 +27,8 @@ module.exports = {
         console.log("logging in");
         //1) post existing user below
         $http.post('https://dry-headland-17316.herokuapp.com/login', {
-          "email": "email",
-          "pass": "pass"
+          "emailAddress": "emailAddress",
+          "password": "password"
         }).then(function(response){
           console.log("response below");
           console.log(response.data);
