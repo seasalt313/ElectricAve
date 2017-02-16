@@ -26,20 +26,15 @@ public class TriprController {
     @Autowired
     UserRepository users;
 
-    @RequestMapping(path ="/test-map", method = RequestMethod.GET)
-    public GeoJSON town() throws Exception {
+    @RequestMapping(path ="/map/{tripName}", method = RequestMethod.GET)
+    public GeoJSON directions(@RequestParam(value = "tripName") String tripName) throws Exception {
         GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyBnADGOsZrhGtk1jSb8C9X49JoeG2m_KU0");
         DirectionsApiRequest directionsRequest = DirectionsApi.newRequest(context);
 
-        Trip currentTrip = new Trip();
-        currentTrip.setTripName("Test");
-        currentTrip.setStartAddress("222 South Church Street, Charlotte, NC");
-        currentTrip.setEndAddress("New York, New York");
+        Trip currentTrip = trips.findTripByTripName(tripName);
 
-        trips.save(currentTrip);
-
-        directionsRequest.origin(trips.findTripByTripName("Test").getStartAddress());
-        directionsRequest.destination(trips.findTripByTripName("Test").getEndAddress());
+        directionsRequest.origin(currentTrip.getStartAddress());
+        directionsRequest.destination(currentTrip.getEndAddress());
 
         DirectionsResult directionsResult = directionsRequest.await();
 
@@ -48,36 +43,34 @@ public class TriprController {
         return GeoJSON.buildGeoJson(new LineString(latlngs));
     }
 
-    @RequestMapping(path = "/map/{trip}", method= RequestMethod.GET)
-    public GeoJSON home(@RequestParam(value = "trip") String trip) throws Exception {
-        GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyBnADGOsZrhGtk1jSb8C9X49JoeG2m_KU0");
-
-        DirectionsApiRequest directionsRequest = DirectionsApi.newRequest(context);
-
-        directionsRequest.origin("222 South Church Street, Charlotte, NC");
-        directionsRequest.destination("New York, New York");
-
-        DirectionsResult directionsResult = directionsRequest.await();
-
-        List<LatLng> latlngs = directionsResult.routes[0].overviewPolyline.decodePath();
-
-        return GeoJSON.buildGeoJson(new LineString(latlngs));
-    }
+//    @RequestMapping(path = "/map", method= RequestMethod.GET)
+//    public GeoJSON home(@RequestParam(value = "trip") String trip) throws Exception {
+//        GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyBnADGOsZrhGtk1jSb8C9X49JoeG2m_KU0");
+//
+//        DirectionsApiRequest directionsRequest = DirectionsApi.newRequest(context);
+//
+//        directionsRequest.origin("222 South Church Street, Charlotte, NC");
+//        directionsRequest.destination("New York, New York");
+//
+//        DirectionsResult directionsResult = directionsRequest.await();
+//
+//        List<LatLng> latlngs = directionsResult.routes[0].overviewPolyline.decodePath();
+//
+//        return GeoJSON.buildGeoJson(new LineString(latlngs));
+//    }
 
     @RequestMapping(path = "/new-trip", method = RequestMethod.POST)
-    public int addTrip(HttpSession session, @RequestBody Trip newTrip) { // add http sessions
+    public Trip addTrip(HttpSession session, @RequestBody Trip newTrip) { // add http sessions
 
         String emailAddress = (String) session.getAttribute("emailAddress");
         User user = users.findByEmailAddress(emailAddress);
-        if(user != null) {
-            Trip trip = trips.findTripByTripName(newTrip.getTripName());
+        Trip trip = trips.findTripByTripName(newTrip.getTripName());
+//        if(user != null) {
             if (trip == null) {
                 trip = new Trip(newTrip.getTripName(), newTrip.getStartAddress(), newTrip.getEndAddress(), user);
                 trips.save(trip);
             }
-            return trip.getId();
-        }
-        return 0;
+        return trip;
     }
 
     @RequestMapping(path = "/trip-list", method = RequestMethod.GET)
