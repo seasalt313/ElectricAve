@@ -1,7 +1,7 @@
 module.exports = {
   name: "showTripController",
   func: function($scope, tripService, accountService, $state){
-    console.log("trip controller working");
+    console.log("show-trip controller working");
 
       $scope.showMap = function(trip){
         tripService.showMap(trip);

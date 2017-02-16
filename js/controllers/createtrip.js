@@ -1,7 +1,7 @@
 module.exports = {
   name: "createTripController",
   func: function($scope, tripService){
-    console.log("create trip controller working");
+    console.log("create-trip controller working");
 
     $scope.postTrip = function(name, from, to){
       console.log("posting trip from controller");
@@ -12,7 +12,7 @@ module.exports = {
 
     // //USING LEAFLET//
     var map = L.map('map').setView([35.2271, -80.8431], 13);
-    var start;
+    // var start;
     // end;
 
     L.tileLayer('https://api.mapbox.com/styles/v1/seasalt/ciz05osm200022srz742acakx/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2Vhc2FsdCIsImEiOiJjaXkzanV0c2UwMDEzMzNsamV1bmg0ZWVqIn0.mcvszUMDaLO4C8Ea9ytkOg', {
@@ -38,12 +38,12 @@ module.exports = {
         tripService.showMap().then(function (response) {
             L.geoJson(response.data).addTo(map);
             console.log("starting coordinates");
-            start = response.data.features[0].geometry.coordinates[0];
-
-            console.log(start);
-
-
-           let loc = tripService.showLocation();
+          //   start = response.data.features[0].geometry.coordinates[0];
+           //
+          //   console.log(start);
+           //
+           //
+          //  let loc = tripService.showLocation();
         });
 
   }
