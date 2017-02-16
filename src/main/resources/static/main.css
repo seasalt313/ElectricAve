@@ -1264,46 +1264,36 @@ body .header_section {
     content: ' '; }
   body .header_section::after {
     clear: both; }
-  body .header_section .header {
-    width: 100%;
+  body .header_section .header h1 {
+    width: 66.66667%;
     float: left;
     padding-right: 0.625rem;
-    padding-left: 0.625rem; }
+    padding-left: 0.625rem;
+    font-size: 40px;
+    text-align: left;
+    color: #C3E8BD; }
     @media print, screen and (min-width: 40em) {
-      body .header_section .header {
+      body .header_section .header h1 {
         padding-right: 0.9375rem;
         padding-left: 0.9375rem; } }
-    body .header_section .header:last-child:not(:first-child) {
+    body .header_section .header h1:last-child:not(:first-child) {
       float: right; }
-    body .header_section .header h1 {
-      width: 83.33333%;
-      float: left;
-      padding-right: 0.625rem;
-      padding-left: 0.625rem;
-      font-size: 40px;
-      text-align: center;
-      color: #C3E8BD; }
-      @media print, screen and (min-width: 40em) {
-        body .header_section .header h1 {
-          padding-right: 0.9375rem;
-          padding-left: 0.9375rem; } }
-      body .header_section .header h1:last-child:not(:first-child) {
-        float: right; }
-    body .header_section .header .logout {
-      width: 16.66667%;
-      float: left;
-      padding-right: 0.625rem;
-      padding-left: 0.625rem;
-      border: 2px solid #C3E8BD;
-      margin: 5px;
-      padding: 20px;
-      font-size: 18px; }
-      @media print, screen and (min-width: 40em) {
-        body .header_section .header .logout {
-          padding-right: 0.9375rem;
-          padding-left: 0.9375rem; } }
-      body .header_section .header .logout:last-child:not(:first-child) {
-        float: right; }
+  body .header_section .header .logout {
+    width: 16.66667%;
+    float: left;
+    padding-right: 0.625rem;
+    padding-left: 0.625rem;
+    border: 2px solid #C3E8BD;
+    margin: 10px;
+    padding: 5px;
+    font-size: 18px;
+    text-align: center; }
+    @media print, screen and (min-width: 40em) {
+      body .header_section .header .logout {
+        padding-right: 0.9375rem;
+        padding-left: 0.9375rem; } }
+    body .header_section .header .logout:last-child:not(:first-child) {
+      float: right; }
 
 body .creating_trip {
   max-width: 75rem;
