@@ -37,6 +37,14 @@ public class User {
         this.trips = trips;
     }
 
+    public User(int id, String userName, String emailAddress, String password, String car) {
+        this.id = id;
+        this.userName = userName;
+        this.emailAddress = emailAddress;
+        this.password = password;
+        this.car = car;
+    }
+
     public User(String userName, String emailAddress, String password, String car) {
         this.userName = userName;
         this.emailAddress = emailAddress;
@@ -87,5 +95,9 @@ public class User {
 
     public void setTrips(List<Trip> trips) {
         this.trips = trips;
+    }
+
+    public int getId() {
+        return id;
     }
 }

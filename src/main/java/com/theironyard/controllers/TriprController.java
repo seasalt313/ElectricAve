@@ -24,7 +24,7 @@ public class TriprController {
     TripRepository trips;
 
     @Autowired
-    TripRepository users;
+    UserRepository users;
 
     @RequestMapping(path ="/test-map", method = RequestMethod.GET)
     public GeoJSON town() throws Exception {
@@ -48,8 +48,8 @@ public class TriprController {
         return GeoJSON.buildGeoJson(new LineString(latlngs));
     }
 
-    @RequestMapping(path = "/map", method= RequestMethod.GET)
-    public GeoJSON home() throws Exception {
+    @RequestMapping(path = "/map/{trip}", method= RequestMethod.GET)
+    public GeoJSON home(@RequestParam(value = "trip") String trip) throws Exception {
         GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyBnADGOsZrhGtk1jSb8C9X49JoeG2m_KU0");
 
         DirectionsApiRequest directionsRequest = DirectionsApi.newRequest(context);
@@ -65,16 +65,19 @@ public class TriprController {
     }
 
     @RequestMapping(path = "/new-trip", method = RequestMethod.POST)
-    public Trip addTrip(@RequestBody Trip newTrip) {
-        Trip trip = trips.findTripByTripName(newTrip.getTripName());
+    public int addTrip(HttpSession session, @RequestBody Trip newTrip) { // add http sessions
 
-        if (trip == null) {
-            trip = new Trip(newTrip.getTripName(), newTrip.getStartAddress(), newTrip.getEndAddress());
-            trips.save(trip);
-        } else {
-            return newTrip;
+        String emailAddress = (String) session.getAttribute("emailAddress");
+        User user = users.findByEmailAddress(emailAddress);
+        if(user != null) {
+            Trip trip = trips.findTripByTripName(newTrip.getTripName());
+            if (trip == null) {
+                trip = new Trip(newTrip.getTripName(), newTrip.getStartAddress(), newTrip.getEndAddress(), user);
+                trips.save(trip);
+            }
+            return trip.getId();
         }
-        return trip;
+        return 0;
     }
 
     @RequestMapping(path = "/trip-list", method = RequestMethod.GET)
