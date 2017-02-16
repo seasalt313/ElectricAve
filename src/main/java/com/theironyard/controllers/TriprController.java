@@ -8,15 +8,10 @@ import com.google.maps.model.LatLng;
 import com.theironyard.data.GeoJSON;
 import com.theironyard.data.LineString;
 import com.theironyard.entities.Trip;
-import com.theironyard.entities.User;
-import com.theironyard.services.PasswordStorage;
 import com.theironyard.services.TripRepository;
-import com.theironyard.services.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -64,5 +59,15 @@ public class TriprController {
         List<LatLng> latlngs = directionsResult.routes[0].overviewPolyline.decodePath();
 
         return GeoJSON.buildGeoJson(new LineString(latlngs));
+    }
+
+    @RequestMapping(path = "/create", method = RequestMethod.POST)
+    public void addTrip(@RequestBody Trip newTrip) {
+        trips.save(newTrip);
+    }
+
+    @RequestMapping(path = "/trip-list", method = RequestMethod.GET)
+    public Iterable<Trip> tripList() {
+        return trips.findAll();
     }
 }
