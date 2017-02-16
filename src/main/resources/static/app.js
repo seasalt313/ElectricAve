@@ -110,7 +110,7 @@ module.exports = {
 
     //USING LEAFLET//
     var map = L.map('map').setView([35.2271, -80.8431], 13);
-    // var start,
+    var start;
     // end;
 
     L.tileLayer('https://api.mapbox.com/styles/v1/seasalt/ciz05osm200022srz742acakx/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2Vhc2FsdCIsImEiOiJjaXkzanV0c2UwMDEzMzNsamV1bmg0ZWVqIn0.mcvszUMDaLO4C8Ea9ytkOg', {
@@ -126,10 +126,10 @@ module.exports = {
     // L.marker([location]).addTo(map)
     // .bindPopup('Your current location')
     // .openPopup();
-
-    L.marker([35.2271, -80.8431]).addTo(map)
-    .bindPopup('Charlotte!')
-    .openPopup();
+    //
+    // L.marker([35.2271, -80.8431]).addTo(map)
+    // .bindPopup('Charlotte!')
+    // .openPopup();
 
     /////////////////////////////
 
@@ -140,13 +140,10 @@ module.exports = {
 
             console.log(start);
 
-            //
-            // L.marker(start).addTo(map)
-            // .bindPopup('starting location!')
-            // .openPopup();
 
-          // tripService.showLocation();
+           let loc = tripService.showLocation();
         });
+
 
 
         $scope.postTrip = function(name, from, to){
@@ -288,13 +285,13 @@ module.exports = {
     let tripList = [];
 
     return {
-      postTrip: function(name, from, to){
+      postTrip: function(tripName, startAddress, endAddress){
         console.log("posting trip");
         //1) post trip here
         $http.post("https://dry-headland-17316.herokuapp.com/new-trip", {
-          "trip_name": "name",
-          "trip_start": "from",
-          "trip_end": "end",
+          "tripName": "tripName",
+          "startAddress": "startAddress",
+          "endAddress": "endAddress",
         }).then(function(response){
           console.log("should be receiving route");
           console.log(response.data);

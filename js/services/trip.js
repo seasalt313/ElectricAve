@@ -7,13 +7,13 @@ module.exports = {
     let tripList = [];
 
     return {
-      postTrip: function(name, from, to){
+      postTrip: function(tripName, startAddress, endAddress){
         console.log("posting trip");
         //1) post trip here
         $http.post("https://dry-headland-17316.herokuapp.com/new-trip", {
-          "trip_name": "name",
-          "trip_start": "from",
-          "trip_end": "end",
+          "tripName": "tripName",
+          "startAddress": "startAddress",
+          "endAddress": "endAddress",
         }).then(function(response){
           console.log("should be receiving route");
           console.log(response.data);
