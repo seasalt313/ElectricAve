@@ -65,16 +65,16 @@ public class TriprController {
     }
 
     @RequestMapping(path = "/new-trip", method = RequestMethod.POST)
-    public boolean addTrip(@RequestBody Trip newTrip) {
+    public Trip addTrip(@RequestBody Trip newTrip) {
         Trip trip = trips.findTripByTripName(newTrip.getTripName());
 
         if (trip == null) {
             trip = new Trip(newTrip.getTripName(), newTrip.getStartAddress(), newTrip.getEndAddress());
             trips.save(trip);
         } else {
-            return false;
+            return newTrip;
         }
-        return true;
+        return trip;
     }
 
     @RequestMapping(path = "/trip-list", method = RequestMethod.GET)
