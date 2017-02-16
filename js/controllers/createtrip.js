@@ -3,7 +3,14 @@ module.exports = {
   func: function($scope, tripService){
     console.log("create trip controller working");
 
-    //USING LEAFLET//
+    $scope.postTrip = function(name, from, to){
+      console.log("posting trip from controller");
+      tripService.postTrip(name, from, to) //this should return the map coordinates? and send them to a differet page that will display the map ** luke
+    }
+
+    $scope.getTripNames = tripService.getTrips();
+
+    // //USING LEAFLET//
     var map = L.map('map').setView([35.2271, -80.8431], 13);
     var start;
     // end;
@@ -39,11 +46,5 @@ module.exports = {
            let loc = tripService.showLocation();
         });
 
-
-
-        $scope.postTrip = function(name, from, to){
-          tripService.postTrip(name, from, to) //this should return the map coordinates? and send them to a differet page that will display the map ** luke
-        }
-        $scope.getTripNames = tripService.getTrips();
   }
 }
