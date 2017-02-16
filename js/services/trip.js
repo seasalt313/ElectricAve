@@ -10,7 +10,7 @@ module.exports = {
       postTrip: function(tripName, startAddress, endAddress){
         console.log("posting trip");
         //1) post trip here
-        $http.post("https://dry-headland-17316.herokuapp.com/new-trip", {
+        $http.post("/new-trip", {
           "tripName": "tripName",
           "startAddress": "startAddress",
           "endAddress": "endAddress",

@@ -110,9 +110,9 @@ module.exports = {
 
     $scope.postTrip = function(name, from, to){
       console.log("posting trip from controller");
-      console.log("from controller: " + name + from + to);
       tripService.postTrip(name, from, to) //this should return the map coordinates? and send them to a differet page that will display the map ** luke
     }
+    console.log("posted thru");
 
     $scope.getTripNames = tripService.getTrips();
 
@@ -289,10 +289,8 @@ module.exports = {
     return {
       postTrip: function(tripName, startAddress, endAddress){
         console.log("posting trip");
-        console.log("from service: " + tripName + startAddress + endAddress);
-
         //1) post trip here
-        $http.post("https://dry-headland-17316.herokuapp.com/new-trip", {
+        $http.post("/new-trip", {
           "tripName": "tripName",
           "startAddress": "startAddress",
           "endAddress": "endAddress",

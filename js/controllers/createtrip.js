@@ -7,6 +7,7 @@ module.exports = {
       console.log("posting trip from controller");
       tripService.postTrip(name, from, to) //this should return the map coordinates? and send them to a differet page that will display the map ** luke
     }
+    console.log("posted thru");
 
     $scope.getTripNames = tripService.getTrips();
 
