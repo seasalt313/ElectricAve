@@ -155,18 +155,18 @@ module.exports = {
     .bindPopup('Charlotte!')
     .openPopup();
 
-    ///////////////////////////
+    /////////////////////////
 
-        // tripService.showMap().then(function (response) {
-        //     L.geoJson(response.data).addTo(map);
-        //     console.log("starting coordinates");
-        //   //   start = response.data.features[0].geometry.coordinates[0];
-        //    //
-        //   //   console.log(start);
-        //    //
-        //    //
-        //   //  let loc = tripService.showLocation();
-        // });
+        tripService.showMap().then(function (response) {
+            L.geoJson(response.data).addTo(map);
+            console.log("starting coordinates");
+          //   start = response.data.features[0].geometry.coordinates[0];
+           //
+          //   console.log(start);
+           //
+           //
+          //  let loc = tripService.showLocation();
+        });
 
 
   }
