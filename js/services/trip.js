@@ -40,8 +40,8 @@ module.exports = {
       // get data for a particular trip
       showMap: function(tripId){
         console.log("logging inside of show map service, trip id is : " + tripId);
-        return $http.get('https://dry-headland-17316.herokuapp.com/show-map/' + tripId);
-        console.log(response.data);
+        return $http.get('map/' + tripId);
+        console.log("response data: " + response.data);
         //
       },
 
