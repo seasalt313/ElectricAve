@@ -23,13 +23,14 @@ public class User {
     @Column(nullable = false)
     String car;
 
-    @OneToMany()
+    @OneToMany
     List<Trip> trips;
 
     public User() {
     }
 
-    public User(String userName, String emailAddress, String password, String car, List<Trip> trips) {
+    public User(int id, String userName, String emailAddress, String password, String car, List<Trip> trips) {
+        this.id = id;
         this.userName = userName;
         this.emailAddress = emailAddress;
         this.password = password;
@@ -87,6 +88,10 @@ public class User {
 
     public void setCar(String car) {
         this.car = car;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public List<Trip> getTrips() {
