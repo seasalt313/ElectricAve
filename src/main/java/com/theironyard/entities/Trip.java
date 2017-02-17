@@ -31,7 +31,26 @@ public class Trip {
         this.endAddress = endAddress;
     }
 
+    public Trip(int id) {
+        this.id = id;
+    }
+
+    public Trip(int id, String tripName, String startAddress, String endAddress) {
+        this.id = id;
+        this.tripName = tripName;
+        this.startAddress = startAddress;
+        this.endAddress = endAddress;
+    }
+
     public Trip(String tripName, String startAddress, String endAddress, User user) {
+        this.tripName = tripName;
+        this.startAddress = startAddress;
+        this.endAddress = endAddress;
+        this.user = user;
+    }
+
+    public Trip(int id, String tripName, String startAddress, String endAddress, User user) {
+        this.id = id;
         this.tripName = tripName;
         this.startAddress = startAddress;
         this.endAddress = endAddress;
