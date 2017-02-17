@@ -7,8 +7,6 @@ module.exports = {
     let tripList = [];
 
 
-
-
     return {
       postTrip: function(tripName, startAddress, endAddress){
         console.log("posting trip");
