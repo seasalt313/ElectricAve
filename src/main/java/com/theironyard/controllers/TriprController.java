@@ -27,8 +27,8 @@ public class TriprController {
     UserRepository users;
 
 
-    @RequestMapping(path = "/show-map/{id}", method = RequestMethod.GET)
-    public GeoJSON directions(@RequestParam(value = "id") int id) throws Exception {
+    @RequestMapping(path = "/map/{id}", method = RequestMethod.GET)
+    public GeoJSON directions(@PathVariable("id") int id) throws Exception {
         GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyBnADGOsZrhGtk1jSb8C9X49JoeG2m_KU0");
         DirectionsApiRequest directionsRequest = DirectionsApi.newRequest(context);
 

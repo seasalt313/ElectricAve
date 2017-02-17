@@ -23,7 +23,7 @@ public class User {
     @Column(nullable = false)
     String car;
 
-    @OneToMany()
+    @OneToMany
     List<Trip> trips;
 
     public User() {
