@@ -34,7 +34,7 @@ module.exports = {
           console.log(response.data);
         })
         console.log("existing user has logged in");
-        return accountInfo; ///???
+        return accountInfo867; ///???
         //2) if response === true, new-trip view should appear to user.
       },
       getAccount: function(){

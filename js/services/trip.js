@@ -6,14 +6,17 @@ module.exports = {
     let userId = ""; ///needs to be global?
     let tripList = [];
 
+
+
+
     return {
       postTrip: function(tripName, startAddress, endAddress){
         console.log("posting trip");
         //1) post trip here
         $http.post("/new-trip", {
-          "tripName": "tripName",
-          "startAddress": "startAddress",
-          "endAddress": "endAddress",
+          "tripName": tripName,
+          "startAddress": startAddress,
+          "endAddress": endAddress,
         }).then(function(response){
           console.log("should be receiving route");
           console.log(response.data);
