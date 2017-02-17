@@ -1,14 +1,15 @@
 module.exports = {
   name: "showTripController",
-  func: function($scope, tripService, accountService, $state){
-    console.log("show-trip controller working");
+  func: function($scope, tripService, accountService, $state, $stateParams){
 
-      $scope.showMap = function(trip){
-        tripService.showMap(trip);
-      }
+  console.log("show-trip controller working");
 
       $scope.trips = tripService.getTrips();
 
       $scope.getAccount = accountService.getAccount();
+
+      $scope.getTripNames = tripService.getTrips();
+
+
   }
 }

@@ -6,12 +6,6 @@ module.exports = [
         component: 'accountLogin',
     },
 
-    // {
-    //     name: 'new-user',
-    //     url: '',
-    //     component: 'newUser',
-    // },
-
     {
         name: 'newtrip',
         url: '/new-trip',
@@ -26,7 +20,7 @@ module.exports = [
 
     {
         name: 'map',
-        url: '/show-map',
+        url: '/show-map/:mapId',
         component: 'mapComponent',
     },
 

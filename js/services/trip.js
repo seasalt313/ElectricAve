@@ -3,7 +3,8 @@ module.exports = {
   func: function($http){
 
     let trip_map = "";
-    let userId = ""; ///needs to be global?
+    let trip_id = "";
+    let userId = "";
     let tripList = [];
 
 
@@ -11,19 +12,18 @@ module.exports = {
       postTrip: function(tripName, startAddress, endAddress){
         console.log("posting trip");
         //1) post trip here
-        $http.post("/new-trip", {
+        return $http.post("/new-trip", {
           "tripName": tripName,
           "startAddress": startAddress,
           "endAddress": endAddress,
         }).then(function(response){
           console.log("should be receiving route");
           console.log(response.data);
+          trip_id = response.data.id;
           trip_map = response.data;
-        })
 
-        console.log("trip has posted, should redirect to map view");
-        return trip_map;
-        //2) the return should include the route which will then display on the show trips page.
+          return trip_id;
+        });
       },
       getTrips: function(){
         //1) GET request here
@@ -39,6 +39,7 @@ module.exports = {
       },
       // get data for a particular trip
       showMap: function(trip){
+        console.log("logging inside of show map service");
         return $http.get('https://polar-tor-56907.herokuapp.com');
         console.log(response.data);
         //

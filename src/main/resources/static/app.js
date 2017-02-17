@@ -6,7 +6,8 @@ const app = angular.module('tripApp', ['ui.router']);
 const controllers = [
   require('./controllers/login'),
   require('./controllers/createtrip'),
-  require('./controllers/showtrip')
+  require('./controllers/showtrip'),
+  require('./controllers/showmap')
 ];
 
   for (let i = 0; i < controllers.length; i++) {
@@ -49,18 +50,7 @@ const components = [
     app.component(components[i].name, components[i].config);
   };
 
-
-//   //leaflet
-//   var mymap = L.map('mapid').setView([51.505, -0.09], 13);
-//
-//   L.tileLayer('https://api.mapbox.com/styles/v1/seasalt/ciz05osm200022srz742acakx/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2Vhc2FsdCIsImEiOiJjaXkzanV0c2UwMDEzMzNsamV1bmg0ZWVqIn0.mcvszUMDaLO4C8Ea9ytkOg', {
-//     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-//     maxZoom: 18,
-//     id: 'mapbox.mapbox-traffic-v1',
-//     accessToken: 'pk.eyJ1Ijoic2Vhc2FsdCIsImEiOiJjaXkzanV0c2UwMDEzMzNsamV1bmg0ZWVqIn0.mcvszUMDaLO4C8Ea9ytkOg'
-// }).addTo(mymap);
-
-},{"./components/accountlogin":2,"./components/createtrip":3,"./components/map":4,"./components/newuser":5,"./components/showtrips":6,"./controllers/createtrip":7,"./controllers/login":8,"./controllers/showtrip":9,"./routes":10,"./services/account":11,"./services/trip":12}],2:[function(require,module,exports){
+},{"./components/accountlogin":2,"./components/createtrip":3,"./components/map":4,"./components/newuser":5,"./components/showtrips":6,"./controllers/createtrip":7,"./controllers/login":8,"./controllers/showmap":9,"./controllers/showtrip":10,"./routes":11,"./services/account":12,"./services/trip":13}],2:[function(require,module,exports){
 module.exports = {
   name: 'accountLogin',
   config: {
@@ -106,49 +96,18 @@ module.exports = {
 module.exports = {
   name: "createTripController",
   func: function($scope, tripService, $state){
+
     console.log("create-trip controller working");
 
     $scope.postTrip = function(tripName, startAddress, endAddress){
-      console.log("posting trip from controller");
-      tripService.postTrip(tripName, startAddress, endAddress) //this should return the map coordinates? and send them to a differet page that will display the map ** luke
-    }
-
-    // $scope.getTripNames = tripService.getTrips();
-
-    // //USING LEAFLET//
-    // var map = L.map('map').setView([35.2271, -80.8431], 13);
-    //
-    // L.tileLayer('https://api.mapbox.com/styles/v1/seasalt/ciz05osm200022srz742acakx/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2Vhc2FsdCIsImEiOiJjaXkzanV0c2UwMDEzMzNsamV1bmg0ZWVqIn0.mcvszUMDaLO4C8Ea9ytkOg', {
-    // attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    // maxZoom: 18,
-    // id: 'mapbox.mapbox-traffic-v1',
-    // accessToken: 'pk.eyJ1Ijoic2Vhc2FsdCIsImEiOiJjaXkzanV0c2UwMDEzMzNsamV1bmg0ZWVqIn0.mcvszUMDaLO4C8Ea9ytkOg'
-    // }).addTo(map);
-
-    //adding popup// wanna add current location here:
-
-    // let location = tripService.showLocation();
-    // L.marker([location]).addTo(map)
-    // .bindPopup('Your current location')
-    // .openPopup();
-    //
-    // L.marker([35.2271, -80.8431]).addTo(map)
-    // .bindPopup('Charlotte!')
-    // .openPopup();
-
-    /////////////////////////////
-
-        // tripService.showMap().then(function (response) {
-        //     L.geoJson(response.data).addTo(map);
-        //     console.log("starting coordinates");
-        //   //   start = response.data.features[0].geometry.coordinates[0];
-        //    //
-        //   //   console.log(start);
-        //    //
-        //    //
-        //   //  let loc = tripService.showLocation();
-        // });
-
+      tripService.postTrip(tripName, startAddress, endAddress)
+        .then(function (id) {
+          console.log("redirecting");
+            $state.go('map', {
+              mapId: id,
+            });
+        });
+      }
   }
 }
 
@@ -168,21 +127,69 @@ module.exports = {
 
 },{}],9:[function(require,module,exports){
 module.exports = {
-  name: "showTripController",
-  func: function($scope, tripService, accountService, $state){
-    console.log("show-trip controller working");
+  name: "showmapcontroller",
+  func: function($scope,tripService, accountService, $state, $stateParams){
 
-      $scope.showMap = function(trip){
-        tripService.showMap(trip);
-      }
+    console.log("show map controller working");
 
-      $scope.trips = tripService.getTrips();
+    tripService.showMap($stateParams.mapId);
 
-      $scope.getAccount = accountService.getAccount();
+    //USING LEAFLET//
+    var map = L.map('map').setView([35.2271, -80.8431], 13);
+    //
+    L.tileLayer('https://api.mapbox.com/styles/v1/seasalt/ciz05osm200022srz742acakx/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2Vhc2FsdCIsImEiOiJjaXkzanV0c2UwMDEzMzNsamV1bmg0ZWVqIn0.mcvszUMDaLO4C8Ea9ytkOg', {
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox.mapbox-traffic-v1',
+    accessToken: 'pk.eyJ1Ijoic2Vhc2FsdCIsImEiOiJjaXkzanV0c2UwMDEzMzNsamV1bmg0ZWVqIn0.mcvszUMDaLO4C8Ea9ytkOg'
+    }).addTo(map);
+
+    // adding popup// wanna add current location here:
+
+    // let location = tripService.showLocation();
+    // L.marker([location]).addTo(map)
+    // .bindPopup('Your current location')
+    // .openPopup();
+
+    L.marker([35.2271, -80.8431]).addTo(map)
+    .bindPopup('Charlotte!')
+    .openPopup();
+
+    ///////////////////////////
+
+        // tripService.showMap().then(function (response) {
+        //     L.geoJson(response.data).addTo(map);
+        //     console.log("starting coordinates");
+        //   //   start = response.data.features[0].geometry.coordinates[0];
+        //    //
+        //   //   console.log(start);
+        //    //
+        //    //
+        //   //  let loc = tripService.showLocation();
+        // });
+
+
   }
 }
 
 },{}],10:[function(require,module,exports){
+module.exports = {
+  name: "showTripController",
+  func: function($scope, tripService, accountService, $state, $stateParams){
+
+  console.log("show-trip controller working");
+
+      $scope.trips = tripService.getTrips();
+
+      $scope.getAccount = accountService.getAccount();
+
+      $scope.getTripNames = tripService.getTrips();
+
+
+  }
+}
+
+},{}],11:[function(require,module,exports){
 module.exports = [
 
     {
@@ -190,12 +197,6 @@ module.exports = [
         url: '/login',
         component: 'accountLogin',
     },
-
-    // {
-    //     name: 'new-user',
-    //     url: '',
-    //     component: 'newUser',
-    // },
 
     {
         name: 'newtrip',
@@ -211,13 +212,13 @@ module.exports = [
 
     {
         name: 'map',
-        url: '/show-map',
+        url: '/show-map/:mapId',
         component: 'mapComponent',
     },
 
 ];
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 module.exports = {
   name: "accountService",
   func: function($http){
@@ -274,13 +275,14 @@ module.exports = {
   }//closing func
 }//closing module export
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 module.exports = {
   name: "tripService",
   func: function($http){
 
     let trip_map = "";
-    let userId = ""; ///needs to be global?
+    let trip_id = "";
+    let userId = "";
     let tripList = [];
 
 
@@ -288,19 +290,18 @@ module.exports = {
       postTrip: function(tripName, startAddress, endAddress){
         console.log("posting trip");
         //1) post trip here
-        $http.post("/new-trip", {
+        return $http.post("/new-trip", {
           "tripName": tripName,
           "startAddress": startAddress,
           "endAddress": endAddress,
         }).then(function(response){
           console.log("should be receiving route");
           console.log(response.data);
+          trip_id = response.data.id;
           trip_map = response.data;
-        })
 
-        console.log("trip has posted, should redirect to map view");
-        return trip_map;
-        //2) the return should include the route which will then display on the show trips page.
+          return trip_id;
+        });
       },
       getTrips: function(){
         //1) GET request here
@@ -316,6 +317,7 @@ module.exports = {
       },
       // get data for a particular trip
       showMap: function(trip){
+        console.log("logging inside of show map service");
         return $http.get('https://polar-tor-56907.herokuapp.com');
         console.log(response.data);
         //
