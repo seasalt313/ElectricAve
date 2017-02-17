@@ -132,7 +132,7 @@ module.exports = {
 
     console.log("show map controller working");
 
-    tripService.showMap($stateParams.mapId);
+    // tripService.showMap($stateParams.mapId);
 
     //USING LEAFLET//
     var map = L.map('map').setView([35.2271, -80.8431], 13);
@@ -144,29 +144,29 @@ module.exports = {
     accessToken: 'pk.eyJ1Ijoic2Vhc2FsdCIsImEiOiJjaXkzanV0c2UwMDEzMzNsamV1bmg0ZWVqIn0.mcvszUMDaLO4C8Ea9ytkOg'
     }).addTo(map);
 
-    // adding popup// wanna add current location here:
 
-    // let location = tripService.showLocation();
-    // L.marker([location]).addTo(map)
-    // .bindPopup('Your current location')
-    // .openPopup();
 
-    L.marker([35.2271, -80.8431]).addTo(map)
-    .bindPopup('Charlotte!')
-    .openPopup();
+    /////////////////////////RENDERING MAP:
 
-    /////////////////////////
-
-        tripService.showMap().then(function (response) {
+        tripService.showMap($stateParams.mapId).then(function (response) {
             L.geoJson(response.data).addTo(map);
             console.log("starting coordinates");
-          //   start = response.data.features[0].geometry.coordinates[0];
-           //
-          //   console.log(start);
-           //
-           //
-          //  let loc = tripService.showLocation();
+            start = response.data.features[0].geometry.coordinates[0];
+
+            console.log(start);
         });
+
+        tripService.showLocation();
+
+
+    // adding popup// wanna add current location here:
+
+    // tripService.showLocation().then(function(){
+    //   L.marker(location).addTo(map)
+    //   .bindPopup('Your current location')
+    //   .openPopup();
+    // });
+
 
 
   }
@@ -316,15 +316,20 @@ module.exports = {
         return tripList;
       },
       // get data for a particular trip
-      showMap: function(trip){
-        console.log("logging inside of show map service");
-        return $http.get('https://polar-tor-56907.herokuapp.com');
+      showMap: function(tripId){
+        console.log("logging inside of show map service, trip id is : " + tripId);
+        return $http.get('https://dry-headland-17316.herokuapp.com/show-map/' + tripId);
         console.log(response.data);
         //
       },
+
       showLocation: function(){
         navigator.geolocation.getCurrentPosition(function(position) {
-          do_something(position.coords.latitude, position.coords.longitude);
+          // var lat = position.coords.latitude;
+          // var long: position.coords.longitude
+          console.log("position");
+          return position.coords;
+          // do_something(position.coords.latitude, position.coords.longitude);
         });
       },
 

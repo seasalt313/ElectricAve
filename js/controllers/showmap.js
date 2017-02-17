@@ -4,7 +4,7 @@ module.exports = {
 
     console.log("show map controller working");
 
-    tripService.showMap($stateParams.mapId);
+    // tripService.showMap($stateParams.mapId);
 
     //USING LEAFLET//
     var map = L.map('map').setView([35.2271, -80.8431], 13);
@@ -16,29 +16,29 @@ module.exports = {
     accessToken: 'pk.eyJ1Ijoic2Vhc2FsdCIsImEiOiJjaXkzanV0c2UwMDEzMzNsamV1bmg0ZWVqIn0.mcvszUMDaLO4C8Ea9ytkOg'
     }).addTo(map);
 
-    // adding popup// wanna add current location here:
 
-    // let location = tripService.showLocation();
-    // L.marker([location]).addTo(map)
-    // .bindPopup('Your current location')
-    // .openPopup();
 
-    L.marker([35.2271, -80.8431]).addTo(map)
-    .bindPopup('Charlotte!')
-    .openPopup();
+    /////////////////////////RENDERING MAP:
 
-    /////////////////////////
-
-        tripService.showMap().then(function (response) {
+        tripService.showMap($stateParams.mapId).then(function (response) {
             L.geoJson(response.data).addTo(map);
             console.log("starting coordinates");
-          //   start = response.data.features[0].geometry.coordinates[0];
-           //
-          //   console.log(start);
-           //
-           //
-          //  let loc = tripService.showLocation();
+            start = response.data.features[0].geometry.coordinates[0];
+
+            console.log(start);
         });
+
+        tripService.showLocation();
+
+
+    // adding popup// wanna add current location here:
+
+    // tripService.showLocation().then(function(){
+    //   L.marker(location).addTo(map)
+    //   .bindPopup('Your current location')
+    //   .openPopup();
+    // });
+
 
 
   }

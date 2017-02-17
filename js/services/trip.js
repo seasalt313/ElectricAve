@@ -38,15 +38,20 @@ module.exports = {
         return tripList;
       },
       // get data for a particular trip
-      showMap: function(trip){
-        console.log("logging inside of show map service");
-        return $http.get('https://polar-tor-56907.herokuapp.com');
+      showMap: function(tripId){
+        console.log("logging inside of show map service, trip id is : " + tripId);
+        return $http.get('https://dry-headland-17316.herokuapp.com/show-map/' + tripId);
         console.log(response.data);
         //
       },
+
       showLocation: function(){
         navigator.geolocation.getCurrentPosition(function(position) {
-          do_something(position.coords.latitude, position.coords.longitude);
+          // var lat = position.coords.latitude;
+          // var long: position.coords.longitude
+          console.log("position");
+          return position.coords;
+          // do_something(position.coords.latitude, position.coords.longitude);
         });
       },
 
