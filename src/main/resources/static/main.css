@@ -1256,7 +1256,6 @@ body .header_section {
   max-width: 75rem;
   margin-right: auto;
   margin-left: auto;
-  border: 2px solid #C3E8BD;
   background-color: #4F5165;
   border-radius: 10px; }
   body .header_section::before, body .header_section::after {
@@ -1283,9 +1282,6 @@ body .header_section {
     float: left;
     padding-right: 0.625rem;
     padding-left: 0.625rem;
-    border: 2px solid #C3E8BD;
-    margin: 10px;
-    padding: 5px;
     font-size: 18px;
     text-align: center; }
     @media print, screen and (min-width: 40em) {
@@ -1527,13 +1523,12 @@ body {
   border: 2px solid #F4F9E9;
   height: auto;
   padding: 20px;
-  margin: 20px;
-  background-image: url("http://www.wbwells.com/wp-content/uploads/2011/06/Desert_road_UAE.jpg");
+  background-image: url("https://images.pexels.com/photos/30134/pexels-photo.jpg?w=1260&h=750&auto=compress&cs=tinysrgb");
   background-size: cover;
-  font-family: 'Source Sans Pro', sans-serif;
-  border-radius: 10px; }
+  font-family: 'Source Sans Pro', sans-serif; }
   body #history {
     padding: 20px;
+    border-radius: 3px;
     margin: 20px;
     border: 2px solid #4F5165;
     text-align: right;
@@ -1542,10 +1537,13 @@ body {
     background-color: #153243; }
   body .map_area {
     text-align: center; }
+    body .map_area h1 {
+      color: white; }
     body .map_area #map {
-      width: 500px;
-      height: 500px;
-      margin: 100px auto; }
+      width: 800px;
+      height: 800px;
+      margin: 70px auto 2px auto;
+      border: 15px solid white; }
     body .map_area button {
       border: 2px solid #C3E8BD;
       color: #C3E8BD;
@@ -1553,3 +1551,47 @@ body {
       padding: 20px;
       background-color: grey;
       border-radius: 8px; }
+  body .notes {
+    max-width: 75rem;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    float: none; }
+    body .notes::before, body .notes::after {
+      display: table;
+      content: ' '; }
+    body .notes::after {
+      clear: both; }
+    body .notes #notes {
+      width: 66.66667%;
+      float: left;
+      padding-right: 0.625rem;
+      padding-left: 0.625rem;
+      margin: 0;
+      font-size: 22px;
+      padding: 5px;
+      height: 200px;
+      float: none; }
+      @media print, screen and (min-width: 40em) {
+        body .notes #notes {
+          padding-right: 0.9375rem;
+          padding-left: 0.9375rem; } }
+      body .notes #notes:last-child:not(:first-child) {
+        float: right; }
+    body .notes .save_notes {
+      width: 66.66667%;
+      float: left;
+      padding-right: 0.625rem;
+      padding-left: 0.625rem;
+      margin: auto;
+      margin-right: 200px;
+      border: none;
+      color: #F4F9E9;
+      background-color: #153243;
+      border-radius: 0; }
+      @media print, screen and (min-width: 40em) {
+        body .notes .save_notes {
+          padding-right: 0.9375rem;
+          padding-left: 0.9375rem; } }
+      body .notes .save_notes:last-child:not(:first-child) {
+        float: right; }

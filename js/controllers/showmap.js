@@ -2,8 +2,9 @@ module.exports = {
   name: "showmapcontroller",
   func: function($scope,tripService, accountService, $state, $stateParams){
 
-    console.log("show map controller working");
+    let start = null;
 
+    console.log("show map controller working");
 
     //USING LEAFLET//
     var map = L.map('map').setView([35.2271, -80.8431], 13);
@@ -15,33 +16,44 @@ module.exports = {
     accessToken: 'pk.eyJ1Ijoic2Vhc2FsdCIsImEiOiJjaXkzanV0c2UwMDEzMzNsamV1bmg0ZWVqIn0.mcvszUMDaLO4C8Ea9ytkOg'
     }).addTo(map);
 
-
-
     /////////////////////////RENDERING MAP:
-
         tripService.showMap($stateParams.mapId).then(function (response) {
             L.geoJson(response.data).addTo(map);
             console.log("starting coordinates");
             start = response.data.features[0].geometry.coordinates[0];
 
-            // L.marker(start).addTo(map)
-            //     .bindPopup('Starting here.')
-            //     .openPopup();
+            console.log("ending coordinates:");
+            let end = response.data.features[0].geometry.coordinates.pop();
+            console.log(end);
 
+            L.marker([start[1], start[0]]).addTo(map)
+                .bindPopup()
+                .openPopup();
+
+            L.marker([end[1], end[0]]).addTo(map)
+                .bindPopup()
+                .openPopup();
+
+          map = L.map('map').setView([start[1], start[0]], 13);
         });
+
+
+
 
 
 
 
     // adding popup// wanna add current location here:
 
-    // tripService.showLocation().then(function(){
-    //   L.marker([location]).addTo(map)
-    //   .bindPopup('Your current location')
-    //   .openPopup();
-    // });
+    tripService.showLocation().then(function(){
+      L.marker(location).addTo(map)
+      .bindPopup('Your current location')
+      .openPopup();
+    });
 
-
+    $scope.viewAccount = accountService.getAccount();
+    $scope.postNote = accountService.postNote();
 
   }
+
 }
