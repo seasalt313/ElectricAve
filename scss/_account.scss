@@ -3,7 +3,7 @@ body {
   .accountInfo {
     @include grid-row();
     margin-top: 40px;
-    padding: 20px;
+    padding: 20px 20px 200px 20px;
     background-color: black;
     opacity: .7;
     color: white;
@@ -14,12 +14,32 @@ body {
       margin: auto;
       font-size: 22px;
       border-right: 1px solid white;
+      border-bottom: 1px solid white;
+    }
 
+    .highlight {
+      color: #C3E8BD;
     }
 
     .trip_history {
-      @include grid-column(6);
+      @include grid-column(9);
       color: white;
+      text-align: center;
+      li a {
+        // @include grid-column(7);
+        color: white;
+        text-decoration: none;
+      }
+      li {
+        padding: 10px;
+        color: #C3E8BD;
+        // border-bottom: 1px solid white;
+        text-align: left;
+        // list-style: none;
+      }
+      #delete button {
+        border: 1px solid white;
+      }
     }
   }
 

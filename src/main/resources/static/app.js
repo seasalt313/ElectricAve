@@ -278,11 +278,12 @@ module.exports = {
       },
       getAccount: function(){
         //1) GET request here
-        let account = $http.get('account/').then(function(response){
+        let account = $http.get('/account').then(function(response){
           const incoming = response.data;
           console.log("should be receiving account info below: ");
           console.log(incoming);
           angular.copy(response.data, accountInfo)
+          return response.data
         })
         //2) return trip names, and send to controller to display on page.
         return accountInfo;
@@ -335,7 +336,7 @@ module.exports = {
       },
       getTrips: function(tripId){
         //1) GET request here
-        let tripHistory = $http.get('trip-list/' ).then(function(response){
+        let tripHistory = $http.get('/trip-list' ).then(function(response){
           const incoming = response.data;
           console.log("should be receiving a list of trips below: ");
           console.log(incoming);

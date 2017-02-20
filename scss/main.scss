@@ -36,10 +36,18 @@ body {
     margin: 20px;
     border: $border;
     text-align: right;
+    font-size: 19px;
     font-family: 'Dosis', sans-serif;
     color: $primary-font-color;
-    background-color: #153243;
+    background-color: transparent;
   }
+
+  #history a {
+    text-decoration: none;
+    color: $primary-font-color;
+
+  }
+
 
   //maps styling with leaflet
   // .shadow {

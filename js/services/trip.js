@@ -27,7 +27,7 @@ module.exports = {
       },
       getTrips: function(tripId){
         //1) GET request here
-        let tripHistory = $http.get('trip-list/' ).then(function(response){
+        let tripHistory = $http.get('/trip-list' ).then(function(response){
           const incoming = response.data;
           console.log("should be receiving a list of trips below: ");
           console.log(incoming);

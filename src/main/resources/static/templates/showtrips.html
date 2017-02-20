@@ -1,18 +1,24 @@
 <section ng-controller="showTripController">
   <div class="accountInfo">
     <div class="details">
-      <p> User: {{ getAccount.name }}</p>
-      <p> Email: {{ getAccount.email }}</p>
-      <p> Car: {{ getAccount.car }}</p>
+      <p> USER:<br> {{ getAccount.userName }}</p>
+      <p> E-MAIL:<br> {{ getAccount.emailAddress }}</p>
+      <p> CAR:<br> {{ getAccount.car }}</p>
     </div>
 
   <div class="trip_history">
-    <h1>Trip History</h1>
-    <ul>
+    <h1>trip history</h1>
+    <p>click on a trip to view route</p>
+    <ol>
       <li ng-repeat="trip in trips">
-        <h3 ng-click="showMap(trip)"> {{ trip.name }}</h3>
+        <a ui-sref="map({mapId:trip.id})">
+        <h2 class="highlight"> TRIP: {{ trip.tripName }}</h2>
+        <h3> FROM:  {{ trip.startAddress }}</h3>
+        <h3> TO:  {{ trip.endAddress }}</h3>
+        </a>
+        <button id="delete">Delete</button>
       </li>
-    </ul>
+    </ol>
   </div>
 </div>
 
