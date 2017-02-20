@@ -1,6 +1,8 @@
 package com.theironyard.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.theironyard.data.GeoJSON;
+import org.springframework.stereotype.Controller;
 
 import javax.persistence.*;
 
@@ -19,6 +21,9 @@ public class Trip {
 
     @Column(nullable = false)
     String endAddress;
+
+    @Column(nullable = false)
+    GeoJSON routeForChargers;
 
     @JsonIgnore
     @ManyToOne
@@ -45,6 +50,10 @@ public class Trip {
         this.endAddress = endAddress;
     }
 
+    public Trip(GeoJSON routeForChargers) {
+        this.routeForChargers = routeForChargers;
+    }
+
     public Trip(String tripName, String startAddress, String endAddress, User user) {
         this.tripName = tripName;
         this.startAddress = startAddress;
@@ -58,6 +67,14 @@ public class Trip {
         this.startAddress = startAddress;
         this.endAddress = endAddress;
         this.user = user;
+    }
+
+    public GeoJSON getRouteForChargers() {
+        return routeForChargers;
+    }
+
+    public void setRouteForChargers(GeoJSON routeForChargers) {
+        this.routeForChargers = routeForChargers;
     }
 
     public String getTripName() {

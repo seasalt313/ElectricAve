@@ -27,21 +27,24 @@ public class TriprController {
     @Autowired
     UserRepository users;
 
+    Trip setRoute = new Trip();
 
-    @RequestMapping(path = "/map/{id}", method = RequestMethod.GET)
+
+//    @RequestMapping(path = "/get-chargers/{id}", method = RequestMethod.GET)
+//    public GeoJSON getChargers(@PathVariable("id") int id) throws Exception {
+//        GeoApiContext context = new GeoApiContext().setApiKey("Af8SI3elKk9EhE9KjxEkuk71wbks21M1UtfwmoiL");
+//
+//    }
+
+    @RequestMapping(path = "/map/{id}", method = RequestMethod.GET) // returns a route based on trip params
     public GeoJSON directions(@PathVariable("id") int id) throws Exception {
         GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyBnADGOsZrhGtk1jSb8C9X49JoeG2m_KU0");
         DirectionsApiRequest directionsRequest = DirectionsApi.newRequest(context);
 
         Trip currentTrip = trips.findTripById(id);
-        //Waypoint chargeStations = waypoints.findWaypointsByTrip(currentTrip)
-
         directionsRequest.origin(currentTrip.getStartAddress());
-        //directionsRequest.waypoints(chargeStations)
         directionsRequest.destination(currentTrip.getEndAddress());
-
-
-        DirectionsResult directionsResult = directionsRequest.await();
+        DirectionsResult directionsResult = directionsRequest.await(); //Object that stored the direction result
 
         // for each leg in the first route:
         // accumulate a distance traveled int.
@@ -62,12 +65,13 @@ public class TriprController {
 
         // call await again to get an updated DirectionsResponse object.
         // pass the directionsResult object into your GeoJSON like below:
-        List<LatLng> latlngs = directionsResult.routes[0].overviewPolyline.decodePath();
-
-        return GeoJSON.buildGeoJson(new LineString(latlngs));
+        List<LatLng> latlngs = directionsResult.routes[0].overviewPolyline.decodePath(); //list of
+        GeoJSON route = GeoJSON.buildGeoJson(new LineString(latlngs));
+        setRoute.setRouteForChargers(route);
+        return route;
     }
 
-    @RequestMapping(path = "/new-trip", method = RequestMethod.POST)
+    @RequestMapping(path = "/new-trip", method = RequestMethod.POST) //adds trip related to user
     public Trip addTrip(HttpSession session, @RequestBody Trip newTrip) { // add http sessions
         ArrayList<Trip> addTripToUser = new ArrayList<>();
         String emailAddress = (String) session.getAttribute("emailAddress");
@@ -84,7 +88,7 @@ public class TriprController {
         return null;
     }
 
-    @RequestMapping(path = "/trip-list", method = RequestMethod.GET)
+    @RequestMapping(path = "/trip-list", method = RequestMethod.GET) //returns list of trips based on the user
     public List<Trip> tripList(HttpSession session) {
         ArrayList<Trip> listOfTrips;
         String emailAddress = (String) session.getAttribute("emailAddress");
@@ -93,6 +97,16 @@ public class TriprController {
         if (user != null) {
             listOfTrips = trips.findTripsByUser(user);
             return listOfTrips;
+        }
+        return null;
+    }
+
+    @RequestMapping(path = "/account", method = RequestMethod.GET) //returns list of trips based on the user
+    public User currentUser(HttpSession session) {
+        String emailAddress = (String) session.getAttribute("emailAddress");
+        User user = users.findByEmailAddress(emailAddress);
+        if (user != null) {
+            return user;
         }
         return null;
     }
