@@ -132,12 +132,11 @@ module.exports = {
 
     console.log("show map controller working");
 
-    // tripService.showMap($stateParams.mapId);
 
     //USING LEAFLET//
     var map = L.map('map').setView([35.2271, -80.8431], 13);
     //
-    L.tileLayer('https://api.mapbox.com/styles/v1/seasalt/ciz05osm200022srz742acakx/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2Vhc2FsdCIsImEiOiJjaXkzanV0c2UwMDEzMzNsamV1bmg0ZWVqIn0.mcvszUMDaLO4C8Ea9ytkOg', {
+    L.tileLayer('https://api.mapbox.com/styles/v1/seasalt/cizab1okt00652rnqabud8ig8/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2Vhc2FsdCIsImEiOiJjaXkzanV0c2UwMDEzMzNsamV1bmg0ZWVqIn0.mcvszUMDaLO4C8Ea9ytkOg', {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
     maxZoom: 18,
     id: 'mapbox.mapbox-traffic-v1',
@@ -153,16 +152,19 @@ module.exports = {
             console.log("starting coordinates");
             start = response.data.features[0].geometry.coordinates[0];
 
-            console.log(start);
+            // L.marker(start).addTo(map)
+            //     .bindPopup('Starting here.')
+            //     .openPopup();
+
         });
 
-        tripService.showLocation();
+
 
 
     // adding popup// wanna add current location here:
 
     // tripService.showLocation().then(function(){
-    //   L.marker(location).addTo(map)
+    //   L.marker([location]).addTo(map)
     //   .bindPopup('Your current location')
     //   .openPopup();
     // });
@@ -325,12 +327,15 @@ module.exports = {
 
       showLocation: function(){
         navigator.geolocation.getCurrentPosition(function(position) {
-          // var lat = position.coords.latitude;
-          // var long: position.coords.longitude
-          console.log("position");
-          return position.coords;
-          // do_something(position.coords.latitude, position.coords.longitude);
+          var lat = position.coords.latitude;
+          var long = position.coords.longitude;
+          console.log("lat: " + lat);
+          console.log("long: " + long);
+          return position;
+
+          do_something(position.coords.latitude, position.coords.longitude);
         });
+
       },
 
     }//closing return
