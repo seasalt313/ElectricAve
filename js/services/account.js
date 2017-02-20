@@ -47,7 +47,19 @@ module.exports = {
         })
         //2) return trip names, and send to controller to display on page.
         return accountInfo;
-      }
+      },
+      postNote: function(){
+        console.log("posting note");
+        //1) post existing user below
+        $http.post('https://dry-headland-17316.herokuapp.com/', {//figure out what goes here
+          "note": "note",
+        }).then(function(response){
+          console.log("response below");
+          console.log(response.data);
+        })
+        return accountInfo; ///???
+        //2) if response === true, new-trip view should appear to user.
+      },
 
     }//closing return object
 

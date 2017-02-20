@@ -1,6 +1,6 @@
 module.exports = {
   name: "createTripController",
-  func: function($scope, tripService, $state){
+  func: function($scope, tripService, accountService, $state){
 
     console.log("create-trip controller working");
 
@@ -12,6 +12,8 @@ module.exports = {
               mapId: id,
             });
         });
-      }
+      },
+
+    $scope.viewAccount = accountService.getAccount();
   }
 }
