@@ -1,10 +1,17 @@
 package com.theironyard.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
+import com.google.gson.JsonObject;
 import com.theironyard.data.GeoJSON;
 import org.springframework.stereotype.Controller;
 
 import javax.persistence.*;
+import java.sql.Blob;
+import java.sql.JDBCType;
 
 @Entity
 @Table(name = "trips")
@@ -22,8 +29,8 @@ public class Trip {
     @Column(nullable = false)
     String endAddress;
 
-    @Column(nullable = false)
-    GeoJSON routeForChargers;
+    @Column
+    String covertRoutetoString;
 
     @JsonIgnore
     @ManyToOne
@@ -50,10 +57,6 @@ public class Trip {
         this.endAddress = endAddress;
     }
 
-    public Trip(GeoJSON routeForChargers) {
-        this.routeForChargers = routeForChargers;
-    }
-
     public Trip(String tripName, String startAddress, String endAddress, User user) {
         this.tripName = tripName;
         this.startAddress = startAddress;
@@ -69,12 +72,16 @@ public class Trip {
         this.user = user;
     }
 
-    public GeoJSON getRouteForChargers() {
-        return routeForChargers;
+    public Trip(String covertRoutetoString) {
+        this.covertRoutetoString = covertRoutetoString;
     }
 
-    public void setRouteForChargers(GeoJSON routeForChargers) {
-        this.routeForChargers = routeForChargers;
+    public String getCovertRoutetoString() {
+        return covertRoutetoString;
+    }
+
+    public void setCovertRoutetoString(String covertRoutetoString) {
+        this.covertRoutetoString = covertRoutetoString;
     }
 
     public String getTripName() {

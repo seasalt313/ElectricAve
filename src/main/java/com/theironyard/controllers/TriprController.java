@@ -1,5 +1,9 @@
 package com.theironyard.controllers;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.google.gson.JsonObject;
 import com.google.maps.DirectionsApi;
 import com.google.maps.DirectionsApiRequest;
 import com.google.maps.GeoApiContext;
@@ -15,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.sql.Blob;
+import java.sql.JDBCType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +33,8 @@ public class TriprController {
     @Autowired
     UserRepository users;
 
-    Trip setRoute = new Trip();
+    ObjectMapper objectMapper = new ObjectMapper();
+
 
 
 //    @RequestMapping(path = "/get-chargers/{id}", method = RequestMethod.GET)
@@ -67,7 +74,7 @@ public class TriprController {
         // pass the directionsResult object into your GeoJSON like below:
         List<LatLng> latlngs = directionsResult.routes[0].overviewPolyline.decodePath(); //list of
         GeoJSON route = GeoJSON.buildGeoJson(new LineString(latlngs));
-        setRoute.setRouteForChargers(route);
+        currentTrip.setCovertRoutetoString(objectMapper.writeValueAsString(route));
         return route;
     }
 
@@ -101,7 +108,7 @@ public class TriprController {
         return null;
     }
 
-    @RequestMapping(path = "/account", method = RequestMethod.GET) //returns list of trips based on the user
+    @RequestMapping(path = "/account", method = RequestMethod.GET) //returns current user
     public User currentUser(HttpSession session) {
         String emailAddress = (String) session.getAttribute("emailAddress");
         User user = users.findByEmailAddress(emailAddress);
