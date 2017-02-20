@@ -45,18 +45,17 @@ module.exports = {
         //
       },
 
-      // showLocation: function(){
-      //   navigator.geolocation.getCurrentPosition(function(position) {
-      //     var lat = position.coords.latitude;
-      //     var long = position.coords.longitude;
-      //     console.log("lat: " + lat);
-      //     console.log("long: " + long);
-      //     return position;
-      //
-      //     do_something(position.coords.latitude, position.coords.longitude);
-      //   });
-      //
-      // },
+      showLocation: function(){
+        return new Promise(function (resolve, reject) { // how promises work
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var lat = position.coords.latitude;
+            var long = position.coords.longitude;
+            console.log("lat: " + lat);
+            console.log("long: " + long);
+            resolve([lat, long]);
+          });
+        });
+      },
 
     }//closing return
 

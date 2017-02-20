@@ -1257,7 +1257,8 @@ body .header_section {
   margin-right: auto;
   margin-left: auto;
   background-color: #4F5165;
-  border-radius: 10px; }
+  border-radius: 10px;
+  font-family: 'Dosis', sans-serif; }
   body .header_section::before, body .header_section::after {
     display: table;
     content: ' '; }
@@ -1270,7 +1271,7 @@ body .header_section {
     padding-left: 0.625rem;
     font-size: 40px;
     text-align: left;
-    color: #C3E8BD; }
+    color: #F4F9E9; }
     @media print, screen and (min-width: 40em) {
       body .header_section .header h1 {
         padding-right: 0.9375rem;
@@ -1295,9 +1296,10 @@ body .creating_trip {
   max-width: 75rem;
   margin-right: auto;
   margin-left: auto;
+  margin-top: 90px;
   display: flex;
   color: #F4F9E9;
-  font-family: 'PT Sans', sans-serif;
+  font-family: 'Dosis', sans-serif;
   text-align: center; }
   body .creating_trip::before, body .creating_trip::after {
     display: table;
@@ -1335,7 +1337,7 @@ body .creating_trip {
         padding-left: 0.625rem;
         padding: 20px;
         font-size: 22px;
-        font-family: 'PT Sans', sans-serif;
+        font-family: 'Dosis', sans-serif;
         background-color: #F4F9E9; }
         @media print, screen and (min-width: 40em) {
           body .creating_trip .contain_trip .name_trip input {
@@ -1365,7 +1367,7 @@ body .creating_trip {
         margin-bottom: 10px;
         padding: 20px;
         font-size: 22px;
-        font-family: 'PT Sans', sans-serif;
+        font-family: 'Dosis', sans-serif;
         background-color: #F4F9E9;
         border-radius: 9px; }
         @media print, screen and (min-width: 40em) {
@@ -1383,9 +1385,9 @@ body .creating_trip {
       margin: 10px auto;
       border: 2px solid #4F5165;
       text-align: center;
-      font-family: 'Source Sans Pro', sans-serif;
-      color: #F4F9E9;
-      background-color: #153243; }
+      font-family: 'Dosis', sans-serif;
+      color: #153243;
+      background-color: #F4F9E9; }
       @media print, screen and (min-width: 40em) {
         body .creating_trip .contain_trip #newbtn {
           padding-right: 0.9375rem;
@@ -1465,7 +1467,7 @@ body .loginctrl {
           text-decoration: none;
           color: #C3E8BD;
           padding: 10px;
-          font-family: 'Source Sans Pro', sans-serif;
+          font-family: 'Poppins', sans-serif;
           font-weight: bold;
           font-size: 27px; }
 
@@ -1488,7 +1490,7 @@ body .loginform {
     padding: 20px;
     margin: 10px auto auto;
     text-align: center;
-    font-family: 'PT Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
     background-color: #EEF0EB; }
     @media print, screen and (min-width: 40em) {
       body .loginform input {
@@ -1507,7 +1509,7 @@ body .loginform {
     color: #C3E8BD;
     text-align: center;
     background-color: #153243;
-    font-family: 'Source Sans Pro', sans-serif; }
+    font-family: 'Poppins', sans-serif; }
     @media print, screen and (min-width: 40em) {
       body .loginform button {
         padding-right: 0.9375rem;
@@ -1525,14 +1527,14 @@ body {
   padding: 20px;
   background-image: url("https://images.pexels.com/photos/30134/pexels-photo.jpg?w=1260&h=750&auto=compress&cs=tinysrgb");
   background-size: cover;
-  font-family: 'Source Sans Pro', sans-serif; }
+  font-family: 'Dosis', sans-serif; }
   body #history {
     padding: 20px;
     border-radius: 3px;
     margin: 20px;
     border: 2px solid #4F5165;
     text-align: right;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Dosis', sans-serif;
     color: #F4F9E9;
     background-color: #153243; }
   body .map_area {

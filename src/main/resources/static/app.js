@@ -130,7 +130,7 @@ module.exports = {
 },{}],9:[function(require,module,exports){
 module.exports = {
   name: "showmapcontroller",
-  func: function($scope,tripService, accountService, $state, $stateParams){
+  func: function($scope,tripService, accountService, $state, $stateParams, $interval){
 
     let start = null;
 
@@ -157,14 +157,14 @@ module.exports = {
             console.log(end);
 
             L.marker([start[1], start[0]]).addTo(map)
-                .bindPopup()
+                .bindPopup("<h1>starting here</h1>")
                 .openPopup();
 
             L.marker([end[1], end[0]]).addTo(map)
                 .bindPopup()
                 .openPopup();
 
-          map = L.map('map').setView([start[1], start[0]], 13);
+           map.setView([start[1], start[0]], 13);
         });
 
 
@@ -175,11 +175,13 @@ module.exports = {
 
     // adding popup// wanna add current location here:
 
-    tripService.showLocation().then(function(){
-      L.marker(location).addTo(map)
-      .bindPopup('Your current location')
-      .openPopup();
-    });
+    $interval(function () {
+      tripService.showLocation().then(function(location){
+        L.marker(location).addTo(map)
+          .bindPopup('Your current location')
+          .openPopup();
+        });
+    }, 30000);
 
     $scope.viewAccount = accountService.getAccount();
     $scope.postNote = accountService.postNote();
@@ -351,18 +353,17 @@ module.exports = {
         //
       },
 
-      // showLocation: function(){
-      //   navigator.geolocation.getCurrentPosition(function(position) {
-      //     var lat = position.coords.latitude;
-      //     var long = position.coords.longitude;
-      //     console.log("lat: " + lat);
-      //     console.log("long: " + long);
-      //     return position;
-      //
-      //     do_something(position.coords.latitude, position.coords.longitude);
-      //   });
-      //
-      // },
+      showLocation: function(){
+        return new Promise(function (resolve, reject) { // how promises work
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var lat = position.coords.latitude;
+            var long = position.coords.longitude;
+            console.log("lat: " + lat);
+            console.log("long: " + long);
+            resolve([lat, long]);
+          });
+        });
+      },
 
     }//closing return
 

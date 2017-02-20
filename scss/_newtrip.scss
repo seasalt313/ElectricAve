@@ -7,9 +7,10 @@ $border: 2px solid #4F5165;
 body {
   .creating_trip {
     @include grid-row();
+    margin-top: 90px;
     display: flex;
     color: $primary-font-color;
-    font-family: 'PT Sans', sans-serif;
+    font-family: 'Dosis', sans-serif;
     text-align: center;
 
     .contain_trip {
@@ -23,7 +24,7 @@ body {
           @include grid-column(12);
           padding: 20px;
           font-size: 22px;
-          font-family: 'PT Sans', sans-serif;
+          font-family: 'Dosis', sans-serif;
           background-color: #F4F9E9;
         }
       }
@@ -37,7 +38,7 @@ body {
           margin-bottom: 10px;
           padding: 20px;
           font-size: 22px;
-          font-family: 'PT Sans', sans-serif;
+          font-family: 'Dosis', sans-serif;
           background-color: #F4F9E9;
           border-radius: 9px;
         }
@@ -48,9 +49,9 @@ body {
         margin: 10px auto;
         border: $border;
         text-align: center;
-        font-family: 'Source Sans Pro', sans-serif;
-        color: $primary-font-color;
-        background-color: $primary-dark-color;
+        font-family: 'Dosis', sans-serif;
+        color: $primary-dark-color;
+        background-color: #F4F9E9;
       }
     }
   }
