@@ -1,5 +1,7 @@
 package com.theironyard.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -18,6 +20,7 @@ public class Trip {
     @Column(nullable = false)
     String endAddress;
 
+    @JsonIgnore
     @ManyToOne
     User user;
 

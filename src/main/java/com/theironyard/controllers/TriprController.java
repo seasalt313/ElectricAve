@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -68,10 +69,11 @@ public class TriprController {
 
     @RequestMapping(path = "/new-trip", method = RequestMethod.POST)
     public Trip addTrip(HttpSession session, @RequestBody Trip newTrip) { // add http sessions
-
+        ArrayList<Trip> addTripToUser = new ArrayList<>();
         String emailAddress = (String) session.getAttribute("emailAddress");
         User user = users.findByEmailAddress(emailAddress);
         Trip trip = trips.findTripById(newTrip.getId());
+
         if (user != null) {
             if (trip == null) {
                 trip = new Trip(newTrip.getTripName(), newTrip.getStartAddress(), newTrip.getEndAddress(), user);
@@ -82,8 +84,16 @@ public class TriprController {
         return null;
     }
 
-//        @RequestMapping(path = "/trip-list", method = RequestMethod.GET)
-//        public Iterable<Trip> tripList () {
-//            return trips.findAll();
-//        }
+    @RequestMapping(path = "/trip-list", method = RequestMethod.GET)
+    public List<Trip> tripList(HttpSession session) {
+        ArrayList<Trip> listOfTrips;
+        String emailAddress = (String) session.getAttribute("emailAddress");
+        User user = users.findByEmailAddress(emailAddress);
+
+        if (user != null) {
+            listOfTrips = trips.findTripsByUser(user);
+            return listOfTrips;
+        }
+        return null;
+    }
 }

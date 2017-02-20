@@ -38,7 +38,6 @@ public class HomeController {
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String home(HttpSession session) {
-
         // check session for existing email
         String emailAddress = (String) session.getAttribute("emailAddress");
         User user = users.findByEmailAddress(emailAddress);
