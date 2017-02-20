@@ -2,6 +2,7 @@ package com.theironyard.entities;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,7 +30,7 @@ public class User {
     public User() {
     }
 
-    public User(int id, String userName, String emailAddress, String password, String car, List<Trip> trips) {
+    public User(int id, String userName, String emailAddress, String password, String car, ArrayList<Trip> trips) {
         this.id = id;
         this.userName = userName;
         this.emailAddress = emailAddress;
