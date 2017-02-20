@@ -1,0 +1,27 @@
+body {
+
+  .accountInfo {
+    @include grid-row();
+    margin-top: 40px;
+    padding: 20px;
+    background-color: black;
+    opacity: .7;
+    color: white;
+
+
+    .details {
+      @include grid-column(3);
+      margin: auto;
+      font-size: 22px;
+      border-right: 1px solid white;
+
+    }
+
+    .trip_history {
+      @include grid-column(6);
+      color: white;
+    }
+  }
+
+
+}

@@ -4,11 +4,11 @@ module.exports = {
 
   console.log("show-trip controller working");
 
-      $scope.trips = tripService.getTrips();
+      $scope.trips = tripService.getTrips($stateParams.userId);
 
       $scope.getAccount = accountService.getAccount();
 
-      $scope.getTripNames = tripService.getTrips();
+      // $scope.getTripNames = tripService.getTrips();
 
 
   }

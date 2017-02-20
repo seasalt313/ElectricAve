@@ -1,10 +1,10 @@
 <section ng-controller="showTripController">
   <div class="accountInfo">
-    <p> User: {{ getAccount.name }}</p>
-    <p> User: {{ getAccount.email }}</p>
-    <p> User: {{ getAccount.password }}</p>
-    <p> User: {{ getAccount.car }}</p>
-  </div>
+    <div class="details">
+      <p> User: {{ getAccount.name }}</p>
+      <p> Email: {{ getAccount.email }}</p>
+      <p> Car: {{ getAccount.car }}</p>
+    </div>
 
   <div class="trip_history">
     <h1>Trip History</h1>
@@ -14,4 +14,6 @@
       </li>
     </ul>
   </div>
+</div>
+
 </section>

@@ -9,24 +9,21 @@
 @import "header";
 @import "newtrip";
 @import "userlogin";
+@import "account";
 
 $primary-dark-color: #153243;
 $primary-font-color: #F4F9E9;
 $highlight-bg-color: #C3E8BD;
 $border: 2px solid #4F5165;
 
-html {
-  background-color: #4F5165;
-}
 
 body {
   background-color: $highlight-bg-color;
-  border: 2px solid #F4F9E9;
   height: auto;
   padding: 20px;
   // margin: 20px;
-  // background-image: url("http://www.wbwells.com/wp-content/uploads/2011/06/Desert_road_UAE.jpg");
-  background-image: url("https://images.pexels.com/photos/30134/pexels-photo.jpg?w=1260&h=750&auto=compress&cs=tinysrgb");
+  background-image: url("http://www.wbwells.com/wp-content/uploads/2011/06/Desert_road_UAE.jpg");
+  // background-image: url("https://images.pexels.com/photos/30134/pexels-photo.jpg?w=1260&h=750&auto=compress&cs=tinysrgb");
   // background-image: url("/Users/mariamqasim/Desktop/tiy/final/tripr/images/josh-felise-11191.jpg");
   background-size: cover;
   font-family: 'Dosis', sans-serif;

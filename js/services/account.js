@@ -39,7 +39,7 @@ module.exports = {
       },
       getAccount: function(){
         //1) GET request here
-        let account = $http.get('https://dry-headland-17316.herokuapp.com/account/' + userId).then(function(response){
+        let account = $http.get('account/').then(function(response){
           const incoming = response.data;
           console.log("should be receiving account info below: ");
           console.log(incoming);

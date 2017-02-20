@@ -197,11 +197,11 @@ module.exports = {
 
   console.log("show-trip controller working");
 
-      $scope.trips = tripService.getTrips();
+      $scope.trips = tripService.getTrips($stateParams.userId);
 
       $scope.getAccount = accountService.getAccount();
 
-      $scope.getTripNames = tripService.getTrips();
+      // $scope.getTripNames = tripService.getTrips();
 
 
   }
@@ -278,7 +278,7 @@ module.exports = {
       },
       getAccount: function(){
         //1) GET request here
-        let account = $http.get('https://dry-headland-17316.herokuapp.com/account/' + userId).then(function(response){
+        let account = $http.get('account/').then(function(response){
           const incoming = response.data;
           console.log("should be receiving account info below: ");
           console.log(incoming);
@@ -333,9 +333,9 @@ module.exports = {
           return trip_id;
         });
       },
-      getTrips: function(){
+      getTrips: function(tripId){
         //1) GET request here
-        let tripHistory = $http.get('https://dry-headland-17316.herokuapp.com/trip-list/' + userId).then(function(response){
+        let tripHistory = $http.get('trip-list/' ).then(function(response){
           const incoming = response.data;
           console.log("should be receiving a list of trips below: ");
           console.log(incoming);
