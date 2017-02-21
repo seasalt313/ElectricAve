@@ -1525,35 +1525,34 @@ body .accountInfo {
   padding: 20px 20px 200px 20px;
   background-color: black;
   opacity: .7;
+  border-radius: 10px;
   color: white; }
   body .accountInfo::before, body .accountInfo::after {
     display: table;
     content: ' '; }
   body .accountInfo::after {
     clear: both; }
-  body .accountInfo .back a {
-    width: 91.66667%;
+  body .accountInfo a.back {
+    width: 100%;
     float: left;
     padding-right: 0.625rem;
     padding-left: 0.625rem;
-    float: right;
     list-style: none;
     text-decoration: none;
     color: #C3E8BD; }
     @media print, screen and (min-width: 40em) {
-      body .accountInfo .back a {
+      body .accountInfo a.back {
         padding-right: 0.9375rem;
         padding-left: 0.9375rem; } }
-    body .accountInfo .back a:last-child:not(:first-child) {
+    body .accountInfo a.back:last-child:not(:first-child) {
       float: right; }
   body .accountInfo .details {
-    width: 25%;
+    width: 100%;
     float: left;
     padding-right: 0.625rem;
     padding-left: 0.625rem;
     margin: auto;
     font-size: 22px;
-    border-right: 1px solid white;
     border-bottom: 1px solid white; }
     @media print, screen and (min-width: 40em) {
       body .accountInfo .details {
@@ -1561,10 +1560,21 @@ body .accountInfo {
         padding-left: 0.9375rem; } }
     body .accountInfo .details:last-child:not(:first-child) {
       float: right; }
+    body .accountInfo .details p {
+      width: 25%;
+      float: left;
+      padding-right: 0.625rem;
+      padding-left: 0.625rem; }
+      @media print, screen and (min-width: 40em) {
+        body .accountInfo .details p {
+          padding-right: 0.9375rem;
+          padding-left: 0.9375rem; } }
+      body .accountInfo .details p:last-child:not(:first-child) {
+        float: right; }
   body .accountInfo .highlight {
     color: #C3E8BD; }
   body .accountInfo .trip_history {
-    width: 75%;
+    width: 100%;
     float: left;
     padding-right: 0.625rem;
     padding-left: 0.625rem;
@@ -1576,15 +1586,54 @@ body .accountInfo {
         padding-left: 0.9375rem; } }
     body .accountInfo .trip_history:last-child:not(:first-child) {
       float: right; }
+    body .accountInfo .trip_history ul {
+      text-align: center; }
     body .accountInfo .trip_history li a {
       color: white;
       text-decoration: none; }
     body .accountInfo .trip_history li {
-      padding: 10px;
+      width: 100%;
+      float: left;
+      padding-right: 0.625rem;
+      padding-left: 0.625rem;
       color: #C3E8BD;
-      text-align: left; }
-    body .accountInfo .trip_history #delete button {
-      border: 1px solid white; }
+      text-align: center;
+      border-bottom: 1px dotted grey;
+      list-style: none; }
+      @media print, screen and (min-width: 40em) {
+        body .accountInfo .trip_history li {
+          padding-right: 0.9375rem;
+          padding-left: 0.9375rem; } }
+      body .accountInfo .trip_history li:last-child:not(:first-child) {
+        float: right; }
+    body .accountInfo .trip_history li h2 {
+      width: 100%;
+      float: left;
+      padding-right: 0.625rem;
+      padding-left: 0.625rem;
+      text-align: center; }
+      @media print, screen and (min-width: 40em) {
+        body .accountInfo .trip_history li h2 {
+          padding-right: 0.9375rem;
+          padding-left: 0.9375rem; } }
+      body .accountInfo .trip_history li h2:last-child:not(:first-child) {
+        float: right; }
+    body .accountInfo .trip_history li h3 {
+      width: 50%;
+      float: left;
+      padding-right: 0.625rem;
+      padding-left: 0.625rem; }
+      @media print, screen and (min-width: 40em) {
+        body .accountInfo .trip_history li h3 {
+          padding-right: 0.9375rem;
+          padding-left: 0.9375rem; } }
+      body .accountInfo .trip_history li h3:last-child:not(:first-child) {
+        float: right; }
+    body .accountInfo .trip_history button#delete {
+      max-width: 50%;
+      border-radius: 4px;
+      padding: 10px;
+      color: lightsalmon; }
 
 body {
   background-color: #C3E8BD;
@@ -1595,15 +1644,15 @@ body {
   font-family: 'Dosis', sans-serif; }
   body #history {
     padding: 20px;
-    border-radius: 3px;
+    border-radius: 10px;
     margin: 20px;
     border: 2px solid #4F5165;
     text-align: right;
     font-size: 19px;
     font-family: 'Dosis', sans-serif;
-    color: #F4F9E9;
-    background-color: transparent; }
-  body #history a {
+    color: black;
+    background-color: #F4F9E9; }
+  body a#history {
     text-decoration: none;
     color: #F4F9E9; }
   body .map_area {

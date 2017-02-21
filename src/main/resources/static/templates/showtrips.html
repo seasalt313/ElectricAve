@@ -1,9 +1,11 @@
 <section ng-controller="showTripController">
   <div class="accountInfo">
+    <h1>Account Information: </h1>
     <div class="details">
       <p> USER:<br> {{ getAccount.userName }}</p>
       <p> E-MAIL:<br> {{ getAccount.emailAddress }}</p>
       <p> CAR:<br> {{ getAccount.car }}</p>
+      <p><a class="back" ui-sref="newtrip">Create a New Trip?</a></p>
     </div>
 
   <div class="trip_history">
@@ -13,17 +15,14 @@
       <li ng-repeat="trip in trips">
         <a ui-sref="map({mapId:trip.id})">
         <h2 class="highlight"> TRIP: {{ trip.tripName }}</h2>
-        <h3> FROM:  {{ trip.startAddress }}</h3>
-        <h3> TO:  {{ trip.endAddress }}</h3>
+        <h3> Starting Location:  <br>{{ trip.startAddress }}</h3>
+        <h3> Ending Location:  <br>{{ trip.endAddress }}</h3>
         </a>
         <button id="delete">Delete</button>
       </li>
     </ol>
   </div>
 
-  <div class="back">
-  <a ui-sref="newtrip">Create a New Trip?</a>
-  </div>
 </div>
 
 </section>

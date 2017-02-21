@@ -167,12 +167,6 @@ module.exports = {
            map.setView([start[1], start[0]], 13);
         });
 
-
-
-
-
-
-
     // adding popup// wanna add current location here:
 
     $interval(function () {
@@ -182,6 +176,28 @@ module.exports = {
           .openPopup();
         });
     }, 30000);
+
+    //this isnt working * luke
+    $interval(function () {
+      tripService.showLocation().then(function(location){
+        console.log('circle at');
+        console.log(location);
+
+            L.circle(L.latLng(location[0], location[1]), 200, {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.5,
+            radius: 200
+        }).addTo(map);
+      });
+    }, 30000);
+
+
+    function onMapClick(e) {
+    prompt("You clicked the map at " + e.latlng +". Would you like to leave a note?");
+    }
+
+    map.on('click', onMapClick);
 
     $scope.viewAccount = accountService.getAccount();
     $scope.postNote = accountService.postNote();
@@ -247,7 +263,7 @@ module.exports = {
       makeAccount: function(name, email, pass, car){
         console.log("new user");
         //1) post this info here.
-        $http.post('https://dry-headland-17316.herokuapp.com/new-user', {
+        $http.post('https://electric-ave.herokuapp.com/new-user', {
           "name": "name",
           "email": "email",
           "pass": "pass",
@@ -265,7 +281,7 @@ module.exports = {
       loginAccount: function(email, pass){
         console.log("logging in");
         //1) post existing user below
-        $http.post('https://dry-headland-17316.herokuapp.com/login', {
+        $http.post('https://electric-ave.com/login', {
           "emailAddress": "emailAddress",
           "password": "password"
         }).then(function(response){
@@ -291,7 +307,7 @@ module.exports = {
       postNote: function(){
         console.log("posting note");
         //1) post existing user below
-        $http.post('https://dry-headland-17316.herokuapp.com/', {//figure out what goes here
+        $http.post('https://electric-ave.herokuapp.com/', {//figure out what goes here
           "note": "note",
         }).then(function(response){
           console.log("response below");

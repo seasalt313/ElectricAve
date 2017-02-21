@@ -32,21 +32,21 @@ body {
 
   #history {
     padding: 20px;
-    border-radius: 3px;
+    border-radius: 10px;
     margin: 20px;
     border: $border;
     text-align: right;
     font-size: 19px;
     font-family: 'Dosis', sans-serif;
-    color: $primary-font-color;
-    background-color: transparent;
+    color: black;
+    background-color: $primary-font-color;
   }
 
-  #history a {
+  a#history {
     text-decoration: none;
     color: $primary-font-color;
-
   }
+
 
 
   //maps styling with leaflet

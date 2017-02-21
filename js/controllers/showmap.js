@@ -37,12 +37,6 @@ module.exports = {
            map.setView([start[1], start[0]], 13);
         });
 
-
-
-
-
-
-
     // adding popup// wanna add current location here:
 
     $interval(function () {
@@ -52,6 +46,28 @@ module.exports = {
           .openPopup();
         });
     }, 30000);
+
+    //this isnt working * luke
+    $interval(function () {
+      tripService.showLocation().then(function(location){
+        console.log('circle at');
+        console.log(location);
+
+            L.circle(L.latLng(location[0], location[1]), 200, {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.5,
+            radius: 200
+        }).addTo(map);
+      });
+    }, 30000);
+
+
+    function onMapClick(e) {
+    prompt("You clicked the map at " + e.latlng +". Would you like to leave a note?");
+    }
+
+    map.on('click', onMapClick);
 
     $scope.viewAccount = accountService.getAccount();
     $scope.postNote = accountService.postNote();
