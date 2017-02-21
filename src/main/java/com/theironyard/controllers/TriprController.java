@@ -14,6 +14,7 @@ import com.google.maps.GeoApiContext;
 import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.LatLng;
 import com.theironyard.data.GeoJSON;
+import com.theironyard.data.Geometry;
 import com.theironyard.data.LineString;
 import com.theironyard.entities.Map;
 import com.theironyard.entities.Trip;
@@ -23,9 +24,12 @@ import com.theironyard.services.TripRepository;
 import com.theironyard.services.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -47,13 +51,19 @@ public class TriprController {
     GeoJSON geoRoute = new GeoJSON();
 
 
-//    @RequestMapping(path = "/get-chargers/{tripId}", method = RequestMethod.GET)
-//    public GeoJSON getChargers(@PathVariable("tripId") int id) throws Exception {
+//    @RequestMapping(path = "/get-chargers/{id}", method = RequestMethod.GET)
+//    public GeoJSON chargers(@PathVariable("id") int id) throws Exception {
+//
+//        HashMap<String, String> urlParms = new HashMap<>();
+//        Geometry thislocation = new RestTemplate().getForObject("https://api.data.gov/nrel/alt-fuel-stations/v1.json?limit=1&api_key=Af8SI3elKk9EhE9KjxEkuk71wbks21M1UtfwmoiL", Geometry.class);
+//        System.out.println(t);
+//
+//
+//
 //        currentTrip = trips.findTripById(id);
 //        addRoute = maps.findMapByTrip(currentTrip);
 //
 //        if(currentTrip != null && addRoute != null) {
-//             geoRoute = objectMapper.convertValue(addRoute.getRouteString(), geoRoute.getClass());
 //
 //        }
 //        return geoRoute;
