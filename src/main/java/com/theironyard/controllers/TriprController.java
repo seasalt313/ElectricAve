@@ -1,8 +1,12 @@
 package com.theironyard.controllers;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.fasterxml.jackson.databind.ser.impl.StringArraySerializer;
 import com.google.gson.JsonObject;
 import com.google.maps.DirectionsApi;
 import com.google.maps.DirectionsApiRequest;
@@ -10,18 +14,22 @@ import com.google.maps.GeoApiContext;
 import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.LatLng;
 import com.theironyard.data.GeoJSON;
+import com.theironyard.data.Geometry;
 import com.theironyard.data.LineString;
+import com.theironyard.entities.Map;
 import com.theironyard.entities.Trip;
 import com.theironyard.entities.User;
+import com.theironyard.services.MapRepository;
 import com.theironyard.services.TripRepository;
 import com.theironyard.services.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
-import java.sql.Blob;
-import java.sql.JDBCType;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -33,14 +41,32 @@ public class TriprController {
     @Autowired
     UserRepository users;
 
-    ObjectMapper objectMapper = new ObjectMapper();
+    @Autowired
+    MapRepository maps;
 
+    ObjectMapper objectMapper = new ObjectMapper();
+    Map addRoute = new Map();
+    String route = new String();
+    Trip currentTrip = new Trip();
+    GeoJSON geoRoute = new GeoJSON();
 
 
 //    @RequestMapping(path = "/get-chargers/{id}", method = RequestMethod.GET)
-//    public GeoJSON getChargers(@PathVariable("id") int id) throws Exception {
-//        GeoApiContext context = new GeoApiContext().setApiKey("Af8SI3elKk9EhE9KjxEkuk71wbks21M1UtfwmoiL");
+//    public GeoJSON chargers(@PathVariable("id") int id) throws Exception {
 //
+//        HashMap<String, String> urlParms = new HashMap<>();
+//        Geometry thislocation = new RestTemplate().getForObject("https://api.data.gov/nrel/alt-fuel-stations/v1.json?limit=1&api_key=Af8SI3elKk9EhE9KjxEkuk71wbks21M1UtfwmoiL", Geometry.class);
+//        System.out.println(t);
+//
+//
+//
+//        currentTrip = trips.findTripById(id);
+//        addRoute = maps.findMapByTrip(currentTrip);
+//
+//        if(currentTrip != null && addRoute != null) {
+//
+//        }
+//        return geoRoute;
 //    }
 
     @RequestMapping(path = "/map/{id}", method = RequestMethod.GET) // returns a route based on trip params
@@ -48,7 +74,7 @@ public class TriprController {
         GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyBnADGOsZrhGtk1jSb8C9X49JoeG2m_KU0");
         DirectionsApiRequest directionsRequest = DirectionsApi.newRequest(context);
 
-        Trip currentTrip = trips.findTripById(id);
+        currentTrip = trips.findTripById(id);
         directionsRequest.origin(currentTrip.getStartAddress());
         directionsRequest.destination(currentTrip.getEndAddress());
         DirectionsResult directionsResult = directionsRequest.await(); //Object that stored the direction result
@@ -73,14 +99,21 @@ public class TriprController {
         // call await again to get an updated DirectionsResponse object.
         // pass the directionsResult object into your GeoJSON like below:
         List<LatLng> latlngs = directionsResult.routes[0].overviewPolyline.decodePath(); //list of
-        GeoJSON route = GeoJSON.buildGeoJson(new LineString(latlngs));
-        currentTrip.setCovertRoutetoString(objectMapper.writeValueAsString(route));
-        return route;
-    }
+        GeoJSON geoRoute = GeoJSON.buildGeoJson(new LineString(latlngs));
+        route = objectMapper.writeValueAsString(geoRoute);
+        addRoute = new Map(route, currentTrip);
+        maps.save(addRoute);
+        currentTrip.setMap(addRoute);
+
+//        JsonGenerator.Feature temp = JsonGenerator.Feature.valueOf(route);
+//        objectMapper.writeValue(Js.Feature.valueOf(route));
+//
+//        System.out.println(test);
+        return geoRoute;
+}
 
     @RequestMapping(path = "/new-trip", method = RequestMethod.POST) //adds trip related to user
     public Trip addTrip(HttpSession session, @RequestBody Trip newTrip) { // add http sessions
-        ArrayList<Trip> addTripToUser = new ArrayList<>();
         String emailAddress = (String) session.getAttribute("emailAddress");
         User user = users.findByEmailAddress(emailAddress);
         Trip trip = trips.findTripById(newTrip.getId());
@@ -89,8 +122,8 @@ public class TriprController {
             if (trip == null) {
                 trip = new Trip(newTrip.getTripName(), newTrip.getStartAddress(), newTrip.getEndAddress(), user);
                 trips.save(trip);
+                return trip;
             }
-            return trip;
         }
         return null;
     }
