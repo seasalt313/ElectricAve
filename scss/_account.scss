@@ -8,6 +8,14 @@ body {
     opacity: .7;
     color: white;
 
+    .back a{
+      @include grid-column(11);
+      float: right;
+      list-style: none;
+      text-decoration: none;
+      color: #C3E8BD;
+    }
+
 
     .details {
       @include grid-column(3);
@@ -33,9 +41,7 @@ body {
       li {
         padding: 10px;
         color: #C3E8BD;
-        // border-bottom: 1px solid white;
         text-align: left;
-        // list-style: none;
       }
       #delete button {
         border: 1px solid white;

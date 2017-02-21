@@ -1531,6 +1531,21 @@ body .accountInfo {
     content: ' '; }
   body .accountInfo::after {
     clear: both; }
+  body .accountInfo .back a {
+    width: 91.66667%;
+    float: left;
+    padding-right: 0.625rem;
+    padding-left: 0.625rem;
+    float: right;
+    list-style: none;
+    text-decoration: none;
+    color: #C3E8BD; }
+    @media print, screen and (min-width: 40em) {
+      body .accountInfo .back a {
+        padding-right: 0.9375rem;
+        padding-left: 0.9375rem; } }
+    body .accountInfo .back a:last-child:not(:first-child) {
+      float: right; }
   body .accountInfo .details {
     width: 25%;
     float: left;
