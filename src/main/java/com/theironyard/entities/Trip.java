@@ -1,17 +1,8 @@
 package com.theironyard.entities;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
-import com.google.gson.JsonObject;
-import com.theironyard.data.GeoJSON;
-import org.springframework.stereotype.Controller;
 
 import javax.persistence.*;
-import java.sql.Blob;
-import java.sql.JDBCType;
 
 @Entity
 @Table(name = "trips")
@@ -29,8 +20,8 @@ public class Trip {
     @Column(nullable = false)
     String endAddress;
 
-    @Column
-    String covertRoutetoString;
+    @OneToOne
+    Map map;
 
     @JsonIgnore
     @ManyToOne
@@ -72,16 +63,20 @@ public class Trip {
         this.user = user;
     }
 
-    public Trip(String covertRoutetoString) {
-        this.covertRoutetoString = covertRoutetoString;
+    public Trip(String tripName, String startAddress, String endAddress, Map map, User user) {
+        this.tripName = tripName;
+        this.startAddress = startAddress;
+        this.endAddress = endAddress;
+        this.map = map;
+        this.user = user;
     }
 
-    public String getCovertRoutetoString() {
-        return covertRoutetoString;
+    public Map getMap() {
+        return map;
     }
 
-    public void setCovertRoutetoString(String covertRoutetoString) {
-        this.covertRoutetoString = covertRoutetoString;
+    public void setMap(Map map) {
+        this.map = map;
     }
 
     public String getTripName() {
