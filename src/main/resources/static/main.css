@@ -1352,7 +1352,7 @@ body .creating_trip {
       padding-left: 0.625rem;
       margin: auto;
       background-color: #153243;
-      border: 2px solid #4F5165; }
+      border-radius: 10px; }
       @media print, screen and (min-width: 40em) {
         body .creating_trip .contain_trip .tripform {
           padding-right: 0.9375rem;
@@ -1553,7 +1553,8 @@ body .accountInfo {
     padding-left: 0.625rem;
     margin: auto;
     font-size: 22px;
-    border-bottom: 1px solid white; }
+    border-bottom: 1px solid white;
+    font-family: 'Roboto', sans-serif; }
     @media print, screen and (min-width: 40em) {
       body .accountInfo .details {
         padding-right: 0.9375rem;
@@ -1611,7 +1612,8 @@ body .accountInfo {
       float: left;
       padding-right: 0.625rem;
       padding-left: 0.625rem;
-      text-align: center; }
+      text-align: center;
+      font-family: 'Roboto', sans-serif; }
       @media print, screen and (min-width: 40em) {
         body .accountInfo .trip_history li h2 {
           padding-right: 0.9375rem;
@@ -1633,7 +1635,8 @@ body .accountInfo {
       max-width: 50%;
       border-radius: 4px;
       padding: 10px;
-      color: lightsalmon; }
+      color: lightsalmon;
+      font-family: 'Roboto', sans-serif; }
 
 body {
   background-color: #C3E8BD;
@@ -1648,12 +1651,15 @@ body {
     margin: 20px;
     border: 2px solid #4F5165;
     text-align: right;
-    font-size: 19px;
+    font-size: 20px;
     font-family: 'Dosis', sans-serif;
-    color: black;
+    color: #4F5165;
     background-color: #F4F9E9; }
-  body a#history {
+  body #history a {
     text-decoration: none;
+    color: #4F5165; }
+  body #history:hover, body #history a:hover {
+    background-color: #4F5165;
     color: #F4F9E9; }
   body .map_area {
     text-align: center; }

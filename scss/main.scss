@@ -27,7 +27,6 @@ body {
   // background-image: url("/Users/mariamqasim/Desktop/tiy/final/tripr/images/josh-felise-11191.jpg");
   background-size: cover;
   font-family: 'Dosis', sans-serif;
-  // border-radius: 10px;
 
 
   #history {
@@ -36,14 +35,19 @@ body {
     margin: 20px;
     border: $border;
     text-align: right;
-    font-size: 19px;
+    font-size: 20px;
     font-family: 'Dosis', sans-serif;
-    color: black;
+    color: #4F5165;
     background-color: $primary-font-color;
   }
 
-  a#history {
+  #history a {
     text-decoration: none;
+    color: #4F5165;
+  }
+
+  #history:hover,  #history a:hover {
+    background-color: #4F5165;
     color: $primary-font-color;
   }
 
