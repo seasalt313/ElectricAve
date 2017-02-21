@@ -1,12 +1,6 @@
 package com.theironyard.controllers;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import com.fasterxml.jackson.databind.ser.impl.StringArraySerializer;
 import com.google.gson.JsonObject;
 import com.google.maps.DirectionsApi;
 import com.google.maps.DirectionsApiRequest;
@@ -14,23 +8,23 @@ import com.google.maps.GeoApiContext;
 import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.LatLng;
 import com.theironyard.data.GeoJSON;
-import com.theironyard.data.Geometry;
 import com.theironyard.data.LineString;
-import com.theironyard.entities.Map;
 import com.theironyard.entities.Trip;
 import com.theironyard.entities.User;
-import com.theironyard.services.MapRepository;
 import com.theironyard.services.TripRepository;
 import com.theironyard.services.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class TriprController {
@@ -41,33 +35,46 @@ public class TriprController {
     @Autowired
     UserRepository users;
 
-    @Autowired
-    MapRepository maps;
-
     ObjectMapper objectMapper = new ObjectMapper();
-    Map addRoute = new Map();
-    String route = new String();
     Trip currentTrip = new Trip();
-    GeoJSON geoRoute = new GeoJSON();
 
 
-//    @RequestMapping(path = "/get-chargers/{id}", method = RequestMethod.GET)
-//    public GeoJSON chargers(@PathVariable("id") int id) throws Exception {
-//
-//        HashMap<String, String> urlParms = new HashMap<>();
-//        Geometry thislocation = new RestTemplate().getForObject("https://api.data.gov/nrel/alt-fuel-stations/v1.json?limit=1&api_key=Af8SI3elKk9EhE9KjxEkuk71wbks21M1UtfwmoiL", Geometry.class);
-//        System.out.println(t);
-//
-//
-//
-//        currentTrip = trips.findTripById(id);
-//        addRoute = maps.findMapByTrip(currentTrip);
-//
-//        if(currentTrip != null && addRoute != null) {
-//
+    @RequestMapping(path = "/get-chargers", method = RequestMethod.GET)
+    public String chargers() throws Exception {
+        GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyBnADGOsZrhGtk1jSb8C9X49JoeG2m_KU0");
+        DirectionsApiRequest directionsRequest = DirectionsApi.newRequest(context);
+
+        currentTrip = trips.findTripById(2);
+        directionsRequest.origin(currentTrip.getStartAddress());
+        directionsRequest.destination(currentTrip.getEndAddress());
+        DirectionsResult directionsResult = directionsRequest.await();
+
+
+        List<LatLng> latlngs = directionsResult.routes[0].overviewPolyline.decodePath(); //list of latlngs
+        LineString lineStrings = new LineString(latlngs);
+
+        GeoJSON geoRoute = GeoJSON.buildGeoJson(new LineString(latlngs));
+
+        //Map<String, GeoJSON> urlParms = new HashMap<>();
+//        String encodedString;
+//        encodedString = URLEncoder.encode(String.valueOf(lineStrings.coordinates), "utf-8");
+        //urlParms.put("LINESTRINGS", geoRoute);
+
+
+        URL url = new URL("https://api.data.gov/nrel/alt-fuel-stations/v1/nearby-route.json?api_key=Af8SI3elKk9EhE9KjxEkuk71wbks21M1UtfwmoiL&distance=5&route=LINESTRINGS");
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("LINESTRINGS", String.valueOf(geoRoute));
+
+//        BufferedReader rd = new BufferedReader();
+//        String line;
+//        while ((line = rd.readLine()) != null) {
+//            result.append(line);
 //        }
-//        return geoRoute;
-//    }
+//        rd.close();
+//        return result.toString();
+        return "dope";
+    }
 
     @RequestMapping(path = "/map/{id}", method = RequestMethod.GET) // returns a route based on trip params
     public GeoJSON directions(@PathVariable("id") int id) throws Exception {
@@ -98,18 +105,10 @@ public class TriprController {
 
         // call await again to get an updated DirectionsResponse object.
         // pass the directionsResult object into your GeoJSON like below:
-        List<LatLng> latlngs = directionsResult.routes[0].overviewPolyline.decodePath(); //list of
-        GeoJSON geoRoute = GeoJSON.buildGeoJson(new LineString(latlngs));
-        route = objectMapper.writeValueAsString(geoRoute);
-        addRoute = new Map(route, currentTrip);
-        maps.save(addRoute);
-        currentTrip.setMap(addRoute);
 
-//        JsonGenerator.Feature temp = JsonGenerator.Feature.valueOf(route);
-//        objectMapper.writeValue(Js.Feature.valueOf(route));
-//
-//        System.out.println(test);
-        return geoRoute;
+
+        List<LatLng> latlngs = directionsResult.routes[0].overviewPolyline.decodePath(); //list of latlngs
+        return GeoJSON.buildGeoJson(new LineString(latlngs));
 }
 
     @RequestMapping(path = "/new-trip", method = RequestMethod.POST) //adds trip related to user

@@ -20,9 +20,6 @@ public class Trip {
     @Column(nullable = false)
     String endAddress;
 
-    @OneToOne
-    Map map;
-
     @JsonIgnore
     @ManyToOne
     User user;
@@ -61,22 +58,6 @@ public class Trip {
         this.startAddress = startAddress;
         this.endAddress = endAddress;
         this.user = user;
-    }
-
-    public Trip(String tripName, String startAddress, String endAddress, Map map, User user) {
-        this.tripName = tripName;
-        this.startAddress = startAddress;
-        this.endAddress = endAddress;
-        this.map = map;
-        this.user = user;
-    }
-
-    public Map getMap() {
-        return map;
-    }
-
-    public void setMap(Map map) {
-        this.map = map;
     }
 
     public String getTripName() {
