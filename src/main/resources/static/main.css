@@ -1717,7 +1717,7 @@ body {
     body .notes::after {
       clear: both; }
     body .notes #notes {
-      width: 83.33333%;
+      width: 66.66667%;
       float: left;
       padding-right: 0.625rem;
       padding-left: 0.625rem;
@@ -1731,14 +1731,14 @@ body {
       body .notes #notes:last-child:not(:first-child) {
         float: right; }
     body .notes .save_notes {
-      width: 83.33333%;
+      width: 66.66667%;
       float: left;
       padding-right: 0.625rem;
       padding-left: 0.625rem;
       margin: auto;
       border: none;
       color: #F4F9E9;
-      background-color: #153243;
+      background-color: #baa489;
       border-radius: 0; }
       @media print, screen and (min-width: 40em) {
         body .notes .save_notes {

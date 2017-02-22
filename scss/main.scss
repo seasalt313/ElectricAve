@@ -92,17 +92,17 @@ body {
     float: none;
 
     #notes {
-      @include grid-column(10);
+      @include grid-column(8);
       font-size: 22px;
       padding: 5px;
       height: 200px;
     }
     .save_notes {
-      @include grid-column(10);
+      @include grid-column(8);
       margin: auto;
       border: none;
       color: #F4F9E9;
-      background-color: #153243;
+      background-color: rgb(186,164,137);
       border-radius: 0;
     }
 
