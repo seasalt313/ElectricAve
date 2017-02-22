@@ -17,6 +17,15 @@ body {
       color: #C3E8BD;
     }
 
+    #search_trips {
+      background-color: transparent;
+      padding: 20px;
+      border: none;
+      border-bottom: 1px solid white;
+      font-family: 'Roboto', sans-serif;
+
+    }
+
 
     .details {
       @include grid-column(12);

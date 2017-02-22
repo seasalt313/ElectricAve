@@ -10,9 +10,10 @@
 
   <div class="trip_history">
     <h1>trip history</h1>
+      <input id="search_trips" ng-model="query" type="text" placeholder="search trips"><i class="fa fa-search" aria-hidden="true"></i></input>
     <p>click on a trip to view route</p>
     <ol>
-      <li ng-repeat="trip in trips">
+      <li ng-repeat="trip in trips | filter: query ">
         <a ui-sref="map({mapId:trip.id})">
         <h2 class="highlight"> TRIP: {{ trip.tripName }}</h2>
         <h3> Starting Location:  <br>{{ trip.startAddress }}</h3>

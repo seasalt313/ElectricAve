@@ -1546,6 +1546,12 @@ body .accountInfo {
         padding-left: 0.9375rem; } }
     body .accountInfo a.back:last-child:not(:first-child) {
       float: right; }
+  body .accountInfo #search_trips {
+    background-color: transparent;
+    padding: 20px;
+    border: none;
+    border-bottom: 1px solid white;
+    font-family: 'Roboto', sans-serif; }
   body .accountInfo .details {
     width: 100%;
     float: left;
@@ -1689,15 +1695,13 @@ body {
     body .notes::after {
       clear: both; }
     body .notes #notes {
-      width: 66.66667%;
+      width: 83.33333%;
       float: left;
       padding-right: 0.625rem;
       padding-left: 0.625rem;
-      margin: 0;
       font-size: 22px;
       padding: 5px;
-      height: 200px;
-      float: none; }
+      height: 200px; }
       @media print, screen and (min-width: 40em) {
         body .notes #notes {
           padding-right: 0.9375rem;
@@ -1705,12 +1709,11 @@ body {
       body .notes #notes:last-child:not(:first-child) {
         float: right; }
     body .notes .save_notes {
-      width: 66.66667%;
+      width: 83.33333%;
       float: left;
       padding-right: 0.625rem;
       padding-left: 0.625rem;
       margin: auto;
-      margin-right: 200px;
       border: none;
       color: #F4F9E9;
       background-color: #153243;

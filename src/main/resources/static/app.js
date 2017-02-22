@@ -167,15 +167,15 @@ module.exports = {
            map.setView([start[1], start[0]], 13);
         });
 
-    // adding popup// wanna add current location here:
-
-    $interval(function () {
-      tripService.showLocation().then(function(location){
-        L.marker(location).addTo(map)
-          .bindPopup('Your current location')
-          .openPopup();
-        });
-    }, 30000);
+    // // adding popup// wanna add current location here:
+    //
+    // $interval(function () {
+    //   tripService.showLocation().then(function(location){
+    //     L.marker(location).addTo(map)
+    //       .bindPopup('Your current location')
+    //       .openPopup();
+    //     });
+    // }, 30000);
 
     //this isnt working * luke
     $interval(function () {

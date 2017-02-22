@@ -51,16 +51,6 @@ body {
     color: $primary-font-color;
   }
 
-
-
-  //maps styling with leaflet
-  // .shadow {
-  //   background-color: black;
-  //   opacity: .6;
-  //   width: 100%;
-  //   height: 1500px;
-  //   z-index: 2;
-  // }
   .map_area {
     text-align: center;
     h1 {
@@ -88,17 +78,17 @@ body {
     float: none;
 
     #notes {
-      @include grid-column(8);
-      margin: 0;
+      @include grid-column(10);
+      // margin: 0;
       font-size: 22px;
       padding: 5px;
       height: 200px;
-      float: none;
+      // float: none;
     }
     .save_notes {
-      @include grid-column(8);
+      @include grid-column(10);
       margin: auto;
-      margin-right: 200px;
+      // margin-right: 200px;
       border: none;
       color: #F4F9E9;
       background-color: #153243;
