@@ -217,9 +217,6 @@ module.exports = {
 
       $scope.getAccount = accountService.getAccount();
 
-      // $scope.getTripNames = tripService.getTrips();
-
-
   }
 }
 
