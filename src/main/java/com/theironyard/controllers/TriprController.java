@@ -100,7 +100,7 @@ public class TriprController {
         List<LatLng> latlngs = directionsResult.routes[0].overviewPolyline.decodePath(); //list of latlngs
         GeoJSON geoRoute = GeoJSON.buildGeoJson(new LineString(latlngs));
 
-        String request = "https://api.data.gov/nrel/alt-fuel-stations/v1/nearby-route.json?api_key=Af8SI3elKk9EhE9KjxEkuk71wbks21M1UtfwmoiL&distance=0.7&fuel_type=ELEC";
+        String request = "https://api.data.gov/nrel/alt-fuel-stations/v1/nearby-route.json?api_key=Af8SI3elKk9EhE9KjxEkuk71wbks21M1UtfwmoiL&distance=0.3&fuel_type=ELEC";
         RestTemplate template = new RestTemplate();
 
         Map<String, String> postData = new HashMap<>();
