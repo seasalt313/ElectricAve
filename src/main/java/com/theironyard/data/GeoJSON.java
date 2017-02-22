@@ -14,8 +14,12 @@ public class GeoJSON {
     public static GeoJSON buildGeoJson(Geometry g) {
         GeoJSON results = new GeoJSON();
 
-        results.features.add(new Feature(g));
+        results.addGeometry(g);
 
         return results;
+    }
+
+    public void addGeometry(Geometry g) {
+        features.add(new Feature(g));
     }
 }
