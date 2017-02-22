@@ -9,6 +9,8 @@ body {
         font-size: 22px;
         padding: 20px;
         display: flex;
+        background-color: rgba(78,81,102, 0.3);
+
 
         .login_a {
           @include grid-row();

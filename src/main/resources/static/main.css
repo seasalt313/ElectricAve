@@ -1264,33 +1264,44 @@ body .header_section {
     content: ' '; }
   body .header_section::after {
     clear: both; }
-  body .header_section .header h1 {
-    width: 66.66667%;
+  body .header_section .header {
+    width: 100%;
     float: left;
     padding-right: 0.625rem;
-    padding-left: 0.625rem;
-    font-size: 40px;
-    text-align: left;
-    color: #F4F9E9; }
+    padding-left: 0.625rem; }
     @media print, screen and (min-width: 40em) {
-      body .header_section .header h1 {
+      body .header_section .header {
         padding-right: 0.9375rem;
         padding-left: 0.9375rem; } }
-    body .header_section .header h1:last-child:not(:first-child) {
+    body .header_section .header:last-child:not(:first-child) {
       float: right; }
-  body .header_section .header .logout {
-    width: 16.66667%;
-    float: left;
-    padding-right: 0.625rem;
-    padding-left: 0.625rem;
-    font-size: 18px;
-    text-align: center; }
-    @media print, screen and (min-width: 40em) {
-      body .header_section .header .logout {
-        padding-right: 0.9375rem;
-        padding-left: 0.9375rem; } }
-    body .header_section .header .logout:last-child:not(:first-child) {
-      float: right; }
+    body .header_section .header h1 {
+      width: 66.66667%;
+      float: left;
+      padding-right: 0.625rem;
+      padding-left: 0.625rem;
+      font-size: 50px;
+      text-align: left;
+      color: #F4F9E9; }
+      @media print, screen and (min-width: 40em) {
+        body .header_section .header h1 {
+          padding-right: 0.9375rem;
+          padding-left: 0.9375rem; } }
+      body .header_section .header h1:last-child:not(:first-child) {
+        float: right; }
+    body .header_section .header .logout {
+      width: 16.66667%;
+      float: left;
+      padding-right: 0.625rem;
+      padding-left: 0.625rem;
+      font-size: 18px;
+      text-align: center; }
+      @media print, screen and (min-width: 40em) {
+        body .header_section .header .logout {
+          padding-right: 0.9375rem;
+          padding-left: 0.9375rem; } }
+      body .header_section .header .logout:last-child:not(:first-child) {
+        float: right; }
 
 body .creating_trip {
   max-width: 75rem;
@@ -1307,11 +1318,14 @@ body .creating_trip {
   body .creating_trip::after {
     clear: both; }
   body .creating_trip .contain_trip {
-    width: 50%;
+    width: 100%;
     float: left;
     padding-right: 0.625rem;
     padding-left: 0.625rem;
-    margin: auto; }
+    margin: auto;
+    display: flex;
+    padding: 100px;
+    background-color: rgba(170, 157, 142, 0.3); }
     @media print, screen and (min-width: 40em) {
       body .creating_trip .contain_trip {
         padding-right: 0.9375rem;
@@ -1346,12 +1360,13 @@ body .creating_trip {
         body .creating_trip .contain_trip .name_trip input:last-child:not(:first-child) {
           float: right; }
     body .creating_trip .contain_trip .tripform {
-      width: 100%;
+      width: 50%;
       float: left;
       padding-right: 0.625rem;
       padding-left: 0.625rem;
+      text-align: center;
       margin: auto;
-      background-color: #153243;
+      background-color: #747274;
       border-radius: 10px; }
       @media print, screen and (min-width: 40em) {
         body .creating_trip .contain_trip .tripform {
@@ -1401,7 +1416,8 @@ body .loginctrl {
   margin-left: auto;
   font-size: 22px;
   padding: 20px;
-  display: flex; }
+  display: flex;
+  background-color: rgba(78, 81, 102, 0.3); }
   body .loginctrl::before, body .loginctrl::after {
     display: table;
     content: ' '; }
@@ -1651,6 +1667,9 @@ body {
   background-image: url("http://www.wbwells.com/wp-content/uploads/2011/06/Desert_road_UAE.jpg");
   background-size: cover;
   font-family: 'Dosis', sans-serif; }
+  body .awesome-marker i {
+    font-size: 35px;
+    margin-top: 5px; }
   body #history {
     padding: 20px;
     border-radius: 10px;
@@ -1659,14 +1678,17 @@ body {
     text-align: right;
     font-size: 20px;
     font-family: 'Dosis', sans-serif;
-    color: #4F5165;
-    background-color: #F4F9E9; }
+    color: #F4F9E9; }
   body #history a {
     text-decoration: none;
-    color: #4F5165; }
-  body #history:hover, body #history a:hover {
-    background-color: #4F5165;
     color: #F4F9E9; }
+  body #history:hover {
+    border: 1px solid #F4F9E9; }
+  body #history a:hover {
+    border: none; }
+  body .shadow {
+    background-color: rgba(186, 164, 137, 0.5);
+    margin: auto; }
   body .map_area {
     text-align: center; }
     body .map_area h1 {

@@ -25,8 +25,14 @@ body {
   background-image: url("http://www.wbwells.com/wp-content/uploads/2011/06/Desert_road_UAE.jpg");
   // background-image: url("https://images.pexels.com/photos/30134/pexels-photo.jpg?w=1260&h=750&auto=compress&cs=tinysrgb");
   // background-image: url("/Users/mariamqasim/Desktop/tiy/final/tripr/images/josh-felise-11191.jpg");
+  // background-image: url('build/images/josh-felise-11191.jpg');
   background-size: cover;
   font-family: 'Dosis', sans-serif;
+
+  .awesome-marker i {
+    font-size: 35px;
+    margin-top: 5px;
+}
 
 
   #history {
@@ -37,18 +43,26 @@ body {
     text-align: right;
     font-size: 20px;
     font-family: 'Dosis', sans-serif;
-    color: #4F5165;
-    background-color: $primary-font-color;
+    color: $primary-font-color;
+
   }
 
   #history a {
     text-decoration: none;
-    color: #4F5165;
+    color: $primary-font-color;
   }
 
-  #history:hover,  #history a:hover {
-    background-color: #4F5165;
-    color: $primary-font-color;
+  #history:hover,   {
+    border: 1px solid $primary-font-color;
+  }
+
+  #history a:hover {
+    border: none;
+  }
+
+  .shadow {
+    background-color: rgba(186,164,137, 0.5);
+    margin: auto;
   }
 
   .map_area {
@@ -79,21 +93,17 @@ body {
 
     #notes {
       @include grid-column(10);
-      // margin: 0;
       font-size: 22px;
       padding: 5px;
       height: 200px;
-      // float: none;
     }
     .save_notes {
       @include grid-column(10);
       margin: auto;
-      // margin-right: 200px;
       border: none;
       color: #F4F9E9;
       background-color: #153243;
       border-radius: 0;
-
     }
 
 

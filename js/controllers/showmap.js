@@ -18,7 +18,8 @@ module.exports = {
 
     /////////////////////////RENDERING MAP:
         tripService.showMap($stateParams.mapId).then(function (response) {
-            L.geoJson(response.data).addTo(map);
+
+            L.geoJson(response.data.features[0]).addTo(map);
             console.log("starting coordinates");
             start = response.data.features[0].geometry.coordinates[0];
 
@@ -27,7 +28,7 @@ module.exports = {
             console.log(end);
 
             L.marker([start[1], start[0]]).addTo(map)
-                .bindPopup("<h1>starting here</h1>")
+                .bindPopup()
                 .openPopup();
 
             L.marker([end[1], end[0]]).addTo(map)
@@ -35,19 +36,30 @@ module.exports = {
                 .openPopup();
 
            map.setView([start[1], start[0]], 13);
+
+           // Add markers to map
+           // Ionicons
+           L.AwesomeMarkers.Icon.prototype.options.prefix = 'ion';
+
+           for (let i = 1; i < response.data.features.length; i++) {
+            console.log(response.data.features[i].geometry.coordinates);
+            let long = response.data.features[i].geometry.coordinates[0];
+            let lat = response.data.features[i].geometry.coordinates[1];
+
+             L.marker([lat, long], {
+                 icon: L.AwesomeMarkers.icon({
+                     icon: 'flash',
+                     iconColor: '#32965D',
+                     markerColor: 'white'
+                 })
+             }).addTo(map);
+           }
+
+
+
         });
 
-    // // adding popup// wanna add current location here:
-    //
-    // $interval(function () {
-    //   tripService.showLocation().then(function(location){
-    //     L.marker(location).addTo(map)
-    //       .bindPopup('Your current location')
-    //       .openPopup();
-    //     });
-    // }, 30000);
 
-    //this isnt working * luke
     $interval(function () {
       tripService.showLocation().then(function(location){
         console.log('circle at');
@@ -61,6 +73,8 @@ module.exports = {
         }).addTo(map);
       });
     }, 30000);
+
+
 
 
     function onMapClick(e) {

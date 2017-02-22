@@ -8,10 +8,11 @@ body {
 
 
     .header {
+      @include grid-column(12);
 
     h1 {
       @include grid-column(8);
-      font-size: 40px;
+      font-size: 50px;
       text-align: left;
       color: #F4F9E9;
     }

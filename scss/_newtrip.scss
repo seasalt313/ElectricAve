@@ -14,8 +14,11 @@ body {
     text-align: center;
 
     .contain_trip {
-      @include grid-column(6);
+      @include grid-column(12);
       margin: auto;
+      display: flex;
+      padding: 100px;
+      background-color: rgba(170,157,142, 0.3);
 
       .name_trip {
         @include grid-column(12);
@@ -29,9 +32,10 @@ body {
         }
       }
       .tripform {
-        @include grid-column(12);
+        @include grid-column(6);
+        text-align: center;
         margin: auto;
-        background-color: $primary-dark-color;
+        background-color: #747274;
         border-radius: 10px;
         input {
           @include grid-column(12);
