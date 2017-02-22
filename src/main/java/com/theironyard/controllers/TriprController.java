@@ -1,7 +1,6 @@
 package com.theironyard.controllers;
 
 
-import com.fasterxml.jackson.databind.*;
 import com.google.maps.DirectionsApi;
 import com.google.maps.DirectionsApiRequest;
 import com.google.maps.GeoApiContext;
@@ -20,10 +19,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -105,7 +100,7 @@ public class TriprController {
         List<LatLng> latlngs = directionsResult.routes[0].overviewPolyline.decodePath(); //list of latlngs
         GeoJSON geoRoute = GeoJSON.buildGeoJson(new LineString(latlngs));
 
-        String request = "https://api.data.gov/nrel/alt-fuel-stations/v1/nearby-route.json?api_key=Af8SI3elKk9EhE9KjxEkuk71wbks21M1UtfwmoiL&distance=2.0&fuel_type=ELEC";
+        String request = "https://api.data.gov/nrel/alt-fuel-stations/v1/nearby-route.json?api_key=Af8SI3elKk9EhE9KjxEkuk71wbks21M1UtfwmoiL&distance=0.7&fuel_type=ELEC";
         RestTemplate template = new RestTemplate();
 
         Map<String, String> postData = new HashMap<>();
