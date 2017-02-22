@@ -1694,10 +1694,19 @@ body {
     body .map_area h1 {
       color: white; }
     body .map_area #map {
+      width: 66.66667%;
+      float: left;
+      padding-right: 0.625rem;
+      padding-left: 0.625rem;
       width: 800px;
       height: 800px;
-      margin: 70px auto 2px auto;
       border: 15px solid white; }
+      @media print, screen and (min-width: 40em) {
+        body .map_area #map {
+          padding-right: 0.9375rem;
+          padding-left: 0.9375rem; } }
+      body .map_area #map:last-child:not(:first-child) {
+        float: right; }
     body .map_area button {
       border: 2px solid #C3E8BD;
       color: #C3E8BD;
