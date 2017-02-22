@@ -62,7 +62,7 @@ body {
 
   .shadow {
     background-color: rgba(186,164,137, 0.5);
-    margin: auto;
+    margin: 0;
   }
 
   .map_area {
@@ -72,7 +72,8 @@ body {
     }
     #map {
       @include grid-column(8);
-      width: 800px;
+      @include grid-column-offset(2);
+      // width: 800px;
       height: 800px;
       // margin: auto;
       // margin: 200px;

@@ -1688,7 +1688,7 @@ body {
     border: none; }
   body .shadow {
     background-color: rgba(186, 164, 137, 0.5);
-    margin: auto; }
+    margin: 0; }
   body .map_area {
     text-align: center; }
     body .map_area h1 {
@@ -1698,7 +1698,7 @@ body {
       float: left;
       padding-right: 0.625rem;
       padding-left: 0.625rem;
-      width: 800px;
+      margin-left: 16.66667%;
       height: 800px;
       border: 15px solid white; }
       @media print, screen and (min-width: 40em) {
