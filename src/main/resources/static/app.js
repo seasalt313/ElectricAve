@@ -179,7 +179,7 @@ module.exports = {
                 L.marker([lat, long], {
                     icon: L.AwesomeMarkers.icon({
                         icon: 'flash',
-                        iconColor: '#ff9200',
+                        iconColor: '#e7b465',
                         markerColor: 'white'
                     })
                 }).addTo(map);
@@ -195,11 +195,11 @@ module.exports = {
                 console.log('circle at');
                 console.log(location);
 
-                L.circle(L.latLng(location[0], location[1]), 200, {
+                L.circle(L.latLng(location[0], location[1]), {
                     color: 'red',
                     fillColor: '#f03',
-                    fillOpacity: 0.5,
-                    radius: 200
+                    fillOpacity: 0.3,
+                    radius: 160
                 }).addTo(map);
             });
         }, 30000);
