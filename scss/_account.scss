@@ -1,91 +1,114 @@
 body {
+    .accountInfo {
+        @include grid-row();
+        margin-top: 40px;
+        padding: 20px 20px 200px;
+        background-color: black;
+        opacity: 0.7;
+        border-radius: 10px;
+        color: $primary-font-color;
 
-  .accountInfo {
-    @include grid-row();
-    margin-top: 40px;
-    padding: 20px 20px 200px 20px;
-    background-color: black;
-    opacity: .7;
-    border-radius: 10px;
-    color: white;
+        h1 {
+            text-align: center;
+        }
 
-    a.back{
-      @include grid-column(12);
-      // float: right;
-      list-style: none;
-      text-decoration: none;
-      color: #C3E8BD;
+        a.back {
+            @include grid-column(12);
+            // float: right;
+            list-style: none;
+            text-decoration: none;
+            color: #C3E8BD;
+        }
+
+        #search_trips {
+            @include grid-column(11);
+            float: none !important;
+            background-color: transparent;
+            color: $primary-font-color;
+            font-size: 19px;
+            padding: 20px;
+            border: none;
+            margin-bottom: 46px;
+            border-bottom: 1px solid $primary-font-color;
+            font-family: 'Dosis', sans-serif;
+            @include breakpoint(850px) {
+                 @include grid-column(4);
+                margin: auto;
+            };
+        }
+
+        .details {
+            @include grid-column(12);
+            margin: auto;
+            font-size: 22px;
+            border-bottom: 1px solid $primary-font-color;
+            font-family: 'Roboto', sans-serif;
+
+            p {
+                @include grid-column(12);
+                text-align: center;
+                @include breakpoint(850px) {
+                     @include grid-column(3);
+                };
+            }
+        }
+
+        .highlight {
+            @include grid-column(12);
+            color: #C3E8BD;
+            @include breakpoint(850px) {
+                 @include grid-column(5);
+            };
+        }
+
+        .trip_history {
+            @include grid-column(12);
+            color: $primary-font-color;
+            text-align: center;
+
+            ul {
+                text-align: center;
+            }
+
+            li a {
+                // @include grid-column(7);
+                color: $primary-font-color;
+                text-decoration: none;
+            }
+
+            li {
+                @include grid-column(12);
+                // padding: 10px;
+                color: #C3E8BD;
+                text-align: center;
+                border-bottom: 1px dotted grey;
+                list-style: none;
+            }
+
+            li h2 {
+                @include grid-column(12);
+                text-align: center;
+                font-family: 'Roboto', sans-serif;
+            }
+
+            li h3 {
+                @include grid-column(12);
+                font-size: 22px;
+                @include breakpoint(850px) {
+                     @include grid-column(5);
+                };
+            }
+
+            button#delete {
+                @include grid-column(5);
+                float: none;
+                text-align: center;
+                max-width: 50%;
+                border-radius: 4px;
+                padding: 10px;
+                color: lightsalmon;
+                font-family: 'Roboto', sans-serif;
+            }
+        }
     }
-
-    #search_trips {
-      background-color: transparent;
-      padding: 20px;
-      border: none;
-      border-bottom: 1px solid white;
-      font-family: 'Roboto', sans-serif;
-
-    }
-
-
-    .details {
-      @include grid-column(12);
-      margin: auto;
-      font-size: 22px;
-      border-bottom: 1px solid white;
-      font-family: 'Roboto', sans-serif;
-
-      p {
-        @include grid-column(3);
-      }
-    }
-
-    .highlight {
-      color: #C3E8BD;
-    }
-
-    .trip_history {
-      @include grid-column(12);
-      color: white;
-      text-align: center;
-
-      ul {
-        text-align: center;
-      }
-      li a {
-        // @include grid-column(7);
-        color: white;
-        text-decoration: none;
-      }
-      li {
-        @include grid-column(12);
-        // padding: 10px;
-        color: #C3E8BD;
-        text-align: center;
-        border-bottom: 1px dotted grey;
-        list-style: none;
-
-      }
-      li h2 {
-        @include grid-column(12);
-        text-align: center;
-        font-family: 'Roboto', sans-serif;
-
-      }
-
-      li h3 {
-        @include grid-column(6);
-      }
-      button#delete {
-        // @include grid-column(3);
-        max-width: 50%;
-        border-radius: 4px;
-        padding: 10px;
-        color: lightsalmon;
-        font-family: 'Roboto', sans-serif;
-
-      }
-    }
-  }
-
-
 }

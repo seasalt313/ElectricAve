@@ -4,27 +4,27 @@ const app = angular.module('tripApp', ['ui.router']);
 
 // CONTROLLERS
 const controllers = [
-  require('./controllers/login'),
-  require('./controllers/createtrip'),
-  require('./controllers/showtrip'),
-  require('./controllers/showmap')
+    require('./controllers/login'),
+    require('./controllers/createtrip'),
+    require('./controllers/showtrip'),
+    require('./controllers/showmap')
 ];
 
-  for (let i = 0; i < controllers.length; i++) {
+for (let i = 0; i < controllers.length; i++) {
     console.log(controllers[i]);
     app.controller(controllers[i].name, controllers[i].func);
-  };
+};
 
 //SERVICES
 const services = [
-  require('./services/account'),
-  require('./services/trip'),
+    require('./services/account'),
+    require('./services/trip'),
 ];
 
-  for (let i = 0; i < services.length; i++) {
+for (let i = 0; i < services.length; i++) {
     console.log(services[i]);
     app.factory(services[i].name, services[i].func)
-  };
+};
 
 
 //ROUTES
@@ -38,17 +38,17 @@ app.config($stateProvider => {
 
 // //COMPONENTS
 const components = [
-  require('./components/accountlogin'),
-  require('./components/createtrip'),
-  require('./components/showtrips'),
-  require('./components/newuser'),
-  require('./components/map'),
+    require('./components/accountlogin'),
+    require('./components/createtrip'),
+    require('./components/showtrips'),
+    require('./components/newuser'),
+    require('./components/map'),
 ];
 
-  for (let i = 0; i < components.length; i++) {
+for (let i = 0; i < components.length; i++) {
     console.log(components[i]);
     app.component(components[i].name, components[i].config);
-  };
+};
 
 },{"./components/accountlogin":2,"./components/createtrip":3,"./components/map":4,"./components/newuser":5,"./components/showtrips":6,"./controllers/createtrip":7,"./controllers/login":8,"./controllers/showmap":9,"./controllers/showtrip":10,"./routes":11,"./services/account":12,"./services/trip":13}],2:[function(require,module,exports){
 module.exports = {
@@ -94,60 +94,60 @@ module.exports = {
 
 },{}],7:[function(require,module,exports){
 module.exports = {
-  name: "createTripController",
-  func: function($scope, tripService, accountService, $state){
+    name: "createTripController",
+    func: function($scope, tripService, accountService, $state) {
 
-    console.log("create-trip controller working");
+        console.log("create-trip controller working");
 
-    $scope.postTrip = function(tripName, startAddress, endAddress){
-      tripService.postTrip(tripName, startAddress, endAddress)
-        .then(function (id) {
-          console.log("redirecting");
-            $state.go('map', {
-              mapId: id,
-            });
-        });
-      },
+        $scope.postTrip = function(tripName, startAddress, endAddress) {
+                tripService.postTrip(tripName, startAddress, endAddress)
+                    .then(function(id) {
+                        console.log("redirecting");
+                        $state.go('map', {
+                            mapId: id,
+                        });
+                    });
+            },
 
-    $scope.viewAccount = accountService.getAccount();
-  }
+            $scope.viewAccount = accountService.getAccount();
+    }
 }
 
 },{}],8:[function(require,module,exports){
 module.exports = {
-  name: "loginController",
-  func: function($scope, accountService){
-    console.log("account controller working");
-    $scope.makeAccount = function(name, email, pass, car){
-      accountService.makeAccount(name, email, pass, car);
+    name: "loginController",
+    func: function($scope, accountService) {
+        console.log("account controller working");
+        $scope.makeAccount = function(name, email, pass, car) {
+            accountService.makeAccount(name, email, pass, car);
+        }
+        $scope.login = function(email, pass) {
+            accountService.loginAccount(email, pass);
+        }
     }
-    $scope.login = function(email, pass){
-      accountService.loginAccount(email, pass);
-    }
-  }
 }
 
 },{}],9:[function(require,module,exports){
 module.exports = {
-  name: "showmapcontroller",
-  func: function($scope,tripService, accountService, $state, $stateParams, $interval){
+    name: "showmapcontroller",
+    func: function($scope, tripService, accountService, $state, $stateParams, $interval) {
 
-    let start = null;
+        let start = null;
 
-    console.log("show map controller working");
+        console.log("show map controller working");
 
-    //USING LEAFLET//
-    var map = L.map('map').setView([35.2271, -80.8431], 13);
-    //
-    L.tileLayer('https://api.mapbox.com/styles/v1/seasalt/cizab1okt00652rnqabud8ig8/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2Vhc2FsdCIsImEiOiJjaXkzanV0c2UwMDEzMzNsamV1bmg0ZWVqIn0.mcvszUMDaLO4C8Ea9ytkOg', {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox.mapbox-traffic-v1',
-    accessToken: 'pk.eyJ1Ijoic2Vhc2FsdCIsImEiOiJjaXkzanV0c2UwMDEzMzNsamV1bmg0ZWVqIn0.mcvszUMDaLO4C8Ea9ytkOg'
-    }).addTo(map);
+        //USING LEAFLET//
+        var map = L.map('map').setView([35.2271, -80.8431], 13);
+        //
+        L.tileLayer('https://api.mapbox.com/styles/v1/seasalt/cizab1okt00652rnqabud8ig8/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2Vhc2FsdCIsImEiOiJjaXkzanV0c2UwMDEzMzNsamV1bmg0ZWVqIn0.mcvszUMDaLO4C8Ea9ytkOg', {
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox.mapbox-traffic-v1',
+            accessToken: 'pk.eyJ1Ijoic2Vhc2FsdCIsImEiOiJjaXkzanV0c2UwMDEzMzNsamV1bmg0ZWVqIn0.mcvszUMDaLO4C8Ea9ytkOg'
+        }).addTo(map);
 
-    /////////////////////////RENDERING MAP:
-        tripService.showMap($stateParams.mapId).then(function (response) {
+        /////////////////////////RENDERING MAP:
+        tripService.showMap($stateParams.mapId).then(function(response) {
 
             L.geoJson(response.data.features[0]).addTo(map);
             console.log("starting coordinates");
@@ -165,73 +165,74 @@ module.exports = {
                 .bindPopup()
                 .openPopup();
 
-           map.setView([start[1], start[0]], 13);
+            map.setView([start[1], start[0]], 13);
 
-           // Add markers to map
-           // Ionicons
-           L.AwesomeMarkers.Icon.prototype.options.prefix = 'ion';
+            // Add markers to map
+            // Ionicons
+            L.AwesomeMarkers.Icon.prototype.options.prefix = 'ion';
 
-           for (let i = 1; i < response.data.features.length; i++) {
-            console.log(response.data.features[i].geometry.coordinates);
-            let long = response.data.features[i].geometry.coordinates[0];
-            let lat = response.data.features[i].geometry.coordinates[1];
+            for (let i = 1; i < response.data.features.length; i++) {
+                console.log(response.data.features[i].geometry.coordinates);
+                let long = response.data.features[i].geometry.coordinates[0];
+                let lat = response.data.features[i].geometry.coordinates[1];
 
-             L.marker([lat, long], {
-                 icon: L.AwesomeMarkers.icon({
-                     icon: 'flash',
-                     iconColor: '#32965D',
-                     markerColor: 'white'
-                 })
-             }).addTo(map);
-           }
+                L.marker([lat, long], {
+                    icon: L.AwesomeMarkers.icon({
+                        icon: 'flash',
+                        iconColor: '#32965D',
+                        markerColor: 'white'
+                    })
+                }).addTo(map);
+            }
 
 
 
         });
 
 
-    $interval(function () {
-      tripService.showLocation().then(function(location){
-        console.log('circle at');
-        console.log(location);
+        $interval(function() {
+            tripService.showLocation().then(function(location) {
+                console.log('circle at');
+                console.log(location);
 
-            L.circle(L.latLng(location[0], location[1]), 200, {
-            color: 'red',
-            fillColor: '#f03',
-            fillOpacity: 0.5,
-            radius: 200
-        }).addTo(map);
-      });
-    }, 30000);
-
-
+                L.circle(L.latLng(location[0], location[1]), 200, {
+                    color: 'red',
+                    fillColor: '#f03',
+                    fillOpacity: 0.5,
+                    radius: 200
+                }).addTo(map);
+            });
+        }, 30000);
 
 
-    function onMapClick(e) {
-    prompt("You clicked the map at " + e.latlng +". Would you like to leave a note?");
+
+
+        function onMapClick(e) {
+            prompt("You clicked the map at " + e.latlng + ". Would you like to leave a note?");
+        }
+
+        map.on('click', onMapClick);
+
+        $scope.viewAccount = accountService.getAccount();
+        $scope.postNote = accountService.postNote();
+
     }
-
-    map.on('click', onMapClick);
-
-    $scope.viewAccount = accountService.getAccount();
-    $scope.postNote = accountService.postNote();
-
-  }
 
 }
 
 },{}],10:[function(require,module,exports){
 module.exports = {
-  name: "showTripController",
-  func: function($scope, tripService, accountService, $state, $stateParams){
+    name: "showTripController",
+    func: function($scope, tripService, accountService, $state, $stateParams) {
 
-  console.log("show-trip controller working");
+        console.log("show-trip controller working");
 
-      $scope.trips = tripService.getTrips($stateParams.userId);
+        $scope.trips = tripService.getTrips($stateParams.userId);
 
-      $scope.getAccount = accountService.getAccount();
+        $scope.getAccount = accountService.getAccount();
 
-  }
+
+    }
 }
 
 },{}],11:[function(require,module,exports){
@@ -265,138 +266,138 @@ module.exports = [
 
 },{}],12:[function(require,module,exports){
 module.exports = {
-  name: "accountService",
-  func: function($http){
-    let accountInfo = {};
-    let userId= "";
+    name: "accountService",
+    func: function($http) {
+        let accountInfo = {};
+        let userId = "";
 
-    return {
-      makeAccount: function(name, email, pass, car){
-        console.log("new user");
-        //1) post this info here.
-        $http.post('https://electric-ave.herokuapp.com/new-user', {
-          "name": "name",
-          "email": "email",
-          "pass": "pass",
-          "car": "car"
-        }).then(function(response){
-          console.log("response below");
-          console.log(response.data);
-          accountInfo = response.data;
-          // userId = response.data.id;
-        })
-        console.log("account creation successful");
-        return accountInfo;
-        //2) if response === true, new-trip view should appear to user
-      },
-      loginAccount: function(email, pass){
-        console.log("logging in");
-        //1) post existing user below
-        $http.post('https://electric-ave.com/login', {
-          "emailAddress": "emailAddress",
-          "password": "password"
-        }).then(function(response){
-          console.log("response below");
-          console.log(response.data);
-        })
-        console.log("existing user has logged in");
-        return accountInfo867; ///???
-        //2) if response === true, new-trip view should appear to user.
-      },
-      getAccount: function(){
-        //1) GET request here
-        let account = $http.get('/account').then(function(response){
-          const incoming = response.data;
-          console.log("should be receiving account info below: ");
-          console.log(incoming);
-          angular.copy(response.data, accountInfo)
-          return response.data
-        })
-        //2) return trip names, and send to controller to display on page.
-        return accountInfo;
-      },
-      postNote: function(){
-        console.log("posting note");
-        //1) post existing user below
-        $http.post('https://electric-ave.herokuapp.com/', {//figure out what goes here
-          "note": "note",
-        }).then(function(response){
-          console.log("response below");
-          console.log(response.data);
-        })
-        return accountInfo; ///???
-        //2) if response === true, new-trip view should appear to user.
-      },
+        return {
+            makeAccount: function(name, email, pass, car) {
+                console.log("new user");
+                //1) post this info here.
+                $http.post('https://electric-ave.herokuapp.com/new-user', {
+                    "name": "name",
+                    "email": "email",
+                    "pass": "pass",
+                    "car": "car"
+                }).then(function(response) {
+                    console.log("response below");
+                    console.log(response.data);
+                    accountInfo = response.data;
+                    // userId = response.data.id;
+                })
+                console.log("account creation successful");
+                return accountInfo;
+                //2) if response === true, new-trip view should appear to user
+            },
+            loginAccount: function(email, pass) {
+                console.log("logging in");
+                //1) post existing user below
+                $http.post('https://electric-ave.com/login', {
+                    "emailAddress": "emailAddress",
+                    "password": "password"
+                }).then(function(response) {
+                    console.log("response below");
+                    console.log(response.data);
+                })
+                console.log("existing user has logged in");
+                return accountInfo867; ///???
+                //2) if response === true, new-trip view should appear to user.
+            },
+            getAccount: function() {
+                //1) GET request here
+                let account = $http.get('/account').then(function(response) {
+                    const incoming = response.data;
+                    console.log("should be receiving account info below: ");
+                    console.log(incoming);
+                    angular.copy(response.data, accountInfo)
+                    return response.data
+                })
+                //2) return trip names, and send to controller to display on page.
+                return accountInfo;
+            },
+            postNote: function() {
+                console.log("posting note");
+                //1) post existing user below
+                $http.post('https://electric-ave.herokuapp.com/', { //figure out what goes here
+                    "note": "note",
+                }).then(function(response) {
+                    console.log("response below");
+                    console.log(response.data);
+                })
+                return accountInfo; ///???
+                //2) if response === true, new-trip view should appear to user.
+            },
 
-    }//closing return object
+        } //closing return object
 
-  }//closing func
-}//closing module export
+    } //closing func
+} //closing module export
 
 },{}],13:[function(require,module,exports){
 module.exports = {
-  name: "tripService",
-  func: function($http){
+    name: "tripService",
+    func: function($http) {
 
-    let trip_map = "";
-    let trip_id = "";
-    let userId = "";
-    let tripList = [];
-
-
-    return {
-      postTrip: function(tripName, startAddress, endAddress){
-        console.log("posting trip");
-        //1) post trip here
-        return $http.post("/new-trip", {
-          "tripName": tripName,
-          "startAddress": startAddress,
-          "endAddress": endAddress,
-        }).then(function(response){
-          console.log("should be receiving route");
-          console.log(response.data);
-          trip_id = response.data.id;
-          trip_map = response.data;
-
-          return trip_id;
-        });
-      },
-      getTrips: function(tripId){
-        //1) GET request here
-        let tripHistory = $http.get('/trip-list' ).then(function(response){
-          const incoming = response.data;
-          console.log("should be receiving a list of trips below: ");
-          console.log(incoming);
-          angular.copy(response.data, tripList)
-        })
-        //2) return trip names, and send to controller to display on page.
-        console.log(tripList);
-        return tripList;
-      },
-      // get data for a particular trip
-      showMap: function(tripId){
-        console.log("logging inside of show map service, trip id is : " + tripId);
-        return $http.get('map/' + tripId);
-        console.log("response data: " + response.data);
-        //
-      },
-
-      showLocation: function(){
-        return new Promise(function (resolve, reject) { // how promises work
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var lat = position.coords.latitude;
-            var long = position.coords.longitude;
-            console.log("lat: " + lat);
-            console.log("long: " + long);
-            resolve([lat, long]);
-          });
-        });
-      },
-
-    }//closing return
+        let trip_map = "";
+        let trip_id = "";
+        let userId = "";
+        let tripList = [];
 
 
-  }//closing func
-}//closing module export
+        return {
+            postTrip: function(tripName, startAddress, endAddress) {
+                console.log("posting trip");
+                //1) post trip here
+                return $http.post("/new-trip", {
+                    "tripName": tripName,
+                    "startAddress": startAddress,
+                    "endAddress": endAddress,
+                }).then(function(response) {
+                    console.log("should be receiving route");
+                    console.log(response.data);
+                    trip_id = response.data.id;
+                    trip_map = response.data;
+
+                    return trip_id;
+                });
+            },
+            getTrips: function(tripId) {
+                //1) GET request here
+                let tripHistory = $http.get('/trip-list').then(function(response) {
+                    const incoming = response.data;
+                    console.log("should be receiving a list of trips below: ");
+                    console.log(incoming);
+                    angular.copy(response.data, tripList)
+                })
+                //2) return trip names, and send to controller to display on page.
+                console.log(tripList);
+                return tripList;
+            },
+            // get data for a particular trip
+            showMap: function(tripId) {
+                console.log("logging inside of show map service, trip id is : " + tripId);
+                return $http.get('map/' + tripId);
+                console.log("response data: " + response.data);
+                //
+            },
+
+            showLocation: function() {
+                return new Promise(function(resolve, reject) { // how promises work
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        var lat = position.coords.latitude;
+                        var long = position.coords.longitude;
+                        console.log("lat: " + lat);
+                        console.log("long: " + long);
+                        resolve([lat, long]);
+                    });
+                });
+            },
+
+        } //closing return
+
+
+    } //closing func
+} //closing module export
 
 },{}]},{},[1]);

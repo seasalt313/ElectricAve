@@ -1,21 +1,23 @@
 <section class="loginctrl" ng-controller="loginController">
-  <div class="login_a">
-  <div class="login choice">
-        <ul class="navul">
-          <li class="navli">Already have an account? <a ui-sref="log-in">Log In</a></li>
-          <br>
-          <br>
-        </ul>
-  </div>
- </div>
+    <div class="login_a">
+        <div class="login">
+            <!-- <ul class="navul"> -->
+            <p class="navli">already have an account? <a ui-sref="log-in">log In</a></p>
+            <br>
+            <br>
+            <!-- </ul> -->
+        </div>
+    </div>
 
- <form class="loginform" action="/new-user" method="post">
-   <input type="text" name="userName" placeholder="enter your name">
-   <input type="email" name="emailAddress" placeholder="email">
-   <input type="password" name="password" placeholder="password">
-   <input type="text" name="car" placeholder="Tesla or Nissan Leaf?">
-   <button type="submit">Create Account</button>
- </form>
+    <!-- <div class="formdiv"> -->
+    <form class="loginform" action="/new-user" method="post">
+        <input type="text" name="userName" placeholder="enter your name">
+        <input type="email" name="emailAddress" placeholder="email">
+        <input type="password" name="password" placeholder="password">
+        <input type="text" name="car" placeholder="Tesla or Nissan Leaf?">
+        <button type="submit">create account</button>
+    </form>
+    <!-- </div> -->
 
 
 </section>

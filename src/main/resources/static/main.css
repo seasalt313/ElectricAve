@@ -1257,7 +1257,8 @@ body .header_section {
   margin-right: auto;
   margin-left: auto;
   background-color: #4F5165;
-  border-radius: 10px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
   font-family: 'Dosis', sans-serif; }
   body .header_section::before, body .header_section::after {
     display: table;
@@ -1276,12 +1277,12 @@ body .header_section {
     body .header_section .header:last-child:not(:first-child) {
       float: right; }
     body .header_section .header h1 {
-      width: 66.66667%;
+      width: 100%;
       float: left;
       padding-right: 0.625rem;
       padding-left: 0.625rem;
+      text-align: center;
       font-size: 50px;
-      text-align: left;
       color: #F4F9E9; }
       @media print, screen and (min-width: 40em) {
         body .header_section .header h1 {
@@ -1289,25 +1290,68 @@ body .header_section {
           padding-left: 0.9375rem; } }
       body .header_section .header h1:last-child:not(:first-child) {
         float: right; }
+      @media screen and (min-width: 53.125em) {
+        body .header_section .header h1 {
+          width: 66.66667%;
+          float: left;
+          padding-right: 0.625rem;
+          padding-left: 0.625rem;
+          text-align: left; } }
+  @media screen and (min-width: 53.125em) and (min-width: 40em) {
+    body .header_section .header h1 {
+      padding-right: 0.9375rem;
+      padding-left: 0.9375rem; } }
+      @media screen and (min-width: 53.125em) {
+          body .header_section .header h1:last-child:not(:first-child) {
+            float: right; } }
     body .header_section .header .logout {
-      width: 16.66667%;
+      width: 50%;
       float: left;
       padding-right: 0.625rem;
       padding-left: 0.625rem;
-      font-size: 18px;
-      text-align: center; }
+      text-align: center;
+      font-size: 18px; }
       @media print, screen and (min-width: 40em) {
         body .header_section .header .logout {
           padding-right: 0.9375rem;
           padding-left: 0.9375rem; } }
       body .header_section .header .logout:last-child:not(:first-child) {
         float: right; }
+      @media screen and (min-width: 53.125em) {
+        body .header_section .header .logout {
+          width: 16.66667%;
+          float: left;
+          padding-right: 0.625rem;
+          padding-left: 0.625rem;
+          text-align: center; } }
+  @media screen and (min-width: 53.125em) and (min-width: 40em) {
+    body .header_section .header .logout {
+      padding-right: 0.9375rem;
+      padding-left: 0.9375rem; } }
+      @media screen and (min-width: 53.125em) {
+          body .header_section .header .logout:last-child:not(:first-child) {
+            float: right; } }
+    body .header_section .header #history {
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px;
+      border: 2px solid #4F5165;
+      text-align: right;
+      font-size: 20px;
+      font-family: 'Dosis', sans-serif;
+      color: #F4F9E9; }
+    body .header_section .header #history a {
+      text-decoration: none;
+      color: #F4F9E9; }
+    body .header_section .header #history:hover {
+      border: 1px solid #F4F9E9; }
+    body .header_section .header #history a:hover {
+      border: none; }
 
 body .creating_trip {
   max-width: 75rem;
   margin-right: auto;
   margin-left: auto;
-  margin-top: 90px;
   display: flex;
   color: #F4F9E9;
   font-family: 'Dosis', sans-serif;
@@ -1325,7 +1369,7 @@ body .creating_trip {
     margin: auto;
     display: flex;
     padding: 100px;
-    background-color: rgba(170, 157, 142, 0.3); }
+    background-color: rgba(78, 81, 102, 0.3); }
     @media print, screen and (min-width: 40em) {
       body .creating_trip .contain_trip {
         padding-right: 0.9375rem;
@@ -1360,7 +1404,7 @@ body .creating_trip {
         body .creating_trip .contain_trip .name_trip input:last-child:not(:first-child) {
           float: right; }
     body .creating_trip .contain_trip .tripform {
-      width: 50%;
+      width: 100%;
       float: left;
       padding-right: 0.625rem;
       padding-left: 0.625rem;
@@ -1374,6 +1418,19 @@ body .creating_trip {
           padding-left: 0.9375rem; } }
       body .creating_trip .contain_trip .tripform:last-child:not(:first-child) {
         float: right; }
+      @media screen and (min-width: 53.125em) {
+        body .creating_trip .contain_trip .tripform {
+          width: 50%;
+          float: left;
+          padding-right: 0.625rem;
+          padding-left: 0.625rem; } }
+  @media screen and (min-width: 53.125em) and (min-width: 40em) {
+    body .creating_trip .contain_trip .tripform {
+      padding-right: 0.9375rem;
+      padding-left: 0.9375rem; } }
+      @media screen and (min-width: 53.125em) {
+          body .creating_trip .contain_trip .tripform:last-child:not(:first-child) {
+            float: right; } }
       body .creating_trip .contain_trip .tripform input {
         width: 100%;
         float: left;
@@ -1424,81 +1481,81 @@ body .loginctrl {
   body .loginctrl::after {
     clear: both; }
   body .loginctrl .login_a {
-    max-width: 75rem;
-    margin-right: auto;
-    margin-left: auto;
-    font-size: 22px;
-    padding: 20px;
-    display: flex; }
-    body .loginctrl .login_a::before, body .loginctrl .login_a::after {
-      display: table;
-      content: ' '; }
-    body .loginctrl .login_a::after {
-      clear: both; }
+    width: 100%;
+    float: left;
+    padding-right: 0.625rem;
+    padding-left: 0.625rem; }
+    @media print, screen and (min-width: 40em) {
+      body .loginctrl .login_a {
+        padding-right: 0.9375rem;
+        padding-left: 0.9375rem; } }
+    body .loginctrl .login_a:last-child:not(:first-child) {
+      float: right; }
+    @media screen and (min-width: 53.125em) {
+      body .loginctrl .login_a {
+        width: 50%;
+        float: left;
+        padding-right: 0.625rem;
+        padding-left: 0.625rem; } }
+  @media screen and (min-width: 53.125em) and (min-width: 40em) {
+    body .loginctrl .login_a {
+      padding-right: 0.9375rem;
+      padding-left: 0.9375rem; } }
+    @media screen and (min-width: 53.125em) {
+        body .loginctrl .login_a:last-child:not(:first-child) {
+          float: right; } }
     body .loginctrl .login_a .login {
-      width: 25%;
-      float: left;
-      padding-right: 0.625rem;
-      padding-left: 0.625rem;
-      font-size: 22px;
-      border: 2px solid #F4F9E9;
+      border: none;
       padding: 20px;
       text-align: center;
       display: block;
       border-radius: 10px; }
-      @media print, screen and (min-width: 40em) {
-        body .loginctrl .login_a .login {
-          padding-right: 0.9375rem;
-          padding-left: 0.9375rem; } }
-      body .loginctrl .login_a .login:last-child:not(:first-child) {
-        float: right; }
-    body .loginctrl .login_a .choice {
-      border: none;
-      width: 100%;
-      float: left;
-      padding-right: 0.625rem;
-      padding-left: 0.625rem; }
-      @media print, screen and (min-width: 40em) {
-        body .loginctrl .login_a .choice {
-          padding-right: 0.9375rem;
-          padding-left: 0.9375rem; } }
-      body .loginctrl .login_a .choice:last-child:not(:first-child) {
-        float: right; }
-      body .loginctrl .login_a .choice ul {
+      body .loginctrl .login_a .login .navli {
         width: 100%;
         float: left;
         padding-right: 0.625rem;
-        padding-left: 0.625rem; }
+        padding-left: 0.625rem;
+        list-style: none;
+        font-size: 27px; }
         @media print, screen and (min-width: 40em) {
-          body .loginctrl .login_a .choice ul {
+          body .loginctrl .login_a .login .navli {
             padding-right: 0.9375rem;
             padding-left: 0.9375rem; } }
-        body .loginctrl .login_a .choice ul:last-child:not(:first-child) {
+        body .loginctrl .login_a .login .navli:last-child:not(:first-child) {
           float: right; }
-        body .loginctrl .login_a .choice ul li {
-          list-style: none;
-          font-size: 27px; }
-        body .loginctrl .login_a .choice ul a {
-          list-style: none;
-          text-decoration: none;
-          color: #C3E8BD;
-          padding: 10px;
-          font-family: 'Poppins', sans-serif;
-          font-weight: bold;
-          font-size: 27px; }
+      body .loginctrl .login_a .login a {
+        list-style: none;
+        text-decoration: none;
+        color: #F4F9E9;
+        padding: 10px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 27px; }
 
-body .loginform {
-  width: 50%;
+body form.loginform {
+  width: 100%;
   float: left;
   padding-right: 0.625rem;
   padding-left: 0.625rem; }
   @media print, screen and (min-width: 40em) {
-    body .loginform {
+    body form.loginform {
       padding-right: 0.9375rem;
       padding-left: 0.9375rem; } }
-  body .loginform:last-child:not(:first-child) {
+  body form.loginform:last-child:not(:first-child) {
     float: right; }
-  body .loginform input {
+  @media screen and (min-width: 53.125em) {
+    body form.loginform {
+      width: 50%;
+      float: left;
+      padding-right: 0.625rem;
+      padding-left: 0.625rem; } }
+  @media screen and (min-width: 53.125em) and (min-width: 40em) {
+    body form.loginform {
+      padding-right: 0.9375rem;
+      padding-left: 0.9375rem; } }
+  @media screen and (min-width: 53.125em) {
+      body form.loginform:last-child:not(:first-child) {
+        float: right; } }
+  body form.loginform input {
     width: 100%;
     float: left;
     padding-right: 0.625rem;
@@ -1506,15 +1563,15 @@ body .loginform {
     padding: 20px;
     margin: 10px auto auto;
     text-align: center;
-    font-family: 'Poppins', sans-serif;
-    background-color: #EEF0EB; }
+    font-family: 'Dosis', sans-serif;
+    background-color: #F4F9E9; }
     @media print, screen and (min-width: 40em) {
-      body .loginform input {
+      body form.loginform input {
         padding-right: 0.9375rem;
         padding-left: 0.9375rem; } }
-    body .loginform input:last-child:not(:first-child) {
+    body form.loginform input:last-child:not(:first-child) {
       float: right; }
-  body .loginform button {
+  body form.loginform button {
     width: 100%;
     float: left;
     padding-right: 0.625rem;
@@ -1522,15 +1579,15 @@ body .loginform {
     padding: 20px;
     margin: 10px auto;
     border: 2px solid #4F5165;
-    color: #C3E8BD;
+    color: #F4F9E9;
     text-align: center;
     background-color: #153243;
-    font-family: 'Poppins', sans-serif; }
+    font-family: 'Dosis', sans-serif; }
     @media print, screen and (min-width: 40em) {
-      body .loginform button {
+      body form.loginform button {
         padding-right: 0.9375rem;
         padding-left: 0.9375rem; } }
-    body .loginform button:last-child:not(:first-child) {
+    body form.loginform button:last-child:not(:first-child) {
       float: right; }
 
 body .accountInfo {
@@ -1538,16 +1595,18 @@ body .accountInfo {
   margin-right: auto;
   margin-left: auto;
   margin-top: 40px;
-  padding: 20px 20px 200px 20px;
+  padding: 20px 20px 200px;
   background-color: black;
-  opacity: .7;
+  opacity: 0.7;
   border-radius: 10px;
-  color: white; }
+  color: #F4F9E9; }
   body .accountInfo::before, body .accountInfo::after {
     display: table;
     content: ' '; }
   body .accountInfo::after {
     clear: both; }
+  body .accountInfo h1 {
+    text-align: center; }
   body .accountInfo a.back {
     width: 100%;
     float: left;
@@ -1563,11 +1622,39 @@ body .accountInfo {
     body .accountInfo a.back:last-child:not(:first-child) {
       float: right; }
   body .accountInfo #search_trips {
+    width: 91.66667%;
+    float: left;
+    padding-right: 0.625rem;
+    padding-left: 0.625rem;
+    float: none !important;
     background-color: transparent;
+    color: #F4F9E9;
+    font-size: 19px;
     padding: 20px;
     border: none;
-    border-bottom: 1px solid white;
-    font-family: 'Roboto', sans-serif; }
+    margin-bottom: 46px;
+    border-bottom: 1px solid #F4F9E9;
+    font-family: 'Dosis', sans-serif; }
+    @media print, screen and (min-width: 40em) {
+      body .accountInfo #search_trips {
+        padding-right: 0.9375rem;
+        padding-left: 0.9375rem; } }
+    body .accountInfo #search_trips:last-child:not(:first-child) {
+      float: right; }
+    @media screen and (min-width: 53.125em) {
+      body .accountInfo #search_trips {
+        width: 33.33333%;
+        float: left;
+        padding-right: 0.625rem;
+        padding-left: 0.625rem;
+        margin: auto; } }
+  @media screen and (min-width: 53.125em) and (min-width: 40em) {
+    body .accountInfo #search_trips {
+      padding-right: 0.9375rem;
+      padding-left: 0.9375rem; } }
+    @media screen and (min-width: 53.125em) {
+        body .accountInfo #search_trips:last-child:not(:first-child) {
+          float: right; } }
   body .accountInfo .details {
     width: 100%;
     float: left;
@@ -1575,7 +1662,7 @@ body .accountInfo {
     padding-left: 0.625rem;
     margin: auto;
     font-size: 22px;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid #F4F9E9;
     font-family: 'Roboto', sans-serif; }
     @media print, screen and (min-width: 40em) {
       body .accountInfo .details {
@@ -1584,24 +1671,61 @@ body .accountInfo {
     body .accountInfo .details:last-child:not(:first-child) {
       float: right; }
     body .accountInfo .details p {
-      width: 25%;
+      width: 100%;
       float: left;
       padding-right: 0.625rem;
-      padding-left: 0.625rem; }
+      padding-left: 0.625rem;
+      text-align: center; }
       @media print, screen and (min-width: 40em) {
         body .accountInfo .details p {
           padding-right: 0.9375rem;
           padding-left: 0.9375rem; } }
       body .accountInfo .details p:last-child:not(:first-child) {
         float: right; }
+      @media screen and (min-width: 53.125em) {
+        body .accountInfo .details p {
+          width: 25%;
+          float: left;
+          padding-right: 0.625rem;
+          padding-left: 0.625rem; } }
+  @media screen and (min-width: 53.125em) and (min-width: 40em) {
+    body .accountInfo .details p {
+      padding-right: 0.9375rem;
+      padding-left: 0.9375rem; } }
+      @media screen and (min-width: 53.125em) {
+          body .accountInfo .details p:last-child:not(:first-child) {
+            float: right; } }
   body .accountInfo .highlight {
+    width: 100%;
+    float: left;
+    padding-right: 0.625rem;
+    padding-left: 0.625rem;
     color: #C3E8BD; }
+    @media print, screen and (min-width: 40em) {
+      body .accountInfo .highlight {
+        padding-right: 0.9375rem;
+        padding-left: 0.9375rem; } }
+    body .accountInfo .highlight:last-child:not(:first-child) {
+      float: right; }
+    @media screen and (min-width: 53.125em) {
+      body .accountInfo .highlight {
+        width: 41.66667%;
+        float: left;
+        padding-right: 0.625rem;
+        padding-left: 0.625rem; } }
+  @media screen and (min-width: 53.125em) and (min-width: 40em) {
+    body .accountInfo .highlight {
+      padding-right: 0.9375rem;
+      padding-left: 0.9375rem; } }
+    @media screen and (min-width: 53.125em) {
+        body .accountInfo .highlight:last-child:not(:first-child) {
+          float: right; } }
   body .accountInfo .trip_history {
     width: 100%;
     float: left;
     padding-right: 0.625rem;
     padding-left: 0.625rem;
-    color: white;
+    color: #F4F9E9;
     text-align: center; }
     @media print, screen and (min-width: 40em) {
       body .accountInfo .trip_history {
@@ -1612,7 +1736,7 @@ body .accountInfo {
     body .accountInfo .trip_history ul {
       text-align: center; }
     body .accountInfo .trip_history li a {
-      color: white;
+      color: #F4F9E9;
       text-decoration: none; }
     body .accountInfo .trip_history li {
       width: 100%;
@@ -1643,22 +1767,48 @@ body .accountInfo {
       body .accountInfo .trip_history li h2:last-child:not(:first-child) {
         float: right; }
     body .accountInfo .trip_history li h3 {
-      width: 50%;
+      width: 100%;
       float: left;
       padding-right: 0.625rem;
-      padding-left: 0.625rem; }
+      padding-left: 0.625rem;
+      font-size: 22px; }
       @media print, screen and (min-width: 40em) {
         body .accountInfo .trip_history li h3 {
           padding-right: 0.9375rem;
           padding-left: 0.9375rem; } }
       body .accountInfo .trip_history li h3:last-child:not(:first-child) {
         float: right; }
+      @media screen and (min-width: 53.125em) {
+        body .accountInfo .trip_history li h3 {
+          width: 41.66667%;
+          float: left;
+          padding-right: 0.625rem;
+          padding-left: 0.625rem; } }
+  @media screen and (min-width: 53.125em) and (min-width: 40em) {
+    body .accountInfo .trip_history li h3 {
+      padding-right: 0.9375rem;
+      padding-left: 0.9375rem; } }
+      @media screen and (min-width: 53.125em) {
+          body .accountInfo .trip_history li h3:last-child:not(:first-child) {
+            float: right; } }
     body .accountInfo .trip_history button#delete {
+      width: 41.66667%;
+      float: left;
+      padding-right: 0.625rem;
+      padding-left: 0.625rem;
+      float: none;
+      text-align: center;
       max-width: 50%;
       border-radius: 4px;
       padding: 10px;
       color: lightsalmon;
       font-family: 'Roboto', sans-serif; }
+      @media print, screen and (min-width: 40em) {
+        body .accountInfo .trip_history button#delete {
+          padding-right: 0.9375rem;
+          padding-left: 0.9375rem; } }
+      body .accountInfo .trip_history button#delete:last-child:not(:first-child) {
+        float: right; }
 
 body {
   background-color: #C3E8BD;
@@ -1670,22 +1820,6 @@ body {
   body .awesome-marker i {
     font-size: 35px;
     margin-top: 5px; }
-  body #history {
-    padding: 20px;
-    border-radius: 10px;
-    margin: 20px;
-    border: 2px solid #4F5165;
-    text-align: right;
-    font-size: 20px;
-    font-family: 'Dosis', sans-serif;
-    color: #F4F9E9; }
-  body #history a {
-    text-decoration: none;
-    color: #F4F9E9; }
-  body #history:hover {
-    border: 1px solid #F4F9E9; }
-  body #history a:hover {
-    border: none; }
   body .shadow {
     background-color: rgba(186, 164, 137, 0.5);
     margin: 0; }
@@ -1694,12 +1828,11 @@ body {
     body .map_area h1 {
       color: white; }
     body .map_area #map {
-      width: 66.66667%;
+      width: 100%;
       float: left;
       padding-right: 0.625rem;
       padding-left: 0.625rem;
-      margin-left: 16.66667%;
-      height: 800px;
+      height: 700px;
       border: 15px solid white; }
       @media print, screen and (min-width: 40em) {
         body .map_area #map {
@@ -1707,6 +1840,20 @@ body {
           padding-left: 0.9375rem; } }
       body .map_area #map:last-child:not(:first-child) {
         float: right; }
+      @media screen and (min-width: 53.125em) {
+        body .map_area #map {
+          width: 66.66667%;
+          float: left;
+          padding-right: 0.625rem;
+          padding-left: 0.625rem;
+          margin-left: 16.66667%; } }
+  @media screen and (min-width: 53.125em) and (min-width: 40em) {
+    body .map_area #map {
+      padding-right: 0.9375rem;
+      padding-left: 0.9375rem; } }
+      @media screen and (min-width: 53.125em) {
+          body .map_area #map:last-child:not(:first-child) {
+            float: right; } }
     body .map_area button {
       border: 2px solid #C3E8BD;
       color: #C3E8BD;

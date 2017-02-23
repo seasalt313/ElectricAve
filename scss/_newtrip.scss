@@ -1,62 +1,68 @@
-
 $primary-dark-color: #153243;
 $primary-font-color: #F4F9E9;
 $highlight-bg-color: #C3E8BD;
 $border: 2px solid #4F5165;
 
 body {
-  .creating_trip {
-    @include grid-row();
-    margin-top: 90px;
-    display: flex;
-    color: $primary-font-color;
-    font-family: 'Dosis', sans-serif;
-    text-align: center;
-
-    .contain_trip {
-      @include grid-column(12);
-      margin: auto;
-      display: flex;
-      padding: 100px;
-      background-color: rgba(170,157,142, 0.3);
-
-      .name_trip {
-        @include grid-column(12);
-        margin: 10px;
-        input {
-          @include grid-column(12);
-          padding: 20px;
-          font-size: 22px;
-          font-family: 'Dosis', sans-serif;
-          background-color: #F4F9E9;
-        }
-      }
-      .tripform {
-        @include grid-column(6);
-        text-align: center;
-        margin: auto;
-        background-color: #747274;
-        border-radius: 10px;
-        input {
-          @include grid-column(12);
-          margin-bottom: 10px;
-          padding: 20px;
-          font-size: 22px;
-          font-family: 'Dosis', sans-serif;
-          background-color: #F4F9E9;
-          border-radius: 9px;
-        }
-      }
-      #newbtn {
-        @include grid-column(12);
-        padding: 20px;
-        margin: 10px auto;
-        border: $border;
-        text-align: center;
+    .creating_trip {
+        @include grid-row();
+        // margin-top: 90px;
+        display: flex;
+        color: $primary-font-color;
         font-family: 'Dosis', sans-serif;
-        color: $primary-dark-color;
-        background-color: #F4F9E9;
-      }
+        text-align: center;
+
+        .contain_trip {
+            @include grid-column(12);
+            margin: auto;
+            display: flex;
+            padding: 100px;
+            background-color: rgba(78,81,102, 0.3);
+
+            .name_trip {
+                @include grid-column(12);
+                margin: 10px;
+
+                input {
+                    @include grid-column(12);
+                    padding: 20px;
+                    font-size: 22px;
+                    font-family: 'Dosis', sans-serif;
+                    background-color: #F4F9E9;
+                }
+            }
+
+            .tripform {
+                @include grid-column(12);
+                text-align: center;
+                margin: auto;
+                background-color: #747274;
+                border-radius: 10px;
+                @include breakpoint(850px) {
+                     @include grid-column(6);
+                };
+
+                input {
+                    @include grid-column(12);
+                    margin-bottom: 10px;
+                    padding: 20px;
+                    font-size: 22px;
+                    font-family: 'Dosis', sans-serif;
+                    background-color: #F4F9E9;
+                    border-radius: 9px;
+                }
+            }
+
+            #newbtn {
+                @include grid-column(12);
+                padding: 20px;
+                margin: 10px auto;
+                border: $border;
+                text-align: center;
+                font-family: 'Dosis', sans-serif;
+                color: $primary-dark-color;
+                background-color: #F4F9E9;
+            }
+        }
     }
-  }
 }

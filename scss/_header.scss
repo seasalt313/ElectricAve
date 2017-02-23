@@ -1,9 +1,16 @@
+$large-screen: 850px;
+$border: 2px solid #4F5165;
+$primary-dark-color: #153243;
+$primary-font-color: #F4F9E9;
+$highlight-bg-color: #C3E8BD;
+
 body {
 
   .header_section {
     @include grid-row();
     background-color: #4F5165;
-    border-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
     font-family: 'Dosis', sans-serif;
 
 
@@ -11,16 +18,49 @@ body {
       @include grid-column(12);
 
     h1 {
-      @include grid-column(8);
+      @include grid-column(12);
+      text-align: center;
       font-size: 50px;
-      text-align: left;
       color: #F4F9E9;
+      @include breakpoint(850px){
+        @include grid-column(8);
+        text-align: left;
+      };
     }
 
     .logout {
-      @include grid-column(2);
-      font-size: 18px;
+      @include grid-column(6);
       text-align: center;
+      font-size: 18px;
+      @include breakpoint(850px){
+        @include grid-column(2);
+        text-align: center;
+      }
+    }
+
+    #history {
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px;
+      border: $border;
+      text-align: right;
+      font-size: 20px;
+      font-family: 'Dosis', sans-serif;
+      color: $primary-font-color;
+
+    }
+
+    #history a {
+      text-decoration: none;
+      color: $primary-font-color;
+    }
+
+    #history:hover,   {
+      border: 1px solid $primary-font-color;
+    }
+
+    #history a:hover {
+      border: none;
     }
 
     }

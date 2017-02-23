@@ -1,114 +1,85 @@
 // including foundation
-
 @import "../node_modules/foundation-sites/scss/foundation";
-
 @include foundation-global-styles;
 @include foundation-grid;
-
 //importing partial sass files
 @import "header";
 @import "newtrip";
 @import "userlogin";
 @import "account";
-
 $primary-dark-color: #153243;
 $primary-font-color: #F4F9E9;
 $highlight-bg-color: #C3E8BD;
 $border: 2px solid #4F5165;
 
-
 body {
-  background-color: $highlight-bg-color;
-  height: auto;
-  padding: 20px;
-  // margin: 20px;
-  background-image: url("http://www.wbwells.com/wp-content/uploads/2011/06/Desert_road_UAE.jpg");
-  // background-image: url("https://images.pexels.com/photos/30134/pexels-photo.jpg?w=1260&h=750&auto=compress&cs=tinysrgb");
-  // background-image: url("/Users/mariamqasim/Desktop/tiy/final/tripr/images/josh-felise-11191.jpg");
-  // background-image: url('build/images/josh-felise-11191.jpg');
-  background-size: cover;
-  font-family: 'Dosis', sans-serif;
-
-  .awesome-marker i {
-    font-size: 35px;
-    margin-top: 5px;
-}
-
-
-  #history {
+    background-color: $highlight-bg-color;
+    height: auto;
     padding: 20px;
-    border-radius: 10px;
-    margin: 20px;
-    border: $border;
-    text-align: right;
-    font-size: 20px;
+    // margin: 20px;
+    background-image: url("http://www.wbwells.com/wp-content/uploads/2011/06/Desert_road_UAE.jpg");
+    // background-image: url("https://images.pexels.com/photos/30134/pexels-photo.jpg?w=1260&h=750&auto=compress&cs=tinysrgb");
+    // background-image: url("/Users/mariamqasim/Desktop/tiy/final/tripr/images/josh-felise-11191.jpg");
+    // background-image: url('build/images/josh-felise-11191.jpg');
+    background-size: cover;
     font-family: 'Dosis', sans-serif;
-    color: $primary-font-color;
 
-  }
-
-  #history a {
-    text-decoration: none;
-    color: $primary-font-color;
-  }
-
-  #history:hover,   {
-    border: 1px solid $primary-font-color;
-  }
-
-  #history a:hover {
-    border: none;
-  }
-
-  .shadow {
-    background-color: rgba(186,164,137, 0.5);
-    margin: 0;
-  }
-
-  .map_area {
-    text-align: center;
-    h1 {
-      color: white;
-    }
-    #map {
-      @include grid-column(8);
-      @include grid-column-offset(2);
-      // width: 800px;
-      height: 800px;
-      // margin: auto;
-      // margin: 200px;
-      border: 15px solid white;
-    }
-    button {
-      border: 2px solid $highlight-bg-color;
-      color: $highlight-bg-color;
-      font-size: 22px;
-      padding: 20px;
-      background-color: grey;
-      border-radius: 8px;
-    }
-  }
-
-  .notes {
-    @include grid-row();
-    text-align: center;
-    float: none;
-
-    #notes {
-      @include grid-column(8);
-      font-size: 22px;
-      padding: 5px;
-      height: 200px;
-    }
-    .save_notes {
-      @include grid-column(8);
-      margin: auto;
-      border: none;
-      color: #F4F9E9;
-      background-color: rgb(186,164,137);
-      border-radius: 0;
+    .awesome-marker i {
+        font-size: 35px;
+        margin-top: 5px;
     }
 
+    .shadow {
+        background-color: rgba(186,164,137, 0.5);
+        margin: 0;
+    }
 
-}
+    .map_area {
+        text-align: center;
+
+        h1 {
+            color: white;
+        }
+
+        #map {
+            @include grid-column(12);
+            height: 700px;
+            border: 15px solid white;
+            @include breakpoint(850px) {
+                 @include grid-column(8);
+                @include grid-column-offset(2);
+            };
+        }
+
+        button {
+            border: 2px solid $highlight-bg-color;
+            color: $highlight-bg-color;
+            font-size: 22px;
+            padding: 20px;
+            background-color: grey;
+            border-radius: 8px;
+        }
+    }
+
+    .notes {
+        @include grid-row();
+        text-align: center;
+        float: none;
+
+        #notes {
+            @include grid-column(8);
+            font-size: 22px;
+            padding: 5px;
+            height: 200px;
+        }
+
+        .save_notes {
+            @include grid-column(8);
+            margin: auto;
+            border: none;
+            color: #F4F9E9;
+            background-color: rgb(186,164,137);
+            border-radius: 0;
+        }
+    }
 }

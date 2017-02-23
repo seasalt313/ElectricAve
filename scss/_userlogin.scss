@@ -1,7 +1,8 @@
 $primary-dark-color: #153243;
-$primary-font-color: #C3E8BD;
+$primary-font-color: #F4F9E9;
 $highlight-bg-color: #C3E8BD;
 $border: 2px solid #4F5165;
+$large-screen: 850px;
 
 body {
     .loginctrl {
@@ -11,68 +12,64 @@ body {
         display: flex;
         background-color: rgba(78,81,102, 0.3);
 
-
         .login_a {
-          @include grid-row();
-          font-size: 22px;
-          padding: 20px;
-          display: flex;
+            @include grid-column(12);
+            @include breakpoint(850px) {
+                 @include grid-column(6);
+            }
+
             .login {
-                @include grid-column(3);
-                font-size: 22px;
-                border: 2px solid #F4F9E9;
+                // @include grid-column(12);
+                border: none;
                 padding: 20px;
                 text-align: center;
                 display: block;
                 border-radius: 10px;
-            }
-
-            .choice {
-                border: none;
-                @include grid-column(12);
-                ul {
-                  @include grid-column(12);
-
-                  li {
+                // .navul {
+                // @include grid-row();
+                .navli {
+                    @include grid-column(12);
                     list-style: none;
                     font-size: 27px;
-
-                  }
-                  a {
-                      list-style: none;
-                      text-decoration: none;
-                      color: $primary-font-color;
-                      padding: 10px;
-                      font-family: 'Poppins', sans-serif;
-                      font-weight: bold;
-                      font-size: 27px;
-                  }
                 }
-              }
-        }
-      }
 
-        .loginform {
-          @include grid-column(6);
-            input {
-                @include grid-column(12);
-                padding: 20px;
-                margin: 10px auto auto;
-                text-align: center;
-                font-family: 'Poppins', sans-serif;
-                background-color: #EEF0EB;
-            }
-
-            button {
-                @include grid-column(12);
-                padding: 20px;
-                margin: 10px auto;
-                border: $border;
-                color: $primary-font-color;
-                text-align: center;
-                background-color: $primary-dark-color;
-                font-family: 'Poppins', sans-serif;
+                a {
+                    list-style: none;
+                    text-decoration: none;
+                    color: $primary-font-color;
+                    padding: 10px;
+                    font-family: 'Poppins', sans-serif;
+                    // font-weight: bold;
+                    font-size: 27px;
+                }
             }
         }
+    }
 
+    form.loginform {
+        @include grid-column(12);
+        @include breakpoint(850px) {
+             @include grid-column(6);
+        }
+
+        input {
+            @include grid-column(12);
+            padding: 20px;
+            margin: 10px auto auto;
+            text-align: center;
+            font-family: 'Dosis', sans-serif;
+            background-color: #F4F9E9;
+        }
+
+        button {
+            @include grid-column(12);
+            padding: 20px;
+            margin: 10px auto;
+            border: $border;
+            color: $primary-font-color;
+            text-align: center;
+            background-color: $primary-dark-color;
+            font-family: 'Dosis', sans-serif;
+        }
+    }
 }

@@ -1,29 +1,43 @@
 <section ng-controller="showTripController">
-  <div class="accountInfo">
-    <h1>Account Information: </h1>
-    <div class="details">
-      <p> USER:<br> {{ getAccount.userName }}</p>
-      <p> E-MAIL:<br> {{ getAccount.emailAddress }}</p>
-      <p> CAR:<br> {{ getAccount.car }}</p>
-      <p><a class="back" ui-sref="newtrip">Create a New Trip?</a></p>
+    <div class="accountInfo">
+        <h1>account: </h1>
+        <div class="details">
+            <p> USER:<br> {{ getAccount.userName }}</p>
+            <p> E-MAIL:<br> {{ getAccount.emailAddress }}</p>
+            <p> CAR:<br> {{ getAccount.car }}</p>
+            <p><a class="back" ui-sref="newtrip">Create a New Trip?</a></p>
+        </div>
+
+        <div class="trip_history">
+            <h1>trip history</h1>
+            <p>click on a trip to view route</p>
+
+            <br>
+            <br>
+
+            <input id="search_trips" ng-model="query" type="text" placeholder="search trips">
+
+            <i class="fa fa-search" aria-hidden="true">
+
+      </input></i>
+
+
+            <br>
+            <br>
+            <br>
+            <ol>
+                <li ng-repeat="trip in trips | filter: query">
+                    <a ui-sref="map({mapId:trip.id})">
+                        <h2 class="highlight"> trip: {{ trip.tripName }}</h2>
+                        <button id="delete">Delete</button>
+                        <br>
+                        <h3> starting location:  <br>{{ trip.startAddress }}</h3>
+                        <h3> ending location:  <br>{{ trip.endAddress }}</h3>
+                    </a>
+                </li>
+            </ol>
+        </div>
+
     </div>
-
-  <div class="trip_history">
-    <h1>trip history</h1>
-      <input id="search_trips" ng-model="query" type="text" placeholder="search trips"><i class="fa fa-search" aria-hidden="true"></i></input>
-    <p>click on a trip to view route</p>
-    <ol>
-      <li ng-repeat="trip in trips | filter: query ">
-        <a ui-sref="map({mapId:trip.id})">
-        <h2 class="highlight"> TRIP: {{ trip.tripName }}</h2>
-        <h3> Starting Location:  <br>{{ trip.startAddress }}</h3>
-        <h3> Ending Location:  <br>{{ trip.endAddress }}</h3>
-        </a>
-        <button id="delete">Delete</button>
-      </li>
-    </ol>
-  </div>
-
-</div>
 
 </section>
