@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
@@ -16,52 +17,53 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
     <link rel="stylesheet" href="main.css">
 
-  </head>
+</head>
 
-  <body ng-app= 'tripApp'>
-     <!-- $state.go -->
+<body ng-app='tripApp'>
+    <!-- $state.go -->
     <section class="header_section">
-      <div class="header">
-        <h1>electric ave</h1>
-        <form class="logout" action="/logout" method="post">
-          <button id="history" type="submit" name="logout">log out</button>
-        </form>
-        <button id="history" ng-click= "getTrips">
+        <div class="header">
+            <h1>electric ave</h1>
+            <form class="logout" action="/logout" method="post">
+                <button id="history" type="submit" name="logout">log out</button>
+            </form>
+            <button id="history" ng-click="getTrips">
           <a ui-sref="triplist">view account</a>
         </button>
 
-      </div>
+        </div>
     </section>
 
 
     <ui-view>
-      <create-trip></create-trip>
+        <create-trip></create-trip>
     </ui-view>
 
 
-        <!-- add leaflet -->
-        <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <!-- add leaflet -->
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
 
-        <!-- awesome markers -->
-        <script src="https://use.fontawesome.com/f87065da5f.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.min.js"></script>
+    <!-- awesome markers -->
+    <script src="https://use.fontawesome.com/f87065da5f.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.min.js"></script>
 
 
 
-        <!-- add angular -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js">
-        </script>
+    <!-- add angular -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js">
+    </script>
 
-        <!-- add font awesome -->
-        <script src="https://use.fontawesome.com/7fb1b7bdac.js">
-        </script>
+    <!-- add font awesome -->
+    <script src="https://use.fontawesome.com/7fb1b7bdac.js">
+    </script>
 
-        <!-- add ui-router -->
-        <script src="https://npmcdn.com/angular-ui-router@1.0.0-beta.3/release/angular-ui-router.min.js">
-        </script>
+    <!-- add ui-router -->
+    <script src="https://npmcdn.com/angular-ui-router@1.0.0-beta.3/release/angular-ui-router.min.js">
+    </script>
 
-        <!-- add js file -->
-        <script src="app.js" type="text/javascript">
-        </script>
-      </body>
-    </html>
+    <!-- add js file -->
+    <script src="app.js" type="text/javascript">
+    </script>
+</body>
+
+</html>
