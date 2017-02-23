@@ -179,7 +179,7 @@ module.exports = {
                 L.marker([lat, long], {
                     icon: L.AwesomeMarkers.icon({
                         icon: 'flash',
-                        iconColor: '#32965D',
+                        iconColor: '#ff9200',
                         markerColor: 'white'
                     })
                 }).addTo(map);

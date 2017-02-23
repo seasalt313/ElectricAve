@@ -31,14 +31,15 @@ body {
 
     .shadow {
         background-color: rgba(186,164,137, 0.5);
-        margin: 0;
     }
 
     .map_area {
         text-align: center;
 
+
         h1 {
             color: white;
+            margin-top: 20px;;
         }
 
         #map {

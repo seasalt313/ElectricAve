@@ -1332,7 +1332,7 @@ body .header_section {
           body .header_section .header .logout:last-child:not(:first-child) {
             float: right; } }
     body .header_section .header #history {
-      padding: 20px;
+      padding: 2px;
       border-radius: 10px;
       margin: 20px;
       border: 2px solid #4F5165;
@@ -1473,7 +1473,6 @@ body .loginctrl {
   margin-left: auto;
   font-size: 22px;
   padding: 20px;
-  display: flex;
   background-color: rgba(78, 81, 102, 0.3); }
   body .loginctrl::before, body .loginctrl::after {
     display: table;
@@ -1821,12 +1820,12 @@ body {
     font-size: 35px;
     margin-top: 5px; }
   body .shadow {
-    background-color: rgba(186, 164, 137, 0.5);
-    margin: 0; }
+    background-color: rgba(186, 164, 137, 0.5); }
   body .map_area {
     text-align: center; }
     body .map_area h1 {
-      color: white; }
+      color: white;
+      margin-top: 20px; }
     body .map_area #map {
       width: 100%;
       float: left;
