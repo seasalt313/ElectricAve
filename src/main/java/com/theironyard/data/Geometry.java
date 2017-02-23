@@ -5,5 +5,5 @@ package com.theironyard.data;
  */
 public class Geometry {
 
-    public String type;
+    public String type; //declared string variable
 }

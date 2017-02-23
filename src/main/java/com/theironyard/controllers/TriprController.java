@@ -29,10 +29,10 @@ import java.util.stream.Collectors;
 public class TriprController {
 
     @Autowired
-    TripRepository trips;
+    TripRepository trips; //store trips
 
     @Autowired
-    UserRepository users;
+    UserRepository users; // store users
 
     Trip currentTrip = new Trip();
 
@@ -66,15 +66,15 @@ public class TriprController {
 //        return geoRoute;
 //    }
 
-    @RequestMapping(path = "/map/{id}", method = RequestMethod.GET) // returns a route based on trip params
-    public GeoJSON directionsWithWaypoints(@PathVariable("id") int id) throws Exception {
-        GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyBnADGOsZrhGtk1jSb8C9X49JoeG2m_KU0");
-        DirectionsApiRequest directionsRequest = DirectionsApi.newRequest(context);
+    @RequestMapping(path = "/map/{id}", method = RequestMethod.GET) // spring method that returns a route with charge waypoints
+    public GeoJSON directionsWithWaypoints(@PathVariable("id") int id) throws Exception { //expecting an int variable
+        GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyBnADGOsZrhGtk1jSb8C9X49JoeG2m_KU0"); // api key for google maps api
+        DirectionsApiRequest directionsRequest = DirectionsApi.newRequest(context); // requesting access to google maps directions api
 
-        currentTrip = trips.findTripById(id);
-        directionsRequest.origin(currentTrip.getStartAddress());
-        directionsRequest.destination(currentTrip.getEndAddress());
-        DirectionsResult directionsResult = directionsRequest.await(); //Object that stored the direction result
+        currentTrip = trips.findTripById(id); // finds current trip by the int variable that was passed
+        directionsRequest.origin(currentTrip.getStartAddress()); // sets the current trips start address as origin
+        directionsRequest.destination(currentTrip.getEndAddress()); // sets the current trips end address as destination
+        DirectionsResult directionsResult = directionsRequest.await(); //result is stored as directions result object
 
         // for each leg in the first route:
         // accumulate a distance traveled int.
@@ -97,31 +97,34 @@ public class TriprController {
         // pass the directionsResult object into your GeoJSON like below:
 
 
-        List<LatLng> latlngs = directionsResult.routes[0].overviewPolyline.decodePath(); //list of latlngs
-        GeoJSON geoRoute = GeoJSON.buildGeoJson(new LineString(latlngs));
+        List<LatLng> latlngs = directionsResult.routes[0].overviewPolyline.decodePath(); //decodes the result by index and storing as polylines in a list
+        GeoJSON geoRoute = GeoJSON.buildGeoJson(new LineString(latlngs)); //converts list to linestrings, then builds each line string as geojson
 
+        //url request to nrel api that contains charge stations database with hardcoded params
         String request = "https://api.data.gov/nrel/alt-fuel-stations/v1/nearby-route.json?api_key=Af8SI3elKk9EhE9KjxEkuk71wbks21M1UtfwmoiL&distance=0.3&fuel_type=ELEC";
         RestTemplate template = new RestTemplate();
 
         Map<String, String> postData = new HashMap<>();
 
+        //url request expects LINESTRING as the route, which a stream was created traverse the list and format them accordingly
         postData.put("route", String.format("LINESTRING(%s)", String.join(",",
                 latlngs.stream()
                         .map(latLng -> latLng.lng + " " + latLng.lat).collect(Collectors.toList()))));
 
-        ChargeStationData stuff = template.postForObject(request, postData, ChargeStationData.class);
+        ChargeStationData chargeStationData = template.postForObject(request, postData, ChargeStationData.class); //stores the charge stations
 
-        stuff.getFuelStations().forEach(fs -> geoRoute.addGeometry(new Point(fs.getLatitude(), fs.getLongitude())));
+        chargeStationData.getFuelStations().forEach(fs -> geoRoute.addGeometry(new Point(fs.getLatitude(), fs.getLongitude())));//makes points in geojson for the charge stations
 
-        return geoRoute;
+        return geoRoute; // return as geojson
 }
 
     @RequestMapping(path = "/new-trip", method = RequestMethod.POST) //adds trip related to user
-    public Trip addTrip(HttpSession session, @RequestBody Trip newTrip) { // add http sessions
-        String emailAddress = (String) session.getAttribute("emailAddress");
-        User user = users.findByEmailAddress(emailAddress);
-        Trip trip = trips.findTripById(newTrip.getId());
+    public Trip addTrip(HttpSession session, @RequestBody Trip newTrip) { // add http sessions and expecting Trip object
+        String emailAddress = (String) session.getAttribute("emailAddress"); //set session by email address
+        User user = users.findByEmailAddress(emailAddress); // find user by email address
+        Trip trip = trips.findTripById(newTrip.getId()); // find trip by trips id
 
+        //if user exists and trip doesn't, a trip is created and is stored in the repo and that trip is returned
         if (user != null) {
             if (trip == null) {
                 trip = new Trip(newTrip.getTripName(), newTrip.getStartAddress(), newTrip.getEndAddress(), user);
@@ -136,8 +139,9 @@ public class TriprController {
     public List<Trip> tripList(HttpSession session) {
         ArrayList<Trip> listOfTrips;
         String emailAddress = (String) session.getAttribute("emailAddress");
-        User user = users.findByEmailAddress(emailAddress);
+        User user = users.findByEmailAddress(emailAddress); //find user based on session
 
+        //if user exists, find all trips associated with the user
         if (user != null) {
             listOfTrips = trips.findTripsByUser(user);
             return listOfTrips;
@@ -145,13 +149,23 @@ public class TriprController {
         return null;
     }
 
-    @RequestMapping(path = "/account", method = RequestMethod.GET) //returns current user
+    @RequestMapping(path = "/account", method = RequestMethod.GET) //returns current user info
     public User currentUser(HttpSession session) {
         String emailAddress = (String) session.getAttribute("emailAddress");
         User user = users.findByEmailAddress(emailAddress);
+        //if user exists return the user object
         if (user != null) {
             return user;
         }
         return null;
+    }
+
+    @RequestMapping(path = "/delete/{id}", method = RequestMethod.DELETE) //deletes trip
+    public void deleteTrip(@PathVariable("id") int id) {
+        currentTrip = trips.findTripById(id); // finds trip by variable passed as param
+        //if trip exists then we delete from the repo
+        if(currentTrip != null) {
+            trips.delete(id);
+        }
     }
 }
